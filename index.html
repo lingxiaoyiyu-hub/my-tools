@@ -25,16 +25,7 @@
     .main-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2.2fr 1fr; gap: 20px; padding: 0 20px; align-items: start; }
 
     /* ── Left column ── */
-    .left-col { display: flex; flex-direction: column; gap: 16px; }
-    .page-head { }
-    .page-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 5px; }
-    .page-desc { color: #57606a; font-size: .88rem; }
-
-    /* Category filter */
-    .cat-filters { display: flex; gap: 8px; flex-wrap: wrap; }
-    .cat-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid #d0d7de; background: #fff; color: #24292f; font-size: .82rem; cursor: pointer; transition: all .15s; font-family: inherit; }
-    .cat-btn:hover { background: #f3f4f6; border-color: #8c959f; }
-    .cat-btn.active { background: #24292f; color: #fff; border-color: #24292f; }
+    .left-col { display: flex; flex-direction: column; }
 
     /* Tools grid — horizontal cards */
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
@@ -97,19 +88,6 @@
 
     <!-- 左：工具列表 -->
     <div class="left-col">
-      <div class="page-head">
-        <h1 class="page-title">在线工具</h1>
-        <p class="page-desc">纯本地运行，无需上传，即开即用。</p>
-      </div>
-
-      <div class="cat-filters">
-        <button class="cat-btn active" data-cat="all">全部</button>
-        <button class="cat-btn" data-cat="image">图片处理</button>
-        <button class="cat-btn" data-cat="text">文本排版</button>
-        <button class="cat-btn" data-cat="system">系统工具</button>
-        <button class="cat-btn" data-cat="productivity">效率工具</button>
-      </div>
-
       <div class="tools-grid" id="toolsGrid">
 
         <!-- 图片水印助手 -->
@@ -427,32 +405,16 @@
 
 <script>
   var searchInput = document.getElementById('searchInput');
-  var catBtns = document.querySelectorAll('.cat-btn');
   var cards = document.querySelectorAll('#toolsGrid .tool-card');
-  var currentCat = 'all';
 
-  function filterCards() {
+  searchInput.addEventListener('input', function() {
     var q = searchInput.value.toLowerCase();
     cards.forEach(function(card) {
       var name = card.querySelector('.tool-name').textContent.toLowerCase();
       var desc = card.querySelector('.tool-desc') ? card.querySelector('.tool-desc').textContent.toLowerCase() : '';
-      var cat = card.getAttribute('data-cat') || '';
-      var matchCat = currentCat === 'all' || cat === currentCat;
-      var matchSearch = !q || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
-      card.style.display = (matchCat && matchSearch) ? '' : 'none';
-    });
-  }
-
-  catBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      catBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      currentCat = btn.getAttribute('data-cat') || 'all';
-      filterCards();
+      card.style.display = (!q || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1) ? '' : 'none';
     });
   });
-
-  searchInput.addEventListener('input', filterCards);
 </script>
 </body>
 </html>
