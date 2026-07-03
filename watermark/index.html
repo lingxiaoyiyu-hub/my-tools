@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>批量水印工具</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: #0f172a;
+    line-height: 1.5;
+  }
+  .app {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+  }
+  aside::-webkit-scrollbar {
+    width: 6px;
+  }
+  aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  aside::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  main {
+    padding: 24px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    background: transparent;
+  }
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+  }
+  .group {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+    transition: all 0.2s ease;
+  }
+  .group:hover {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04), 0 4px 6px -2px rgba(0,0,0,0.01);
+  }
+  .group-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .group-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 12px;
+    background: #175cff;
+    border-radius: 2px;
+  }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    margin: 10px 0 6px;
+  }
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #cbd5e2;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fff;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #175cff;
+    box-shadow: 0 0 0 3px rgba(23, 92, 255, 0.15);
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    outline: none;
+    transition: background 0.15s;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #175cff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(23, 92, 255, 0.3);
+    transition: transform 0.1s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+  input[type="color"] {
+    width: 42px;
+    height: 34px;
+    padding: 2px;
+    border: 1px solid #cbd5e2;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    gap: 10px;
+    align-items: center;
+  }
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+  }
+  .field-grid.full { grid-template-columns: 1fr; }
+  .field { min-width: 0; }
+  .field label:first-child { margin-top: 0; }
+  .colors {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .colors span {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 500;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+  }
+  .check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  button {
+    height: 42px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #175cff, #004ecc);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(23, 92, 255, 0.2);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(23, 92, 255, 0.3);
+  }
+  button.secondary {
+    background: linear-gradient(135deg, #334155, #1e293b);
+    box-shadow: 0 4px 6px -1px rgba(30, 41, 59, 0.2);
+  }
+  button.secondary:hover:not(:disabled) {
+    box-shadow: 0 10px 15px -3px rgba(30, 41, 59, 0.3);
+  }
+  button:disabled {
+    background: #cbd5e1 !important;
+    color: #94a3b8 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+  }
+  .file-info {
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .topbar select {
+    width: auto;
+    min-width: 180px;
+    height: 34px;
+    font-size: 13px;
+  }
+  .upload-dropzone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(248, 250, 252, 0.5);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .upload-dropzone:hover, .upload-dropzone.dragover {
+    border-color: #175cff;
+    background: rgba(23, 92, 255, 0.03);
+    transform: translateY(-1px);
+  }
+  .upload-icon {
+    color: #64748b;
+    transition: color 0.2s;
+  }
+  .upload-dropzone:hover .upload-icon {
+    color: #175cff;
+  }
+  .upload-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+  }
+  .upload-subtext {
+    font-size: 11px;
+    color: #94a3b8;
+  }
+  .preview-wrap {
+    min-height: 0;
+    background:
+      linear-gradient(45deg, #cbd5e1 25%, transparent 25%),
+      linear-gradient(-45deg, #cbd5e1 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #cbd5e1 75%),
+      linear-gradient(-45deg, transparent 75%, #cbd5e1 75%);
+    background-color: #f1f5f9;
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    border: 1px solid #cbd5e2;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: auto;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+  }
+  canvas {
+    max-width: min(100%, 980px);
+    max-height: calc(100vh - 120px);
+    background: #fff;
+    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .thumbs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+    max-height: 130px;
+    overflow-y: auto;
+    padding: 2px;
+  }
+  .thumb {
+    height: 56px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1f5f9;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.15s ease;
+  }
+  .thumb:hover {
+    transform: scale(1.05);
+  }
+  .thumb.active {
+    border-color: #175cff;
+    box-shadow: 0 0 0 3px rgba(23, 92, 255, 0.25);
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hint {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  
+  /* Tabs layout styles */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    background: rgba(15, 23, 42, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(15, 23, 42, 0.05);
+  }
+  .tab-btn {
+    flex: 1;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: none !important;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .tab-btn:hover {
+    color: #1e293b;
+    background: rgba(255, 255, 255, 0.5);
+    transform: none !important;
+  }
+  .tab-btn.active {
+    background: #ffffff;
+    color: #175cff;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -1px rgba(15, 23, 42, 0.04) !important;
+    transform: none !important;
+  }
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    aside { border-right: 0; border-bottom: 1px solid #d9e0ea; }
+    main { min-height: 60vh; }
+    .field-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+      <a href="../" style="text-decoration: none; color: #175cff; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; transition: color 0.15s ease;">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        返回工具箱首页
+      </a>
+    </div>
+    <h1 style="margin-top: 0;">📸 批量水印与边框工具</h1>
+
+    <label style="margin-top: 14px;">选择图片</label>
+    <div id="dropzone" class="upload-dropzone">
+      <svg class="upload-icon" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <div class="upload-text">点击或将图片拖拽到此处</div>
+      <div class="upload-subtext">支持多选，所有处理均为本地离线完成</div>
+    </div>
+    <input id="fileInput" type="file" accept="image/*" multiple style="display: none;">
+    <div id="thumbs" class="thumbs"></div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="border">🎨 边框设计</button>
+      <button class="tab-btn" data-tab="watermark">✍️ 水印参数</button>
+      <button class="tab-btn" data-tab="export">⚙️ 导出设置</button>
+    </div>
+
+    <!-- Tab 1: 边框设计 -->
+    <div class="tab-content" id="tab-border">
+      <div class="group">
+        <div class="group-title">边框效果</div>
+        <div class="check">
+          <input id="frameEnabled" type="checkbox" checked>
+          <span>启用边框</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>边框模板</label>
+            <select id="frameTemplate">
+              <option value="leica">徕卡经典</option>
+              <option value="polaroid">复古拍立得</option>
+              <option value="film">复古胶片</option>
+              <option value="ins">INS卡片</option>
+              <option value="xianyu">闲鱼爆款</option>
+              <option value="neon">霓虹蓝紫</option>
+              <option value="clean">极简白边</option>
+              <option value="gold">暗金质感</option>
+              <option value="cover">红黄封面</option>
+              <option value="custom">自定义</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>画布比例</label>
+            <select id="aspectRatio">
+              <option value="original">原图比例</option>
+              <option value="16:9">16:9 横版</option>
+              <option value="4:3">4:3 横版</option>
+              <option value="9:16">9:16 竖版</option>
+              <option value="1:1">1:1 方图</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>图片适配</label>
+            <select id="fitMode">
+              <option value="contain">完整留边</option>
+              <option value="cover">铺满裁切</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>留边背景</label>
+            <select id="backgroundMode">
+              <option value="blur">模糊原图</option>
+              <option value="solid">纯黑背景</option>
+              <option value="transparent">透明背景</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label id="labelLeft">左上标签 / 相机型号</label>
+            <input id="cornerLabel" type="text" value="小鱼游戏">
+          </div>
+          <div class="field">
+            <label id="labelRight">辅助参数 / 日期印戳</label>
+            <input id="cameraMeta" type="text" value="50mm f/1.8 1/125s ISO 200">
+          </div>
+        </div>
+
+        <div class="field-grid" style="margin-top: 10px; border-top: 1px dashed rgba(15, 23, 42, 0.08); padding-top: 10px;">
+          <div class="field">
+            <label>角标样式</label>
+            <select id="cornerLabelStyle">
+              <option value="default">默认 (跟随模板)</option>
+              <option value="none">隐藏角标</option>
+              <option value="slant">斜切旗帜</option>
+              <option value="pill">圆润胶囊</option>
+              <option value="glass">磨砂玻璃</option>
+              <option value="tag">渐变标签</option>
+              <option value="minimal">极简白底</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>角标字体</label>
+            <select id="cornerLabelFont">
+              <option value="Outfit, sans-serif">Outfit (现代)</option>
+              <option value="Microsoft YaHei">微软雅黑</option>
+              <option value="Times New Roman, serif">Times (衬线)</option>
+              <option value="Courier New, monospace">Courier (等宽)</option>
+              <option value="cursive">楷体/手写</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>背景填充</label>
+            <select id="cornerBgMode">
+              <option value="theme">主题颜色</option>
+              <option value="custom">自定义颜色</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>自定义色</label>
+            <div class="colors" style="margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+              <input id="cornerBgColor" type="color" value="#175cff" style="width: 28px; height: 28px; padding: 2px;">
+              <span style="font-size: 11px;">底</span>
+              <input id="cornerTextColor" type="color" value="#ffffff" style="width: 28px; height: 28px; padding: 2px;">
+              <span style="font-size: 11px;">字</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Xianyu extra options -->
+        <div class="field-grid" id="xianyuFields" style="display: none; margin-top: 10px;">
+          <div class="field">
+            <label>商品售价 (¥)</label>
+            <input id="productPrice" type="text" value="99.00">
+          </div>
+          <div class="field">
+            <label>优惠标签</label>
+            <input id="discountLabel" type="text" value="全新现货">
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>边框大小</label>
+            <div class="row">
+              <input id="borderWidth" type="range" min="4" max="40" value="14">
+              <input id="borderWidthNum" type="number" min="4" max="40" value="14">
+            </div>
+          </div>
+          <div class="field">
+            <label>圆角</label>
+            <div class="row">
+              <input id="radius" type="range" min="0" max="80" value="28">
+              <input id="radiusNum" type="number" min="0" max="80" value="28">
+            </div>
+          </div>
+          <div class="field">
+            <label>颜色</label>
+            <div class="colors">
+              <input id="topColor" type="color" value="#ef1111">
+              <span>上边</span>
+              <input id="bottomColor" type="color" value="#ffb000">
+              <span>下边</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: 水印参数 -->
+    <div class="tab-content" id="tab-watermark" style="display: none;">
+      <div class="group">
+        <div class="group-title">水印</div>
+        <div class="field-grid full">
+          <div class="field">
+            <label>水印文字</label>
+            <input id="watermarkText" type="text" value="闲鱼@小鱼游戏">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label>字号</label>
+            <div class="row">
+              <input id="fontSize" type="range" min="16" max="120" value="42">
+              <input id="fontSizeNum" type="number" min="16" max="120" value="42">
+            </div>
+          </div>
+          <div class="field">
+            <label>透明度</label>
+            <div class="row">
+              <input id="opacity" type="range" min="0" max="100" value="18">
+              <input id="opacityNum" type="number" min="0" max="100" value="18">
+            </div>
+          </div>
+          <div class="field">
+            <label>横向间距</label>
+            <div class="row">
+              <input id="gapX" type="range" min="120" max="800" value="360">
+              <input id="gapXNum" type="number" min="120" max="800" value="360">
+            </div>
+          </div>
+          <div class="field">
+            <label>纵向间距</label>
+            <div class="row">
+              <input id="gapY" type="range" min="100" max="600" value="240">
+              <input id="gapYNum" type="number" min="100" max="600" value="240">
+            </div>
+          </div>
+          <div class="field">
+            <label>倾斜角度</label>
+            <div class="row">
+              <input id="angle" type="range" min="-60" max="60" value="-24">
+              <input id="angleNum" type="number" min="-60" max="60" value="-24">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: 导出设置 -->
+    <div class="tab-content" id="tab-export" style="display: none;">
+      <div class="group">
+        <div class="group-title">高清修复</div>
+        <div class="check">
+          <input id="hdEnabled" type="checkbox">
+          <span>启用高清修复</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label>导出倍数</label>
+            <select id="exportScale">
+              <option value="1" selected>原尺寸</option>
+              <option value="1.5">1.5倍高清</option>
+              <option value="2">2倍高清</option>
+              <option value="3">3倍高清</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>导出格式</label>
+            <select id="exportFormat">
+              <option value="image/jpeg" selected>JPG 体积小</option>
+              <option value="image/png">PNG 无损</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>JPG质量</label>
+            <div class="row">
+              <input id="jpegQuality" type="range" min="50" max="95" value="85">
+              <input id="jpegQualityNum" type="number" min="50" max="95" value="85">
+            </div>
+          </div>
+          <div class="field">
+            <label>锐化强度</label>
+            <div class="row">
+              <input id="sharpen" type="range" min="0" max="100" value="35">
+              <input id="sharpenNum" type="number" min="0" max="100" value="35">
+            </div>
+          </div>
+        </div>
+        <div class="hint">本地处理：放大导出并加强边缘清晰度。</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="downloadOne" class="secondary" disabled>下载当前</button>
+      <button id="downloadZip" disabled>批量导出ZIP</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div class="file-info" id="fileInfo">还没选择图片</div>
+      <select id="currentSelect"></select>
+    </div>
+    <div class="preview-wrap">
+      <canvas id="canvas"></canvas>
+    </div>
+  </main>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const canvas = $("canvas");
+const ctx = canvas.getContext("2d");
+let files = [];
+let images = [];
+let currentIndex = 0;
+const SETTINGS_KEY = "batchWatermarkToolSettings";
+let lastImgDrawCoords = { x: 0, y: 0, w: 0, h: 0, targetX: 0, targetY: 0, targetW: 0, targetH: 0 };
+
+// Tab Switching Logic
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const target = btn.dataset.tab;
+    document.querySelectorAll(".tab-content").forEach(content => {
+      content.style.display = content.id === `tab-${target}` ? "flex" : "none";
+    });
+  });
+});
+
+const controls = [
+  "watermarkText", "fontSize", "fontSizeNum", "opacity", "opacityNum",
+  "gapX", "gapXNum", "gapY", "gapYNum", "angle", "angleNum",
+  "frameEnabled", "frameTemplate", "aspectRatio", "fitMode", "backgroundMode", "cornerLabel", "cameraMeta", "borderWidth", "borderWidthNum",
+  "radius", "radiusNum", "topColor", "bottomColor", "hdEnabled", "exportScale", "exportFormat", "jpegQuality", "jpegQualityNum", "sharpen", "sharpenNum",
+  "productPrice", "discountLabel",
+  "cornerLabelStyle", "cornerLabelFont", "cornerBgMode", "cornerBgColor", "cornerTextColor"
+];
+
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    this.beginPath();
+    this.moveTo(x + r, y);
+    this.lineTo(x + w - r, y);
+    this.quadraticCurveTo(x + w, y, x + w, y + r);
+    this.lineTo(x + w, y + h - r);
+    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    this.lineTo(x + r, y + h);
+    this.quadraticCurveTo(x, y + h, x, y + h - r);
+    this.lineTo(x, y + r);
+    this.quadraticCurveTo(x, y, x + r, y);
+    this.closePath();
+    return this;
+  };
+}
+
+function bindPair(a, b) {
+  const elA = $(a);
+  const elB = $(b);
+  if (elA && elB) {
+    elA.addEventListener("input", () => { elB.value = elA.value; renderCurrent(); });
+    elB.addEventListener("input", () => { elA.value = elB.value; renderCurrent(); });
+  }
+}
+bindPair("fontSize", "fontSizeNum");
+bindPair("opacity", "opacityNum");
+bindPair("gapX", "gapXNum");
+bindPair("gapY", "gapYNum");
+bindPair("angle", "angleNum");
+bindPair("borderWidth", "borderWidthNum");
+bindPair("radius", "radiusNum");
+bindPair("jpegQuality", "jpegQualityNum");
+bindPair("sharpen", "sharpenNum");
+
+loadSettings();
+toggleTemplateFields();
+
+controls.forEach(id => {
+  const el = $(id);
+  if (el) {
+    el.addEventListener("input", () => {
+      saveSettings();
+      renderCurrent();
+    });
+  }
+});
+
+$("frameTemplate").addEventListener("change", applyFrameTemplate);
+
+["cornerLabel", "cameraMeta", "borderWidth", "borderWidthNum", "radius", "radiusNum", "topColor", "bottomColor", "productPrice", "discountLabel", "cornerLabelStyle", "cornerLabelFont", "cornerBgMode", "cornerBgColor", "cornerTextColor"].forEach(id => {
+  const el = $(id);
+  if (el) {
+    el.addEventListener("input", () => {
+      if ($("frameTemplate").value !== "custom") $("frameTemplate").value = "custom";
+      saveSettings();
+    });
+  }
+});
+
+const frameTemplates = {
+  leica: { label: "LEICA Q3", cameraMeta: "50mm f/1.8 1/125s ISO 200", border: 30, radius: 0, top: "#ffffff", bottom: "#ffffff", style: "leica" },
+  polaroid: { label: "MEMORIES", cameraMeta: "2026/06/04", border: 24, radius: 4, top: "#fdfbf7", bottom: "#fafafa", style: "polaroid" },
+  film: { label: "KODAK Portra 400", cameraMeta: "'26 06 04", border: 25, radius: 6, top: "#121212", bottom: "#121212", style: "film" },
+  ins: { label: "INSTAGRAM", cameraMeta: "LIFESTYLE", border: 15, radius: 24, top: "#1e293b", bottom: "#0f172a", style: "ins" },
+  xianyu: { label: "全新现货", cameraMeta: "诚信保障 · 顺丰包邮", border: 16, radius: 18, top: "#ffe500", bottom: "#ff9500", style: "xianyu", price: "99.00", discount: "包邮特惠" },
+  neon: { label: "小鱼游戏", cameraMeta: "NEON GLOW", border: 10, radius: 34, top: "#00d5ff", bottom: "#b400ff", style: "neon" },
+  clean: { label: "小鱼游戏", cameraMeta: "MINIMALIST", border: 12, radius: 24, top: "#ffffff", bottom: "#ffffff", style: "minimal" },
+  gold: { label: "小鱼游戏", cameraMeta: "GOLD LINE", border: 12, radius: 22, top: "#d8a437", bottom: "#7a4b13", style: "tag" },
+  cover: { label: "小鱼游戏", cameraMeta: "COVER", border: 14, radius: 28, top: "#ef1111", bottom: "#ffb000", style: "slant" },
+  noneLabel: { label: "", cameraMeta: "", border: 12, radius: 28, top: "#ef1111", bottom: "#ffb000", style: "none" }
+};
+
+function toggleTemplateFields() {
+  const tpl = $("frameTemplate").value;
+  const xianyuFields = $("xianyuFields");
+  if (xianyuFields) {
+    xianyuFields.style.display = tpl === "xianyu" ? "grid" : "none";
+  }
+}
+
+function applyFrameTemplate() {
+  const key = $("frameTemplate").value;
+  if (key === "custom") {
+    toggleTemplateFields();
+    saveSettings();
+    return renderCurrent();
+  }
+  const tpl = frameTemplates[key];
+  $("cornerLabel").value = tpl.label;
+  if (tpl.cameraMeta !== undefined) $("cameraMeta").value = tpl.cameraMeta;
+  $("borderWidth").value = $("borderWidthNum").value = tpl.border;
+  $("radius").value = $("radiusNum").value = tpl.radius;
+  $("topColor").value = tpl.top;
+  $("bottomColor").value = tpl.bottom;
+  if (tpl.aspect) $("aspectRatio").value = tpl.aspect;
+  
+  if (key === "xianyu") {
+    $("productPrice").value = tpl.price || "99.00";
+    $("discountLabel").value = tpl.discount || "全新现货";
+  }
+  
+  $("cornerLabelStyle").value = "default";
+  $("cornerLabelFont").value = "Outfit, sans-serif";
+  $("cornerBgMode").value = "theme";
+  
+  toggleTemplateFields();
+  saveSettings();
+  renderCurrent();
+}
+
+function loadSettings() {
+  try {
+    const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+    controls.forEach(id => {
+      const el = $(id);
+      if (!el || settings[id] === undefined) return;
+      if (el.type === "checkbox") el.checked = settings[id];
+      else el.value = settings[id];
+    });
+  } catch (err) {
+    localStorage.removeItem(SETTINGS_KEY);
+  }
+}
+
+function saveSettings() {
+  const settings = {};
+  controls.forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    settings[id] = el.type === "checkbox" ? el.checked : el.value;
+  });
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+}
+
+const dropzone = $("dropzone");
+const fileInput = $("fileInput");
+
+dropzone.onclick = () => fileInput.click();
+
+dropzone.ondragover = e => {
+  e.preventDefault();
+  dropzone.classList.add("dragover");
+};
+dropzone.ondragleave = () => {
+  dropzone.classList.remove("dragover");
+};
+dropzone.ondrop = async e => {
+  e.preventDefault();
+  dropzone.classList.remove("dragover");
+  if (e.dataTransfer.files.length) {
+    fileInput.files = e.dataTransfer.files;
+    fileInput.dispatchEvent(new Event('change'));
+  }
+};
+
+fileInput.addEventListener("change", async e => {
+  files = [...e.target.files];
+  images = [];
+  currentIndex = 0;
+  for (const file of files) images.push(await loadImage(file));
+  buildThumbs();
+  buildSelect();
+  updateButtons();
+  renderCurrent();
+});
+
+$("currentSelect").addEventListener("change", e => {
+  currentIndex = Number(e.target.value);
+  updateThumbs();
+  renderCurrent();
+});
+
+$("downloadOne").addEventListener("click", async () => {
+  if (!images.length) return;
+  await renderToCanvas(currentIndex);
+  downloadBlob(await canvasToBlob(makeExportCanvas()), outputName(files[currentIndex].name));
+});
+
+$("downloadZip").addEventListener("click", async () => {
+  if (!images.length) return;
+  $("downloadZip").disabled = true;
+  $("downloadZip").textContent = "处理中...";
+  const entries = [];
+  for (let i = 0; i < images.length; i++) {
+    await renderToCanvas(i);
+    const blob = await canvasToBlob(makeExportCanvas());
+    entries.push({ name: outputName(files[i].name), data: new Uint8Array(await blob.arrayBuffer()) });
+  }
+  const zipBlob = makeZip(entries);
+  downloadBlob(zipBlob, "批量水印图片.zip");
+  $("downloadZip").textContent = "批量导出ZIP";
+  $("downloadZip").disabled = false;
+});
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+function buildThumbs() {
+  $("thumbs").innerHTML = "";
+  images.forEach((img, i) => {
+    const div = document.createElement("div");
+    div.className = "thumb" + (i === currentIndex ? " active" : "");
+    div.onclick = () => {
+      currentIndex = i;
+      $("currentSelect").value = i;
+      updateThumbs();
+      renderCurrent();
+    };
+    const t = document.createElement("img");
+    t.src = img.src;
+    div.appendChild(t);
+    $("thumbs").appendChild(div);
+  });
+}
+
+function buildSelect() {
+  $("currentSelect").innerHTML = "";
+  files.forEach((file, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = file.name;
+    $("currentSelect").appendChild(option);
+  });
+}
+
+function updateThumbs() {
+  [...document.querySelectorAll(".thumb")].forEach((el, i) => {
+    el.classList.toggle("active", i === currentIndex);
+  });
+}
+
+function updateButtons() {
+  const ready = images.length > 0;
+  $("downloadOne").disabled = !ready;
+  $("downloadZip").disabled = !ready;
+  $("fileInfo").textContent = ready ? `已选择 ${images.length} 张，当前：${files[currentIndex].name}` : "还没选择图片";
+}
+
+function renderCurrent() {
+  if (!images.length) {
+    canvas.width = 900;
+    canvas.height = 520;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#7a8797";
+    ctx.font = "28px Microsoft YaHei";
+    ctx.textAlign = "center";
+    ctx.fillText("选择图片后预览效果", canvas.width / 2, canvas.height / 2);
+    return;
+  }
+  updateButtons();
+  renderToCanvas(currentIndex);
+}
+
+async function renderToCanvas(index) {
+  const img = images[index];
+  const size = getCanvasSize(img);
+  canvas.width = size.width;
+  canvas.height = size.height;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setImageQuality(ctx);
+  
+  const bw = Math.max(1, Number($("borderWidth").value) || 1);
+  const r = Math.max(0, Number($("radius").value) || 0);
+  const top = $("topColor").value;
+  const bottom = $("bottomColor").value;
+  const tplKey = $("frameTemplate").value;
+  const style = frameTemplates[tplKey]?.style || "slant";
+  
+  if ($("frameEnabled").checked) {
+    drawFrameBackground(bw, r, style, top, bottom, img);
+  }
+  
+  if ($("frameEnabled").checked) {
+    if (style !== "leica" && style !== "polaroid" && style !== "film" && style !== "ins") {
+      ctx.save();
+      roundedPath(0, 0, canvas.width, canvas.height, r);
+      ctx.clip();
+    }
+  }
+  
+  drawFittedImage(img);
+  
+  if ($("frameEnabled").checked) {
+    if (style !== "leica" && style !== "polaroid" && style !== "film" && style !== "ins") {
+      ctx.restore();
+    }
+  }
+  
+  if ($("frameEnabled").checked) {
+    drawFrameDetails(bw, r, style, top, bottom, img);
+  }
+  
+  drawWatermark();
+  
+  if ($("hdEnabled").checked) sharpenCanvas(canvas, Number($("sharpen").value) / 100);
+}
+
+function getCanvasSize(img) {
+  const ratio = $("aspectRatio").value;
+  const w = img.naturalWidth;
+  const h = img.naturalHeight;
+  if (ratio === "original") return { width: w, height: h };
+  const [rw, rh] = ratio.split(":").map(Number);
+  const target = rw / rh;
+  if (target < 1) return { width: Math.round(h * target), height: h };
+  return { width: w, height: Math.round(w / target) };
+}
+
+function getPhotoCoords(frameEnabled, bw, style) {
+  let targetX = 0;
+  let targetY = 0;
+  let targetW = canvas.width;
+  let targetH = canvas.height;
+  
+  if (frameEnabled) {
+    if (style === "leica") {
+      const bottomSpace = bw * 2.5;
+      targetX = bw;
+      targetY = bw;
+      targetW = canvas.width - bw * 2;
+      targetH = canvas.height - bw - bottomSpace;
+    } else if (style === "polaroid") {
+      const bottomSpace = bw * 3.5;
+      targetX = bw;
+      targetY = bw;
+      targetW = canvas.width - bw * 2;
+      targetH = canvas.height - bw - bottomSpace;
+    } else if (style === "film") {
+      const isLandscape = canvas.width > canvas.height;
+      if (isLandscape) {
+        targetX = bw * 0.5;
+        targetY = bw * 1.8;
+        targetW = canvas.width - bw;
+        targetH = canvas.height - bw * 3.6;
+      } else {
+        targetX = bw * 1.8;
+        targetY = bw * 0.5;
+        targetW = canvas.width - bw * 3.6;
+        targetH = canvas.height - bw;
+      }
+    } else if (style === "ins") {
+      const padding = bw * 1.5;
+      targetX = padding;
+      targetY = padding;
+      targetW = canvas.width - padding * 2;
+      targetH = canvas.height - padding * 2;
+    }
+  }
+  return { targetX, targetY, targetW, targetH };
+}
+
+function drawFittedImage(img) {
+  const fit = $("fitMode").value;
+  const tplKey = $("frameTemplate").value;
+  const style = frameTemplates[tplKey]?.style || "slant";
+  const bw = Number($("borderWidth").value);
+  const r = Number($("radius").value);
+  const frameEnabled = $("frameEnabled").checked;
+  
+  const { targetX, targetY, targetW, targetH } = getPhotoCoords(frameEnabled, bw, style);
+
+  drawBackground(img, fit, targetX, targetY, targetW, targetH);
+  
+  setImageQuality(ctx);
+  const scale = fit === "cover"
+    ? Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight)
+    : Math.min(targetW / img.naturalWidth, targetH / img.naturalHeight);
+  const w = img.naturalWidth * scale;
+  const h = img.naturalHeight * scale;
+  const x = targetX + (targetW - w) / 2;
+  const y = targetY + (targetH - h) / 2;
+  
+  ctx.save();
+  ctx.beginPath();
+  if (style === "ins" && r > 0) {
+    roundedPath(targetX, targetY, targetW, targetH, r);
+  } else {
+    ctx.rect(targetX, targetY, targetW, targetH);
+  }
+  ctx.clip();
+  ctx.drawImage(img, x, y, w, h);
+  ctx.restore();
+  
+  lastImgDrawCoords = { x, y, w, h, targetX, targetY, targetW, targetH };
+}
+
+function drawBackground(img, fit, targetX = 0, targetY = 0, targetW = canvas.width, targetH = canvas.height) {
+  const mode = $("backgroundMode").value;
+  if (fit === "cover" || mode === "transparent") return;
+  if (mode === "solid") {
+    ctx.fillStyle = "#000";
+    ctx.fillRect(targetX, targetY, targetW, targetH);
+    return;
+  }
+  const scale = Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight);
+  const w = img.naturalWidth * scale;
+  const h = img.naturalHeight * scale;
+  const x = targetX + (targetW - w) / 2;
+  const y = targetY + (targetH - h) / 2;
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(targetX, targetY, targetW, targetH);
+  ctx.clip();
+  setImageQuality(ctx);
+  ctx.filter = "blur(28px) brightness(0.72)";
+  ctx.drawImage(img, x, y, w, h);
+  ctx.restore();
+  ctx.fillStyle = "rgba(0,0,0,0.18)";
+  ctx.fillRect(targetX, targetY, targetW, targetH);
+}
+
+function drawWatermark() {
+  const text = $("watermarkText").value.trim();
+  if (!text) return;
+  const size = Math.max(1, Number($("fontSize").value) || 1);
+  const alpha = Number($("opacity").value) / 100;
+  const gapX = Math.max(10, Number($("gapX").value) || 10);
+  const gapY = Math.max(10, Number($("gapY").value) || 10);
+  const angle = Number($("angle").value) * Math.PI / 180;
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(angle);
+  ctx.translate(-canvas.width / 2, -canvas.height / 2);
+  ctx.font = `700 ${size}px Microsoft YaHei, Arial`;
+  ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+  ctx.strokeStyle = `rgba(0,0,0,${alpha * 0.35})`;
+  ctx.lineWidth = Math.max(1, size / 18);
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let y = -gapY; y < canvas.height + gapY; y += gapY) {
+    for (let x = -gapX; x < canvas.width + gapX; x += gapX) {
+      ctx.strokeText(text, x, y);
+      ctx.fillText(text, x, y);
+    }
+  }
+  ctx.restore();
+}
+
+function drawFrameBackground(bw, r, style, top, bottom, img) {
+  if (style === "leica") {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  } else if (style === "polaroid") {
+    ctx.fillStyle = "#fdfbf7";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.save();
+    ctx.fillStyle = "rgba(0, 0, 0, 0.015)";
+    for (let i = 0; i < 2000; i++) {
+      const px = Math.random() * canvas.width;
+      const py = Math.random() * canvas.height;
+      ctx.fillRect(px, py, 1.2, 1.2);
+    }
+    ctx.restore();
+  } else if (style === "film") {
+    ctx.fillStyle = "#0c0c0d";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  } else if (style === "ins") {
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#8134af");
+    gradient.addColorStop(0.5, "#dd2a7b");
+    gradient.addColorStop(1, "#f58529");
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    const { targetX, targetY, targetW, targetH } = getPhotoCoords(true, bw, style);
+    
+    ctx.save();
+    ctx.shadowColor = "rgba(0, 0, 0, 0.22)";
+    ctx.shadowBlur = 18;
+    ctx.shadowOffsetY = 6;
+    
+    ctx.fillStyle = "#ffffff";
+    roundedPath(targetX, targetY, targetW, targetH, r);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function drawFrameDetails(bw, r, style, top, bottom, img) {
+  ctx.save();
+  if (style === "leica") drawLeicaFrame(bw, r, top, bottom);
+  else if (style === "polaroid") drawPolaroidFrame(bw, r, top, bottom);
+  else if (style === "film") drawFilmFrame(bw, r, top);
+  else if (style === "ins") drawInsFrame(bw, r, top, bottom, img);
+  else if (style === "xianyu") drawXianyuFrame(bw, r, top, bottom);
+  else if (style === "neon") drawNeonFrame(bw, r, top, bottom);
+  else if (style === "minimal") drawMinimalFrame(bw, r, top);
+  else if (style === "tag") drawGoldFrame(bw, r, top, bottom);
+  else if (style === "round") drawFreshFrame(bw, r, top, bottom);
+  else drawClassicFrame(bw, r, top, bottom);
+  const customCornerStyle = $("cornerLabelStyle").value;
+  if (customCornerStyle !== "none") {
+    if (customCornerStyle !== "default" || (style !== "none" && style !== "leica" && style !== "polaroid" && style !== "film" && style !== "ins" && style !== "xianyu")) {
+      drawCornerLabel(bw, r, style, img);
+    }
+  }
+  ctx.restore();
+}
+
+function drawTextSpaced(ctx, text, x, y, spacing, align = "left") {
+  const chars = text.split("");
+  let widths = chars.map(c => ctx.measureText(c).width + spacing);
+  let totalW = widths.reduce((a, b) => a + b, 0) - spacing;
+  
+  let startX = x;
+  if (align === "center") startX = x - totalW / 2;
+  else if (align === "right") startX = x - totalW;
+  
+  let curX = startX;
+  for (let i = 0; i < chars.length; i++) {
+    ctx.fillText(chars[i], curX, y);
+    curX += widths[i];
+  }
+}
+
+function drawLeicaFrame(bw, r, top, bottom) {
+  const bottomSpace = bw * 2.5;
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.lineWidth = Math.max(1, bw / 15);
+  ctx.strokeRect(bw, bw, canvas.width - bw * 2, canvas.height - bw - bottomSpace);
+  
+  const yMid = canvas.height - bottomSpace / 2;
+  const xMid = canvas.width / 2;
+  const logoR = Math.max(16, bw * 0.45);
+  
+  ctx.save();
+  ctx.shadowColor = "rgba(229, 25, 24, 0.35)";
+  ctx.shadowBlur = Math.max(4, bw * 0.15);
+  ctx.shadowOffsetY = Math.max(1, bw * 0.05);
+  ctx.fillStyle = "#e51918";
+  ctx.beginPath();
+  ctx.arc(xMid, yMid, logoR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+  
+  ctx.fillStyle = "#ffffff";
+  ctx.font = `italic bold ${logoR * 0.68}px "Brush Script MT", "Times New Roman", cursive, serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("Leica", xMid, yMid - logoR * 0.08);
+  
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = Math.max(1, logoR * 0.08);
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.moveTo(xMid - logoR * 0.48, yMid + logoR * 0.22);
+  ctx.quadraticCurveTo(xMid, yMid + logoR * 0.34, xMid + logoR * 0.44, yMid + logoR * 0.16);
+  ctx.stroke();
+  
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.lineWidth = Math.max(1, bw * 0.04);
+  ctx.beginPath();
+  ctx.moveTo(xMid - logoR * 2.2, yMid - logoR * 0.65);
+  ctx.lineTo(xMid - logoR * 2.2, yMid + logoR * 0.65);
+  ctx.moveTo(xMid + logoR * 2.2, yMid - logoR * 0.65);
+  ctx.lineTo(xMid + logoR * 2.2, yMid + logoR * 0.65);
+  ctx.stroke();
+  
+  const label = $("cornerLabel").value.trim();
+  if (label) {
+    ctx.fillStyle = "#1e293b";
+    ctx.font = `bold ${Math.max(13, bw * 0.45)}px "Outfit", -apple-system, sans-serif`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, bw * 1.25, yMid);
+  }
+  
+  const meta = $("cameraMeta").value.trim();
+  if (meta) {
+    ctx.fillStyle = "#475569";
+    ctx.font = `500 ${Math.max(12, bw * 0.38)}px "Outfit", -apple-system, sans-serif`;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    drawTextSpaced(ctx, meta, canvas.width - bw * 1.25, yMid, 1.2, "right");
+  }
+}
+
+function drawPolaroidFrame(bw, r, top, bottom) {
+  const bottomSpace = bw * 3.5;
+  const { targetX, targetY, targetW, targetH } = getPhotoCoords(true, bw, "polaroid");
+  
+  ctx.save();
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.12)";
+  ctx.lineWidth = Math.max(1, bw * 0.05);
+  ctx.strokeRect(targetX, targetY, targetW, targetH);
+  ctx.restore();
+  
+  ctx.save();
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.06)";
+  ctx.lineWidth = Math.max(1, bw / 15);
+  ctx.strokeRect(bw, bw, canvas.width - bw * 2, canvas.height - bw - bottomSpace);
+  ctx.restore();
+  
+  const label = $("cameraMeta").value.trim() || $("cornerLabel").value.trim();
+  if (label) {
+    const yMid = canvas.height - bottomSpace / 2;
+    ctx.fillStyle = "#2c3e50";
+    ctx.font = `italic ${Math.max(16, bw * 0.7)}px "Brush Script MT", "Segoe Print", "KaiTi", "Microsoft YaHei", cursive`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, canvas.width / 2, yMid);
+  }
+  
+  ctx.save();
+  const tapeW = bw * 3.2;
+  const tapeH = bw * 0.8;
+  const tx = canvas.width / 2 - tapeW / 2;
+  const ty = targetY - tapeH / 2;
+  
+  ctx.fillStyle = "rgba(244, 235, 215, 0.55)";
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  
+  ctx.moveTo(tx, ty);
+  ctx.lineTo(tx + tapeW, ty);
+  
+  let curY = ty;
+  while (curY < ty + tapeH) {
+    curY += 3;
+    const offset = (Math.random() - 0.5) * 3;
+    ctx.lineTo(tx + tapeW + offset, curY);
+  }
+  
+  ctx.lineTo(tx, ty + tapeH);
+  
+  curY = ty + tapeH;
+  while (curY > ty) {
+    curY -= 3;
+    const offset = (Math.random() - 0.5) * 3;
+    ctx.lineTo(tx + offset, curY);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  
+  ctx.strokeStyle = "rgba(0,0,0,0.03)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let step = 4; step < tapeW; step += 12) {
+    ctx.moveTo(tx + step, ty);
+    ctx.lineTo(tx + step - 4, ty + tapeH);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawFilmFrame(bw, r, color) {
+  const isLandscape = canvas.width > canvas.height;
+  const inner = lastImgDrawCoords || { x: 0, y: 0, w: canvas.width, h: canvas.height, targetX: 0, targetY: 0, targetW: canvas.width, targetH: canvas.height };
+  
+  ctx.fillStyle = "#000000";
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+  ctx.lineWidth = 1.5;
+  
+  const holeW = bw * 0.45;
+  const holeH = bw * 0.6;
+  const holeR = 3;
+  const holeGap = Math.max(5, bw * 1.35);
+  
+  if (isLandscape) {
+    const yTop = inner.targetY / 2;
+    const yBottom = inner.targetY + inner.targetH + (canvas.height - (inner.targetY + inner.targetH)) / 2;
+    
+    for (let x = bw * 0.8; x < canvas.width - bw * 0.8; x += holeGap) {
+      ctx.beginPath();
+      ctx.roundRect(x - holeW / 2, yTop - holeH / 2, holeW, holeH, holeR);
+      ctx.fill();
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.roundRect(x - holeW / 2, yBottom - holeH / 2, holeW, holeH, holeR);
+      ctx.fill();
+      ctx.stroke();
+    }
+  } else {
+    const xLeft = inner.targetX / 2;
+    const xRight = inner.targetX + inner.targetW + (canvas.width - (inner.targetX + inner.targetW)) / 2;
+    
+    for (let y = bw * 0.8; y < canvas.height - bw * 0.8; y += holeGap) {
+      ctx.beginPath();
+      ctx.roundRect(xLeft - holeW / 2, y - holeH / 2, holeW, holeH, holeR);
+      ctx.fill();
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.roundRect(xRight - holeW / 2, y - holeH / 2, holeW, holeH, holeR);
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+  
+  const label = $("cornerLabel").value.trim() || "KODAK PORTRA 400";
+  ctx.fillStyle = "#e0a800";
+  ctx.font = `bold ${Math.max(12, bw * 0.45)}px "Courier New", Courier, monospace`;
+  
+  if (isLandscape) {
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, bw * 1.2, inner.targetY - bw * 0.45);
+    
+    ctx.textAlign = "right";
+    ctx.fillText("► 24A", canvas.width - bw * 1.2, inner.targetY - bw * 0.45);
+    
+    ctx.textAlign = "left";
+    ctx.fillText("SAFETY FILM  25", bw * 1.2, inner.targetY + inner.targetH + bw * 0.45);
+  } else {
+    ctx.save();
+    ctx.translate(inner.targetX - bw * 0.45, canvas.height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.fillText(label + "  ► 24A", 0, 0);
+    ctx.restore();
+    
+    ctx.save();
+    ctx.translate(inner.targetX + inner.targetW + bw * 0.45, canvas.height / 2);
+    ctx.rotate(Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.fillText("SAFETY FILM  25", 0, 0);
+    ctx.restore();
+  }
+  
+  const meta = $("cameraMeta").value.trim();
+  if (meta) {
+    ctx.save();
+    ctx.fillStyle = "#ff6a00";
+    ctx.shadowColor = "#ff5500";
+    ctx.shadowBlur = Math.max(6, bw * 0.25);
+    ctx.font = `bold ${Math.max(16, bw * 0.85)}px "Courier New", Courier, monospace`;
+    
+    const stampX = inner.targetX + inner.targetW - bw * 1.5;
+    const stampY = inner.targetY + inner.targetH - bw * 1.2;
+    drawTextSpaced(ctx, meta, stampX, stampY, bw * 0.15, "right");
+    ctx.restore();
+  }
+}
+
+function drawInsFrame(bw, r, top, bottom, img) {
+  const inner = lastImgDrawCoords || { x: 0, y: 0, w: canvas.width, h: canvas.height, targetX: 0, targetY: 0, targetW: canvas.width, targetH: canvas.height };
+  const text = $("cornerLabel").value.trim();
+  if (text) {
+    const fontSize = Math.max(16, Math.round(canvas.width * 0.03));
+    ctx.font = `bold ${fontSize}px "Outfit", -apple-system, sans-serif`;
+    const padX = fontSize * 0.7;
+    const labelW = ctx.measureText(text).width + padX * 2.5;
+    const labelH = fontSize * 1.6;
+    
+    const lx = inner.targetX + bw * 1.5;
+    const ly = inner.targetY + bw * 1.5;
+    
+    ctx.save();
+    roundedPath(lx, ly, labelW, labelH, 12);
+    ctx.clip();
+    const blurRadius = Math.max(10, Math.round(canvas.width * 0.012));
+    ctx.filter = `blur(${blurRadius}px) brightness(0.96)`;
+    ctx.drawImage(img, inner.x, inner.y, inner.w, inner.h);
+    ctx.restore();
+    
+    ctx.save();
+    ctx.shadowColor = "rgba(0, 0, 0, 0.12)";
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetY = 4;
+    
+    ctx.fillStyle = "rgba(255, 255, 255, 0.38)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 1.5;
+    
+    ctx.beginPath();
+    ctx.roundRect(lx, ly, labelW, labelH, 12);
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+    
+    const dotR = labelH * 0.15;
+    const dotX = lx + padX * 0.8;
+    const dotY = ly + labelH / 2;
+    const dotGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, dotR);
+    dotGrad.addColorStop(0, "#ff007f");
+    dotGrad.addColorStop(1, "#7f00ff");
+    
+    ctx.fillStyle = dotGrad;
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, dotR, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    
+    ctx.fillStyle = "#ffffff";
+    ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
+    ctx.shadowBlur = 4;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, lx + padX * 1.5, ly + labelH / 2);
+    ctx.restore();
+  }
+}
+
+function drawXianyuFrame(bw, r, top, bottom) {
+  ctx.strokeStyle = "#ffe500";
+  ctx.lineWidth = bw;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  
+  const inner = lastImgDrawCoords || { x: 0, y: 0, w: canvas.width, h: canvas.height, targetX: 0, targetY: 0, targetW: canvas.width, targetH: canvas.height };
+  
+  const label = $("discountLabel").value.trim() || $("cornerLabel").value.trim();
+  if (label) {
+    ctx.save();
+    ctx.translate(bw, bw);
+    ctx.rotate(-45 * Math.PI / 180);
+    
+    const fontSize = Math.max(13, bw * 0.65);
+    ctx.font = `900 ${fontSize}px -apple-system, sans-serif`;
+    const ribbonH = fontSize * 1.4;
+    const ribbonW = fontSize * 5.2;
+    
+    const ribbonGrad = ctx.createLinearGradient(0, 0, 0, ribbonH);
+    ribbonGrad.addColorStop(0, "#ffe600");
+    ribbonGrad.addColorStop(1, "#ffa500");
+    
+    ctx.fillStyle = ribbonGrad;
+    ctx.fillRect(-ribbonW / 2, -ribbonH / 2, ribbonW, ribbonH);
+    
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(-ribbonW / 2 + 2, -ribbonH / 2 + 2, ribbonW - 4, ribbonH - 4);
+    
+    ctx.fillStyle = "#8a0000";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, 0, 1);
+    ctx.restore();
+  }
+  
+  const meta = $("cameraMeta").value.trim();
+  if (meta) {
+    const bannerH = Math.max(26, bw * 1.6);
+    const bx = bw;
+    const by = canvas.height - bw - bannerH;
+    const bw_width = canvas.width - bw * 2;
+    
+    const bannerGrad = ctx.createLinearGradient(bx, 0, bx + bw_width, 0);
+    bannerGrad.addColorStop(0, "#ff3b30");
+    bannerGrad.addColorStop(1, "#ff9500");
+    
+    ctx.fillStyle = bannerGrad;
+    ctx.beginPath();
+    ctx.rect(bx, by, bw_width, bannerH);
+    ctx.fill();
+    
+    ctx.fillStyle = "#ffffff";
+    const fontSize = bannerH * 0.46;
+    ctx.font = `bold ${fontSize}px -apple-system, sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(meta, canvas.width / 2, by + bannerH / 2);
+  }
+  
+  const price = $("productPrice").value.trim();
+  if (price) {
+    const bannerH = Math.max(26, bw * 1.6);
+    const bubbleH = Math.max(36, bw * 1.8);
+    const bubbleY = canvas.height - bw * 1.5 - bannerH - bubbleH - Math.max(6, bw * 0.2);
+    
+    ctx.save();
+    ctx.shadowColor = "rgba(0, 0, 0, 0.18)";
+    ctx.shadowBlur = Math.max(6, bw * 0.35);
+    ctx.shadowOffsetY = Math.max(3, bw * 0.15);
+    
+    ctx.fillStyle = "#ff3b30";
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = Math.max(2, bw * 0.15);
+    
+    const symSize = Math.round(bubbleH * 0.36);
+    const priceSize = Math.round(bubbleH * 0.58);
+    
+    ctx.font = `bold ${symSize}px -apple-system, sans-serif`;
+    const curSymbolW = ctx.measureText("¥").width;
+    ctx.font = `900 ${priceSize}px -apple-system, sans-serif`;
+    const curPriceW = ctx.measureText(price).width;
+    
+    const padX = bubbleH * 0.28;
+    const bubbleW = curSymbolW + curPriceW + padX * 2.8;
+    
+    const adjustedX = canvas.width - bw * 1.5 - bubbleW;
+    
+    ctx.beginPath();
+    ctx.roundRect(adjustedX, bubbleY, bubbleW, bubbleH, bubbleH / 2);
+    ctx.fill();
+    ctx.stroke();
+    
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.fillStyle = "#ffffff";
+    
+    ctx.font = `bold ${symSize}px -apple-system, sans-serif`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText("¥", adjustedX + padX, bubbleY + bubbleH / 2 + Math.max(1, bubbleH * 0.04));
+    
+    ctx.font = `900 ${priceSize}px -apple-system, sans-serif`;
+    ctx.fillText(price, adjustedX + padX + curSymbolW + Math.max(2, bubbleH * 0.08), bubbleY + bubbleH / 2);
+    ctx.restore();
+  }
+}
+
+function drawClassicFrame(bw, r, top, bottom) {
+  ctx.lineWidth = bw;
+  ctx.strokeStyle = top;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  ctx.strokeStyle = bottom;
+  ctx.beginPath();
+  ctx.moveTo(r, canvas.height - bw / 2);
+  ctx.lineTo(canvas.width - r, canvas.height - bw / 2);
+  ctx.stroke();
+}
+
+function drawNeonFrame(bw, r, top, bottom) {
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, top);
+  gradient.addColorStop(0.5, "#ffffff");
+  gradient.addColorStop(1, bottom);
+  ctx.shadowColor = bottom;
+  ctx.shadowBlur = bw * 1.6;
+  ctx.lineWidth = bw;
+  ctx.strokeStyle = gradient;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+}
+
+function drawMinimalFrame(bw, r, color) {
+  ctx.lineWidth = bw;
+  ctx.strokeStyle = color;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  ctx.lineWidth = Math.max(2, bw / 4);
+  ctx.strokeStyle = "rgba(0,0,0,0.18)";
+  roundedPath(bw + 2, bw + 2, canvas.width - bw * 2 - 4, canvas.height - bw * 2 - 4, Math.max(0, r - bw));
+  ctx.stroke();
+}
+
+function drawGoldFrame(bw, r, top, bottom) {
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, top);
+  gradient.addColorStop(0.45, "#fff1a8");
+  gradient.addColorStop(1, bottom);
+  ctx.lineWidth = bw;
+  ctx.strokeStyle = gradient;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  ctx.lineWidth = Math.max(2, bw / 5);
+  ctx.strokeStyle = "rgba(255,255,255,0.5)";
+  roundedPath(bw * 1.1, bw * 1.1, canvas.width - bw * 2.2, canvas.height - bw * 2.2, Math.max(0, r - bw));
+  ctx.stroke();
+}
+
+function drawFreshFrame(bw, r, top, bottom) {
+  const gradient = ctx.createLinearGradient(0, canvas.height, canvas.width, 0);
+  gradient.addColorStop(0, bottom);
+  gradient.addColorStop(1, top);
+  ctx.lineWidth = bw;
+  ctx.strokeStyle = gradient;
+  roundedPath(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw, r);
+  ctx.stroke();
+  ctx.fillStyle = top;
+  for (const [x, y] of [[bw * 2.2, canvas.height - bw * 2.4], [canvas.width - bw * 3.5, bw * 2.3]]) {
+    ctx.beginPath();
+    ctx.arc(x, y, bw * 0.75, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawCornerLabel(bw, r, style, img) {
+  const text = $("cornerLabel").value.trim();
+  if (!text) return;
+  
+  let activeStyle = $("cornerLabelStyle").value;
+  if (activeStyle === "default") {
+    activeStyle = style;
+  }
+  if (activeStyle === "none") return;
+  
+  const fontSize = Math.max(22, Math.round(canvas.width * 0.038));
+  
+  const fontFam = $("cornerLabelFont").value;
+  ctx.font = `900 ${fontSize}px ${fontFam}`;
+  
+  const padX = fontSize * 0.55;
+  const labelW = ctx.measureText(text).width + padX * 2;
+  const labelH = fontSize * 1.55;
+  const x = bw;
+  const y = bw;
+  
+  let bgFill;
+  let textFill;
+  const bgMode = $("cornerBgMode").value;
+  const top = $("topColor").value;
+  const bottom = $("bottomColor").value;
+  
+  if (bgMode === "custom") {
+    bgFill = $("cornerBgColor").value;
+    textFill = $("cornerTextColor").value;
+  } else {
+    bgFill = top;
+    textFill = activeStyle === "minimal" ? "#172033" : "#ffffff";
+  }
+  
+  ctx.save();
+  if (activeStyle === "pill" || activeStyle === "round") {
+    ctx.fillStyle = bgFill;
+    ctx.beginPath();
+    ctx.roundRect(x + bw * 0.4, y + bw * 0.4, labelW, labelH, labelH / 2);
+    ctx.fill();
+  } else if (activeStyle === "glass") {
+    const lx = x + bw * 0.4;
+    const ly = y + bw * 0.4;
+    
+    ctx.save();
+    roundedPath(lx, ly, labelW, labelH, 12);
+    ctx.clip();
+    const blurRadius = Math.max(10, Math.round(canvas.width * 0.012));
+    ctx.filter = `blur(${blurRadius}px) brightness(0.96)`;
+    const inner = lastImgDrawCoords;
+    const imgX = inner ? inner.x : 0;
+    const imgY = inner ? inner.y : 0;
+    const imgW = inner ? inner.w : canvas.width;
+    const imgH = inner ? inner.h : canvas.height;
+    ctx.drawImage(img, imgX, imgY, imgW, imgH);
+    ctx.restore();
+    
+    ctx.save();
+    ctx.shadowColor = "rgba(0, 0, 0, 0.12)";
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetY = 4;
+    
+    ctx.fillStyle = bgMode === "custom" ? bgFill : "rgba(255, 255, 255, 0.38)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 1.5;
+    
+    ctx.beginPath();
+    ctx.roundRect(lx, ly, labelW, labelH, 12);
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+    textFill = bgMode === "custom" ? textFill : "#ffffff";
+  } else if (activeStyle === "minimal") {
+    ctx.fillStyle = bgMode === "custom" ? bgFill : "rgba(255, 255, 255, 0.88)";
+    ctx.beginPath();
+    ctx.roundRect(x + bw * 0.35, y + bw * 0.35, labelW, labelH, 12);
+    ctx.fill();
+    ctx.strokeStyle = bgMode === "custom" ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.16)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  } else if (activeStyle === "tag") {
+    if (bgMode === "custom") {
+      ctx.fillStyle = bgFill;
+    } else {
+      const gradient = ctx.createLinearGradient(x, y, x + labelW, y + labelH);
+      gradient.addColorStop(0, top);
+      gradient.addColorStop(1, bottom);
+      ctx.fillStyle = gradient;
+    }
+    ctx.beginPath();
+    ctx.roundRect(x + bw * 0.35, y + bw * 0.35, labelW, labelH, 10);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = bgFill;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + labelW, y);
+    ctx.lineTo(x + labelW - labelH * 0.45, y + labelH);
+    ctx.lineTo(x, y + labelH);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  ctx.fillStyle = textFill;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  const tx = activeStyle === "slant" ? x + padX * 0.7 : x + bw * 0.4 + padX * 0.75;
+  const ty = activeStyle === "slant" ? y + labelH / 2 : y + bw * 0.4 + labelH / 2;
+  
+  ctx.fillText(text, tx, ty);
+  ctx.restore();
+}
+
+function roundedPath(x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function canvasToBlob(target) {
+  const type = $("exportFormat").value;
+  const quality = type === "image/jpeg" ? Number($("jpegQuality").value) / 100 : undefined;
+  return new Promise(resolve => target.toBlob(resolve, type, quality));
+}
+
+function makeExportCanvas() {
+  if (!$("hdEnabled").checked) return canvas;
+  const scale = Number($("exportScale").value);
+  if (scale <= 1) return canvas;
+  const out = document.createElement("canvas");
+  out.width = canvas.width * scale;
+  out.height = canvas.height * scale;
+  const outCtx = out.getContext("2d");
+  setImageQuality(outCtx);
+  outCtx.drawImage(canvas, 0, 0, out.width, out.height);
+  sharpenCanvas(out, Math.min(1, Number($("sharpen").value) / 100 * 0.65));
+  return out;
+}
+
+function setImageQuality(targetCtx) {
+  targetCtx.imageSmoothingEnabled = true;
+  targetCtx.imageSmoothingQuality = "high";
+}
+
+function sharpenCanvas(target, amount) {
+  if (amount <= 0) return;
+  const targetCtx = target.getContext("2d");
+  const w = target.width;
+  const h = target.height;
+  if (w < 3 || h < 3) return;
+  const src = targetCtx.getImageData(0, 0, w, h);
+  const out = targetCtx.createImageData(w, h);
+  const s = src.data;
+  const d = out.data;
+  const center = 1 + amount * 4;
+  const side = -amount;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) {
+        d[i] = s[i];
+        d[i + 1] = s[i + 1];
+        d[i + 2] = s[i + 2];
+        d[i + 3] = s[i + 3];
+        continue;
+      }
+      for (let c = 0; c < 3; c++) {
+        const value =
+          s[i + c] * center +
+          s[i - 4 + c] * side +
+          s[i + 4 + c] * side +
+          s[i - w * 4 + c] * side +
+          s[i + w * 4 + c] * side;
+        d[i + c] = Math.max(0, Math.min(255, value));
+      }
+      d[i + 3] = s[i + 3];
+    }
+  }
+  targetCtx.putImageData(out, 0, 0);
+}
+
+function outputName(name) {
+  const ext = $("exportFormat").value === "image/jpeg" ? ".jpg" : ".png";
+  return name.replace(/\.[^.]+$/, "") + "_水印" + ext;
+}
+
+function downloadBlob(blob, name) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function makeZip(entries) {
+  const encoder = new TextEncoder();
+  const files = [];
+  const central = [];
+  let offset = 0;
+  for (const entry of entries) {
+    const nameBytes = encoder.encode(entry.name);
+    const data = entry.data;
+    const crc = crc32(data);
+    const local = new Uint8Array(30 + nameBytes.length);
+    const localView = new DataView(local.buffer);
+    localView.setUint32(0, 0x04034b50, true);
+    localView.setUint16(4, 20, true);
+    localView.setUint16(8, 0, true);
+    localView.setUint16(10, 0, true);
+    localView.setUint32(14, crc, true);
+    localView.setUint32(18, data.length, true);
+    localView.setUint32(22, data.length, true);
+    localView.setUint16(26, nameBytes.length, true);
+    local.set(nameBytes, 30);
+    files.push(local, data);
+
+    const cd = new Uint8Array(46 + nameBytes.length);
+    const cdView = new DataView(cd.buffer);
+    cdView.setUint32(0, 0x02014b50, true);
+    cdView.setUint16(4, 20, true);
+    cdView.setUint16(6, 20, true);
+    cdView.setUint32(16, crc, true);
+    cdView.setUint32(20, data.length, true);
+    cdView.setUint32(24, data.length, true);
+    cdView.setUint16(28, nameBytes.length, true);
+    cdView.setUint32(42, offset, true);
+    cd.set(nameBytes, 46);
+    central.push(cd);
+    offset += local.length + data.length;
+  }
+  const centralSize = central.reduce((sum, item) => sum + item.length, 0);
+  const end = new Uint8Array(22);
+  const endView = new DataView(end.buffer);
+  endView.setUint32(0, 0x06054b50, true);
+  endView.setUint16(8, entries.length, true);
+  endView.setUint16(10, entries.length, true);
+  endView.setUint32(12, centralSize, true);
+  endView.setUint32(16, offset, true);
+  return new Blob([...files, ...central, end], { type: "application/zip" });
+}
+
+let crcTable;
+function crc32(data) {
+  if (!crcTable) {
+    crcTable = new Uint32Array(256);
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+      crcTable[i] = c >>> 0;
+    }
+  }
+  let crc = 0xffffffff;
+  for (let i = 0; i < data.length; i++) crc = crcTable[(crc ^ data[i]) & 0xff] ^ (crc >>> 8);
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+renderCurrent();
+</script>
+</body>
+</html>
