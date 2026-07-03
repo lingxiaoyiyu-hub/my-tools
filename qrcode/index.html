@@ -293,7 +293,7 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="./qrcode.min.js"></script>
   <script>
     const textEl = document.getElementById('text');
     const fgEl = document.getElementById('fg');
@@ -315,7 +315,7 @@
     let logoImg = null;
 
     function eccFromValue(v) {
-      return { L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H }[v];
+      return ['L', 'M', 'Q', 'H'].includes(v) ? v : 'M';
     }
 
     function showToast(msg) {
@@ -329,8 +329,89 @@
       const url = URL.createObjectURL(file);
       logoPreview.innerHTML = `<img src="${url}" alt="logo"><span>${file.name}</span>`;
       const img = new Image();
-      img.onload = () => { logoImg = img; render(); };
+      img.onload = () => {
+        logoImg = img;
+        URL.revokeObjectURL(url);
+        render();
+      };
+      img.onerror = () => {
+        logoImg = null;
+        URL.revokeObjectURL(url);
+        showToast('Logo 图片读取失败');
+      };
       img.src = url;
+    }
+
+    function roundedRectPath(context, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      context.beginPath();
+      context.moveTo(x + radius, y);
+      context.lineTo(x + w - radius, y);
+      context.quadraticCurveTo(x + w, y, x + w, y + radius);
+      context.lineTo(x + w, y + h - radius);
+      context.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+      context.lineTo(x + radius, y + h);
+      context.quadraticCurveTo(x, y + h, x, y + h - radius);
+      context.lineTo(x, y + radius);
+      context.quadraticCurveTo(x, y, x + radius, y);
+      context.closePath();
+    }
+
+    function drawLogo() {
+      if (!logoImg) return;
+
+      const maxLogo = Math.floor(size * 0.22);
+      const scale = Math.min(1, maxLogo / Math.max(logoImg.width, logoImg.height));
+      const w = logoImg.width * scale;
+      const h = logoImg.height * scale;
+      const x = (size - w) / 2;
+      const y = (size - h) / 2;
+      const padding = Math.floor(size * 0.025);
+      const r = Math.floor(12 * (size / 512));
+
+      ctx.save();
+      roundedRectPath(ctx, x - padding, y - padding, w + padding * 2, h + padding * 2, r);
+      ctx.fillStyle = bgEl.value || '#ffffff';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      roundedRectPath(ctx, x, y, w, h, Math.max(6, r - 4));
+      ctx.clip();
+      ctx.drawImage(logoImg, x, y, w, h);
+      ctx.restore();
+    }
+
+    function drawQrToCanvas(text) {
+      if (typeof qrcode !== 'function') {
+        throw new Error('二维码生成库未加载');
+      }
+
+      const qr = qrcode(0, eccFromValue(eccEl.value));
+      qr.addData(text);
+      qr.make();
+
+      const moduleCount = qr.getModuleCount();
+      const quietModules = 2;
+      const cell = Math.max(1, Math.floor(size / (moduleCount + quietModules * 2)));
+      const qrSize = cell * moduleCount;
+      const offset = Math.floor((size - qrSize) / 2);
+
+      canvas.width = size;
+      canvas.height = size;
+
+      ctx.clearRect(0, 0, size, size);
+      ctx.fillStyle = bgEl.value || '#ffffff';
+      ctx.fillRect(0, 0, size, size);
+
+      ctx.fillStyle = fgEl.value || '#000000';
+      for (let row = 0; row < moduleCount; row++) {
+        for (let col = 0; col < moduleCount; col++) {
+          if (qr.isDark(row, col)) {
+            ctx.fillRect(offset + col * cell, offset + row * cell, cell, cell);
+          }
+        }
+      }
     }
 
     async function render() {
@@ -343,44 +424,19 @@
       canvas.style.display = '';
       emptyHint.style.display = 'none';
 
-      const fg = fgEl.value;
-      const bg = bgEl.value;
-
-      const opts = {
-        width: size,
-        margin: 2,
-        color: { dark: fg, light: bg },
-        errorCorrectionLevel: eccFromValue(eccEl.value),
-      };
-
       try {
-        await QRCode.toCanvas(canvas, text, opts);
+        drawQrToCanvas(text);
       } catch (e) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.style.display = 'none';
         emptyHint.style.display = '';
-        emptyHint.textContent = '内容过长或无法生成二维码，请缩短文本后重试';
+        emptyHint.textContent = e.message === '二维码生成库未加载'
+          ? '二维码生成库加载失败，请刷新页面重试'
+          : '内容过长或无法生成二维码，请缩短文本后重试';
         return;
       }
 
-      if (logoImg) {
-        const maxLogo = Math.floor(size * 0.22);
-        const scale = Math.min(1, maxLogo / Math.max(logoImg.width, logoImg.height));
-        const w = logoImg.width * scale;
-        const h = logoImg.height * scale;
-        const x = (size - w) / 2;
-        const y = (size - h) / 2;
-        const r = Math.floor(12 * (size / 512));
-
-        ctx.save();
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.beginPath();
-        ctx.roundRect(x - r, y - r, w + r * 2, h + r * 2, r);
-        ctx.fill();
-        ctx.restore();
-
-        ctx.drawImage(logoImg, x, y, w, h);
-      }
+      drawLogo();
     }
 
     textEl.addEventListener('input', render);
@@ -403,13 +459,12 @@
     downloadBtn.addEventListener('click', async () => {
       const text = (textEl.value || '').trim();
       if (!text) { showToast('请先输入内容'); return; }
-      const opts = {
-        width: size,
-        margin: 2,
-        color: { dark: fgEl.value, light: bgEl.value },
-        errorCorrectionLevel: eccFromValue(eccEl.value),
-      };
-      const dataUrl = await QRCode.toDataURL(text, opts);
+      await render();
+      if (!canvas.width || !canvas.height || canvas.style.display === 'none') {
+        showToast('二维码还未生成');
+        return;
+      }
+      const dataUrl = canvas.toDataURL('image/png');
       const a = document.createElement('a');
       a.href = dataUrl;
       a.download = 'qrcode.png';
@@ -423,7 +478,13 @@
       const text = (textEl.value || '').trim();
       if (!text) { showToast('请先输入内容'); return; }
       try {
+        await render();
+        if (!canvas.width || !canvas.height || canvas.style.display === 'none') {
+          showToast('二维码还未生成');
+          return;
+        }
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        if (!blob) throw new Error('Canvas export failed');
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
         showToast('已复制到剪贴板');
       } catch (e) {
