@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF工具箱 - 小乘工具箱</title>
+  <meta name="description" content="纯本地运行的PDF工具箱：合并、拆分、旋转、提取，文件不上传服务器。">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --primary-light: #f0fdf4;
+      --bg: #f4f5f6;
+      --card: #fff;
+      --text: #171717;
+      --text-muted: #737373;
+      --border: #e5e5e5;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+      --radius: 16px;
+      --shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; color: var(--text); }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .pill { font-size: 0.72rem; color: var(--primary); background: var(--primary-light); border: 1px solid #bbf7d0; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .home-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); transition: all 0.15s; }
+    .home-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-light); }
+    .container { max-width: 980px; width: 100%; margin: 0 auto; padding: 24px 20px 40px; flex: 1; }
+    .tabs { display: flex; gap: 4px; background: var(--card); padding: 6px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    .tab { flex: 1; padding: 10px 16px; border: none; background: transparent; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.15s; font-family: inherit; }
+    .tab:hover { color: var(--text); background: #f9fafb; }
+    .tab.active { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(5,150,105,.25); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 16px; }
+    .card-title { font-size: 0.98rem; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .card-title svg { stroke: var(--primary); }
+    .dropzone { border: 2px dashed var(--border); border-radius: 12px; padding: 32px 20px; text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.2s; background: #fafafa; }
+    .dropzone:hover, .dropzone.dragover { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .dropzone svg { margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.92rem; }
+    .dropzone-hint { font-size: 0.76rem; margin-top: 4px; opacity: 0.7; }
+    .file-list { margin-top: 14px; }
+    .file-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #fafafa; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; font-size: 0.85rem; }
+    .file-item .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-item .file-pages { color: var(--text-muted); font-size: 0.76rem; background: #f0f0f0; padding: 2px 8px; border-radius: 10px; }
+    .file-item .icon-btn { width: 28px; height: 28px; border: 1px solid var(--border); background: var(--card); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: all 0.15s; }
+    .icon-btn:hover { color: var(--primary); border-color: var(--primary); }
+    .icon-btn.danger:hover { color: var(--danger); border-color: var(--danger); }
+    .form-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    label { font-size: 0.85rem; color: var(--text); }
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .radio-item { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer; }
+    .radio-item input { cursor: pointer; }
+    input[type="text"], input[type="number"] { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: inherit; outline: none; transition: border-color 0.15s; flex: 1; min-width: 120px; max-width: 320px; }
+    input[type="text"]:focus, input[type="number"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(5,150,105,.1); }
+    .info-line { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
+    .btn { padding: 9px 18px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; }
+    .btn:hover { border-color: var(--primary); color: var(--primary); }
+    .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-sm { padding: 5px 10px; font-size: 0.76rem; }
+    .action-bar { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .angle-group { display: flex; gap: 8px; }
+    .angle-btn { flex: 1; min-width: 90px; padding: 14px 8px; border: 1.5px solid var(--border); background: var(--card); border-radius: 10px; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: inherit; color: var(--text); }
+    .angle-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .angle-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .angle-btn .angle-label { font-size: 0.8rem; font-weight: 600; }
+    .angle-btn .angle-hint { font-size: 0.68rem; color: var(--text-muted); }
+    .page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; max-height: 320px; overflow-y: auto; padding: 4px; }
+    .page-chk { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.82rem; text-align: center; transition: all 0.15s; background: var(--card); user-select: none; }
+    .page-chk:hover { border-color: var(--primary); }
+    .page-chk.checked { background: var(--primary-light); border-color: var(--primary); color: var(--primary); font-weight: 600; }
+    .grid-toolbar { display: flex; gap: 8px; margin-top: 12px; }
+    #toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .toast { padding: 10px 18px; border-radius: 10px; font-size: 0.85rem; box-shadow: 0 4px 16px rgba(0,0,0,.12); animation: toastIn 0.2s ease; pointer-events: auto; }
+    .toast.error { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
+    .toast.success { background: var(--primary-light); color: var(--primary); border: 1px solid #bbf7d0; }
+    .toast.info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .loading { display: inline-block; width: 14px; height: 14px; border: 2px solid #fff3; border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    footer { text-align: center; padding: 20px; font-size: 0.76rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--card); }
+    @media (max-width: 900px) {
+      header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .header-right { width: 100%; justify-content: space-between; }
+      .container { padding: 16px; }
+      .tabs { overflow-x: auto; }
+      .tab { font-size: 0.85rem; padding: 8px 12px; }
+      .page-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .angle-group { flex-direction: column; }
+      .page-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="toast-container"></div>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="#059669" stroke-width="2" fill="none">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <path d="M9 15l2 2 4-4"></path>
+        </svg>
+      </div>
+      PDF工具箱
+    </div>
+    <div class="header-right">
+      <span class="pill">纯本地运行 · 不上传任何内容</span>
+      <a href="../" class="home-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.2" fill="none">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        返回工具箱首页
+      </a>
+    </div>
+  </header>
+  <main class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="merge">合并</button>
+      <button class="tab" data-tab="split">拆分</button>
+      <button class="tab" data-tab="rotate">旋转</button>
+      <button class="tab" data-tab="extract">提取</button>
+    </div>
+
+    <section class="panel active" data-panel="merge">
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M9 2h6M5 6h14M7 10h10M9 14h6M11 18h2"></path>
+          </svg>
+          选择多个PDF文件
+        </div>
+        <div class="dropzone" id="merge-dropzone">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.8" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <div class="dropzone-text">点击选择或拖拽PDF文件到此处</div>
+          <div class="dropzone-hint">支持多选，按顺序合并</div>
+          <input type="file" id="merge-input" multiple accept="application/pdf" hidden>
+        </div>
+        <div class="file-list" id="merge-list"></div>
+        <div class="action-bar">
+          <button class="btn primary" id="merge-btn" disabled>合并并下载</button>
+          <button class="btn" id="merge-clear" disabled>清空列表</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="split">
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M8 3v18M16 3v18M3 8h5M3 16h5M16 8h5M16 16h5"></path>
+          </svg>
+          选择PDF文件
+        </div>
+        <div class="dropzone" id="split-dropzone">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.8" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <div class="dropzone-text">点击选择或拖拽PDF文件</div>
+          <div class="dropzone-hint">仅支持单文件</div>
+          <input type="file" id="split-input" accept="application/pdf" hidden>
+        </div>
+        <div id="split-info" class="info-line" style="display:none;"></div>
+      </div>
+      <div class="card" id="split-config" style="display:none;">
+        <div class="card-title">拆分模式</div>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="split-mode" value="range" checked> 按页码区间</label>
+          <label class="radio-item"><input type="radio" name="split-mode" value="each"> 每页拆成单页</label>
+        </div>
+        <div class="form-row" id="split-range-row" style="margin-top:14px;">
+          <input type="text" id="split-range" placeholder="如 1-3,5,7-9" autocomplete="off">
+        </div>
+        <div class="info-line" id="split-range-hint">格式：起始页-结束页，多个用逗号分隔；输出多个文件时打包为ZIP</div>
+        <div class="action-bar">
+          <button class="btn primary" id="split-btn">拆分并下载</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="rotate">
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+          </svg>
+          选择PDF文件
+        </div>
+        <div class="dropzone" id="rotate-dropzone">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.8" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <div class="dropzone-text">点击选择或拖拽PDF文件</div>
+          <div class="dropzone-hint">仅支持单文件</div>
+          <input type="file" id="rotate-input" accept="application/pdf" hidden>
+        </div>
+        <div id="rotate-info" class="info-line" style="display:none;"></div>
+      </div>
+      <div class="card" id="rotate-config" style="display:none;">
+        <div class="card-title">旋转范围</div>
+        <div class="radio-group" style="margin-bottom: 14px;">
+          <label class="radio-item"><input type="radio" name="rotate-scope" value="all" checked> 全部页面</label>
+          <label class="radio-item"><input type="radio" name="rotate-scope" value="custom"> 指定页码</label>
+        </div>
+        <div class="form-row" id="rotate-pages-row" style="display:none;">
+          <input type="text" id="rotate-pages" placeholder="如 1,3,5-7" autocomplete="off">
+        </div>
+        <div class="card-title" style="margin-top: 20px;">旋转角度（顺时针）</div>
+        <div class="angle-group" id="rotate-angle-group">
+          <button class="angle-btn active" data-angle="90">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+            </svg>
+            <span class="angle-label">90°</span>
+            <span class="angle-hint">顺时针</span>
+          </button>
+          <button class="angle-btn" data-angle="180">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 9 9"></path>
+              <path d="M21 12v-4M21 12h-4"></path>
+            </svg>
+            <span class="angle-label">180°</span>
+            <span class="angle-hint">翻转</span>
+          </button>
+          <button class="angle-btn" data-angle="270">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M21 12a9 9 0 0 0-15-6.7L3 8"></path>
+              <path d="M3 3v5h5"></path>
+            </svg>
+            <span class="angle-label">270°</span>
+            <span class="angle-hint">逆时针90°</span>
+          </button>
+        </div>
+        <div class="info-line">注：pdf-lib按绝对角度设置，多次点击不会累积</div>
+        <div class="action-bar">
+          <button class="btn primary" id="rotate-btn">旋转并下载</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="extract">
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          选择PDF文件
+        </div>
+        <div class="dropzone" id="extract-dropzone">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.8" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <div class="dropzone-text">点击选择或拖拽PDF文件</div>
+          <div class="dropzone-hint">仅支持单文件</div>
+          <input type="file" id="extract-input" accept="application/pdf" hidden>
+        </div>
+        <div id="extract-info" class="info-line" style="display:none;"></div>
+      </div>
+      <div class="card" id="extract-config" style="display:none;">
+        <div class="card-title">选择要提取的页面</div>
+        <div class="grid-toolbar">
+          <button class="btn btn-sm" id="extract-all">全选</button>
+          <button class="btn btn-sm" id="extract-invert">反选</button>
+          <button class="btn btn-sm" id="extract-clear">清空</button>
+        </div>
+        <div class="page-grid" id="extract-grid"></div>
+        <div class="action-bar">
+          <button class="btn primary" id="extract-btn" disabled>提取并下载</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 小乘工具箱. 纯本地运行，文件不上传服务器.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script>
+    const { PDFDocument, degrees } = PDFLib;
+
+    /* ============ Toast ============ */
+    function showToast(msg, type = 'info', duration = 3000) {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = `toast ${type}`;
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-10px)';
+        el.style.transition = 'all 0.25s';
+        setTimeout(() => el.remove(), 250);
+      }, duration);
+    }
+
+    /* ============ 工具函数 ============ */
+    function isPdf(file) {
+      return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+    }
+    function readBytes(file) {
+      return new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(new Uint8Array(r.result));
+        r.onerror = () => reject(new Error('文件读取失败'));
+        r.readAsArrayBuffer(file);
+      });
+    }
+    function download(bytes, filename, mime = 'application/pdf') {
+      const blob = new Blob([bytes], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+    // "1-3,5,7-9" -> [0,1,2,4,6,7,8] (0-indexed)
+    function parsePages(input, total) {
+      if (!input || !input.trim()) return null;
+      const parts = input.split(',').map(s => s.trim()).filter(Boolean);
+      const result = [];
+      for (const part of parts) {
+        const m = part.match(/^(\d+)(?:-(\d+))?$/);
+        if (!m) return null;
+        const start = parseInt(m[1], 10);
+        const end = m[2] ? parseInt(m[2], 10) : start;
+        if (isNaN(start) || isNaN(end)) return null;
+        if (start < 1 || end < 1 || start > total || end > total) return null;
+        if (start > end) return null;
+        for (let i = start; i <= end; i++) result.push(i - 1);
+      }
+      return result;
+    }
+    // "1-3,5,7-9" -> [{label:"1-3",pages:[0,1,2]},...] (0-indexed)
+    function parseRanges(input, total) {
+      if (!input || !input.trim()) return null;
+      const parts = input.split(',').map(s => s.trim()).filter(Boolean);
+      const ranges = [];
+      for (const part of parts) {
+        const m = part.match(/^(\d+)(?:-(\d+))?$/);
+        if (!m) return null;
+        const start = parseInt(m[1], 10);
+        const end = m[2] ? parseInt(m[2], 10) : start;
+        if (isNaN(start) || isNaN(end)) return null;
+        if (start < 1 || end < 1 || start > total || end > total) return null;
+        if (start > end) return null;
+        const pages = [];
+        for (let i = start; i <= end; i++) pages.push(i - 1);
+        ranges.push({ label: start === end ? `${start}` : `${start}-${end}`, pages });
+      }
+      return ranges;
+    }
+    function setLoading(btn, loading) {
+      if (loading) {
+        btn.dataset.originalText = btn.innerHTML;
+        btn.innerHTML = '<span class="loading"></span> 处理中...';
+        btn.disabled = true;
+      } else {
+        if (btn.dataset.originalText) {
+          btn.innerHTML = btn.dataset.originalText;
+          delete btn.dataset.originalText;
+        }
+        btn.disabled = false;
+      }
+    }
+    function getBaseName(filename) {
+      const name = filename.replace(/\\/g, '/').split('/').pop();
+      return name.replace(/\.pdf$/i, '');
+    }
+    function formatBytes(n) {
+      if (n < 1024) return n + ' B';
+      if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+      return (n / 1024 / 1024).toFixed(1) + ' MB';
+    }
+
+    /* ============ ZIP 打包（原生实现） ============ */
+    function crc32(data) {
+      const table = crc32.table || (crc32.table = (() => {
+        const t = new Uint32Array(256);
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+          for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+          t[n] = c >>> 0;
+        }
+        return t;
+      })());
+      let crc = 0xffffffff;
+      for (let i = 0; i < data.length; i++) crc = table[(crc ^ data[i]) & 0xff] ^ (crc >>> 8);
+      return (crc ^ 0xffffffff) >>> 0;
+    }
+    function makeZip(entries) {
+      const enc = new TextEncoder();
+      const chunks = [];
+      const central = [];
+      let offset = 0;
+      for (const e of entries) {
+        const nameBytes = enc.encode(e.name);
+        const crc = crc32(e.data);
+        const size = e.data.length;
+        const lh = new Uint8Array(30 + nameBytes.length);
+        const dv = new DataView(lh.buffer);
+        dv.setUint32(0, 0x04034b50, true);
+        dv.setUint16(4, 20, true);
+        dv.setUint16(6, 0, true);
+        dv.setUint16(8, 0, true);
+        dv.setUint16(10, 0, true);
+        dv.setUint16(12, 0, true);
+        dv.setUint32(14, crc, true);
+        dv.setUint32(18, size, true);
+        dv.setUint32(22, size, true);
+        dv.setUint16(26, nameBytes.length, true);
+        dv.setUint16(28, 0, true);
+        lh.set(nameBytes, 30);
+        chunks.push(lh, e.data);
+        const ch = new Uint8Array(46 + nameBytes.length);
+        const cdv = new DataView(ch.buffer);
+        cdv.setUint32(0, 0x02014b50, true);
+        cdv.setUint16(4, 20, true);
+        cdv.setUint16(6, 20, true);
+        cdv.setUint16(8, 0, true);
+        cdv.setUint16(10, 0, true);
+        cdv.setUint16(12, 0, true);
+        cdv.setUint16(14, 0, true);
+        cdv.setUint32(16, crc, true);
+        cdv.setUint32(20, size, true);
+        cdv.setUint32(24, size, true);
+        cdv.setUint16(28, nameBytes.length, true);
+        cdv.setUint16(30, 0, true);
+        cdv.setUint16(32, 0, true);
+        cdv.setUint16(34, 0, true);
+        cdv.setUint16(36, 0, true);
+        cdv.setUint32(38, 0, true);
+        cdv.setUint32(42, offset, true);
+        ch.set(nameBytes, 46);
+        central.push(ch);
+        offset += lh.length + e.data.length;
+      }
+      let centralSize = 0;
+      for (const c of central) centralSize += c.length;
+      const cdoff = offset;
+      const endrec = new Uint8Array(22);
+      const edv = new DataView(endrec.buffer);
+      edv.setUint32(0, 0x06054b50, true);
+      edv.setUint16(4, 0, true);
+      edv.setUint16(6, 0, true);
+      edv.setUint16(8, entries.length, true);
+      edv.setUint16(10, entries.length, true);
+      edv.setUint32(12, centralSize, true);
+      edv.setUint32(16, cdoff, true);
+      edv.setUint16(20, 0, true);
+      return new Blob([...chunks, ...central, endrec], { type: 'application/zip' });
+    }
+
+    /* ============ Tab 切换 ============ */
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+      });
+    });
+
+    /* ============ 通用 dropzone 绑定 ============ */
+    function bindDropzone(zoneId, inputId, onFiles, multiple) {
+      const zone = document.getElementById(zoneId);
+      const input = document.getElementById(inputId);
+      zone.addEventListener('click', () => input.click());
+      input.addEventListener('change', () => {
+        if (input.files.length) onFiles(input.files);
+        input.value = '';
+      });
+      ['dragover', 'dragenter'].forEach(ev => zone.addEventListener(ev, e => {
+        e.preventDefault(); zone.classList.add('dragover');
+      }));
+      ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+        e.preventDefault(); zone.classList.remove('dragover');
+      }));
+      zone.addEventListener('drop', e => {
+        const files = Array.from(e.dataTransfer.files);
+        const pdfs = files.filter(isPdf);
+        if (!pdfs.length) { showToast('未发现PDF文件', 'error'); return; }
+        if (!multiple) onFiles(pdfs.slice(0, 1));
+        else onFiles(pdfs);
+      });
+    }
+
+    /* ============ 合并模块 ============ */
+    let mergeFiles = []; // [{file, pageCount}]
+
+    function renderMergeList() {
+      const list = document.getElementById('merge-list');
+      list.innerHTML = '';
+      mergeFiles.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'file-item';
+        row.innerHTML = `
+          <button class="icon-btn" data-act="up" title="上移">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+          <button class="icon-btn" data-act="down" title="下移">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <span class="file-name" title="${item.file.name}">${item.file.name}</span>
+          ${item.pageCount ? `<span class="file-pages">${item.pageCount}页</span>` : '<span class="file-pages">···</span>'}
+          <button class="icon-btn danger" data-act="del" title="删除">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+          </button>
+        `;
+        row.querySelector('[data-act="up"]').addEventListener('click', () => {
+          if (idx === 0) return;
+          [mergeFiles[idx-1], mergeFiles[idx]] = [mergeFiles[idx], mergeFiles[idx-1]];
+          renderMergeList();
+        });
+        row.querySelector('[data-act="down"]').addEventListener('click', () => {
+          if (idx === mergeFiles.length - 1) return;
+          [mergeFiles[idx+1], mergeFiles[idx]] = [mergeFiles[idx], mergeFiles[idx+1]];
+          renderMergeList();
+        });
+        row.querySelector('[data-act="del"]').addEventListener('click', () => {
+          mergeFiles.splice(idx, 1);
+          renderMergeList();
+        });
+        list.appendChild(row);
+      });
+      document.getElementById('merge-btn').disabled = mergeFiles.length < 2;
+      document.getElementById('merge-clear').disabled = mergeFiles.length === 0;
+    }
+    async function addMergeFiles(files) {
+      const arr = Array.from(files).filter(isPdf);
+      if (!arr.length) { showToast('未发现PDF文件', 'error'); return; }
+      const nonPdf = files.length - arr.length;
+      if (nonPdf > 0) showToast(`已过滤 ${nonPdf} 个非PDF文件`, 'info');
+      for (const f of arr) {
+        const item = { file: f, pageCount: 0 };
+        mergeFiles.push(item);
+        renderMergeList();
+        try {
+          const bytes = await readBytes(f);
+          const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+          item.pageCount = doc.getPageCount();
+          renderMergeList();
+        } catch (e) {
+          console.warn('读取页数失败:', f.name, e);
+          item.pageCount = 0;
+          renderMergeList();
+        }
+      }
+    }
+    bindDropzone('merge-dropzone', 'merge-input', addMergeFiles, true);
+    document.getElementById('merge-clear').addEventListener('click', () => {
+      mergeFiles = [];
+      renderMergeList();
+    });
+    document.getElementById('merge-btn').addEventListener('click', async () => {
+      if (mergeFiles.length < 2) { showToast('至少需要2个文件', 'error'); return; }
+      const btn = document.getElementById('merge-btn');
+      setLoading(btn, true);
+      try {
+        const outDoc = await PDFDocument.create();
+        for (const item of mergeFiles) {
+          const bytes = await readBytes(item.file);
+          const src = await PDFDocument.load(bytes, { ignoreEncryption: true });
+          const pages = await outDoc.copyPages(src, src.getPageIndices());
+          pages.forEach(p => outDoc.addPage(p));
+        }
+        const out = await outDoc.save();
+        download(out, '合并文档.pdf');
+        showToast(`合并完成（${mergeFiles.length}个文件）`, 'success');
+      } catch (e) {
+        console.error(e);
+        showToast('合并失败：' + e.message, 'error', 5000);
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+
+    /* ============ 拆分模块 ============ */
+    let splitDoc = null;
+    let splitFile = null;
+    let splitTotal = 0;
+
+    function showSplitConfig(show) {
+      document.getElementById('split-config').style.display = show ? 'block' : 'none';
+    }
+    function setSplitInfo(text, ok = true) {
+      const el = document.getElementById('split-info');
+      el.style.display = text ? 'block' : 'none';
+      el.textContent = text;
+      el.style.color = ok ? 'var(--text-muted)' : 'var(--danger)';
+    }
+    document.querySelectorAll('input[name="split-mode"]').forEach(r => {
+      r.addEventListener('change', () => {
+        const isRange = document.querySelector('input[name="split-mode"]:checked').value === 'range';
+        document.getElementById('split-range-row').style.display = isRange ? 'flex' : 'none';
+        document.getElementById('split-range-hint').style.display = isRange ? 'block' : 'none';
+      });
+    });
+    async function loadSplitFile(file) {
+      if (!isPdf(file)) { showToast('请选择PDF文件', 'error'); return; }
+      splitFile = file;
+      try {
+        const bytes = await readBytes(file);
+        splitDoc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+        splitTotal = splitDoc.getPageCount();
+        setSplitInfo(`已加载：${file.name} · ${splitTotal}页 · ${formatBytes(file.size)}`);
+        showSplitConfig(true);
+      } catch (e) {
+        console.error(e);
+        if (e.message.includes('encrypt') || e.message.includes('Encrypted')) {
+          setSplitInfo('该PDF已加密，本工具不破解密码，无法处理', false);
+        } else {
+          setSplitInfo('加载失败：' + e.message, false);
+        }
+        showSplitConfig(false);
+      }
+    }
+    bindDropzone('split-dropzone', 'split-input', files => loadSplitFile(files[0]), false);
+    document.getElementById('split-btn').addEventListener('click', async () => {
+      if (!splitDoc) { showToast('请先选择文件', 'error'); return; }
+      const btn = document.getElementById('split-btn');
+      const mode = document.querySelector('input[name="split-mode"]:checked').value;
+      setLoading(btn, true);
+      try {
+        if (mode === 'each') {
+          // 每页拆成单页
+          const entries = [];
+          const base = getBaseName(splitFile.name);
+          for (let i = 0; i < splitTotal; i++) {
+            const newDoc = await PDFDocument.create();
+            const [p] = await newDoc.copyPages(splitDoc, [i]);
+            newDoc.addPage(p);
+            const data = await newDoc.save();
+            const pn = String(i + 1).padStart(String(splitTotal).length, '0');
+            entries.push({ name: `${base}_p${pn}.pdf`, data: new Uint8Array(data) });
+          }
+          if (entries.length === 1) {
+            download(entries[0].data, entries[0].name);
+          } else {
+            const blob = makeZip(entries);
+            download(new Uint8Array(await blob.arrayBuffer()), `${base}_拆分.zip`, 'application/zip');
+          }
+          showToast(`拆分完成（${entries.length}个文件）`, 'success');
+        } else {
+          // 按区间
+          const input = document.getElementById('split-range').value.trim();
+          if (!input) { showToast('请输入页码区间', 'error'); setLoading(btn, false); return; }
+          const ranges = parseRanges(input, splitTotal);
+          if (!ranges) { showToast('页码格式错误或越界，示例：1-3,5,7-9', 'error', 5000); setLoading(btn, false); return; }
+          const entries = [];
+          const base = getBaseName(splitFile.name);
+          for (const r of ranges) {
+            const newDoc = await PDFDocument.create();
+            const pages = await newDoc.copyPages(splitDoc, r.pages);
+            pages.forEach(p => newDoc.addPage(p));
+            const data = await newDoc.save();
+            entries.push({ name: `${base}_${r.label}.pdf`, data: new Uint8Array(data) });
+          }
+          if (entries.length === 1) {
+            download(entries[0].data, entries[0].name);
+          } else {
+            const blob = makeZip(entries);
+            download(new Uint8Array(await blob.arrayBuffer()), `${base}_拆分.zip`, 'application/zip');
+          }
+          showToast(`拆分完成（${entries.length}个文件）`, 'success');
+        }
+      } catch (e) {
+        console.error(e);
+        showToast('拆分失败：' + e.message, 'error', 5000);
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+
+    /* ============ 旋转模块 ============ */
+    let rotateDoc = null;
+    let rotateFile = null;
+    let rotateTotal = 0;
+    let rotateAngle = 90;
+
+    function showRotateConfig(show) {
+      document.getElementById('rotate-config').style.display = show ? 'block' : 'none';
+    }
+    function setRotateInfo(text, ok = true) {
+      const el = document.getElementById('rotate-info');
+      el.style.display = text ? 'block' : 'none';
+      el.textContent = text;
+      el.style.color = ok ? 'var(--text-muted)' : 'var(--danger)';
+    }
+    document.querySelectorAll('input[name="rotate-scope"]').forEach(r => {
+      r.addEventListener('change', () => {
+        const isCustom = document.querySelector('input[name="rotate-scope"]:checked').value === 'custom';
+        document.getElementById('rotate-pages-row').style.display = isCustom ? 'flex' : 'none';
+      });
+    });
+    document.querySelectorAll('.angle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        rotateAngle = parseInt(btn.dataset.angle, 10);
+      });
+    });
+    async function loadRotateFile(file) {
+      if (!isPdf(file)) { showToast('请选择PDF文件', 'error'); return; }
+      rotateFile = file;
+      try {
+        const bytes = await readBytes(file);
+        rotateDoc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+        rotateTotal = rotateDoc.getPageCount();
+        setRotateInfo(`已加载：${file.name} · ${rotateTotal}页 · ${formatBytes(file.size)}`);
+        showRotateConfig(true);
+      } catch (e) {
+        console.error(e);
+        if (e.message.includes('encrypt') || e.message.includes('Encrypted')) {
+          setRotateInfo('该PDF已加密，本工具不破解密码，无法处理', false);
+        } else {
+          setRotateInfo('加载失败：' + e.message, false);
+        }
+        showRotateConfig(false);
+      }
+    }
+    bindDropzone('rotate-dropzone', 'rotate-input', files => loadRotateFile(files[0]), false);
+    document.getElementById('rotate-btn').addEventListener('click', async () => {
+      if (!rotateDoc) { showToast('请先选择文件', 'error'); return; }
+      const btn = document.getElementById('rotate-btn');
+      setLoading(btn, true);
+      try {
+        const scope = document.querySelector('input[name="rotate-scope"]:checked').value;
+        let targetIdx = [];
+        if (scope === 'all') {
+          targetIdx = Array.from({ length: rotateTotal }, (_, i) => i);
+        } else {
+          const input = document.getElementById('rotate-pages').value.trim();
+          if (!input) { showToast('请输入页码', 'error'); setLoading(btn, false); return; }
+          const parsed = parsePages(input, rotateTotal);
+          if (!parsed) { showToast('页码格式错误或越界，示例：1,3,5-7', 'error', 5000); setLoading(btn, false); return; }
+          targetIdx = parsed;
+        }
+        const pages = rotateDoc.getPages();
+        for (const idx of targetIdx) {
+          const page = pages[idx];
+          // pdf-lib 的 setRotation 是绝对设置，不会累积
+          page.setRotation(degrees(rotateAngle));
+        }
+        const out = await rotateDoc.save();
+        const base = getBaseName(rotateFile.name);
+        download(out, `${base}_旋转${rotateAngle}.pdf`);
+        showToast(`旋转完成（${targetIdx.length}页 → ${rotateAngle}°）`, 'success');
+      } catch (e) {
+        console.error(e);
+        showToast('旋转失败：' + e.message, 'error', 5000);
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+
+    /* ============ 提取模块 ============ */
+    let extractDoc = null;
+    let extractFile = null;
+    let extractTotal = 0;
+    let extractSelected = new Set();
+
+    function showExtractConfig(show) {
+      document.getElementById('extract-config').style.display = show ? 'block' : 'none';
+    }
+    function setExtractInfo(text, ok = true) {
+      const el = document.getElementById('extract-info');
+      el.style.display = text ? 'block' : 'none';
+      el.textContent = text;
+      el.style.color = ok ? 'var(--text-muted)' : 'var(--danger)';
+    }
+    function renderExtractGrid() {
+      const grid = document.getElementById('extract-grid');
+      grid.innerHTML = '';
+      for (let i = 0; i < extractTotal; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'page-chk' + (extractSelected.has(i) ? ' checked' : '');
+        cell.textContent = `第 ${i + 1} 页`;
+        cell.addEventListener('click', () => {
+          if (extractSelected.has(i)) extractSelected.delete(i);
+          else extractSelected.add(i);
+          renderExtractGrid();
+          document.getElementById('extract-btn').disabled = extractSelected.size === 0;
+        });
+        grid.appendChild(cell);
+      }
+      document.getElementById('extract-btn').disabled = extractSelected.size === 0;
+    }
+    document.getElementById('extract-all').addEventListener('click', () => {
+      extractSelected = new Set(Array.from({ length: extractTotal }, (_, i) => i));
+      renderExtractGrid();
+    });
+    document.getElementById('extract-invert').addEventListener('click', () => {
+      const next = new Set();
+      for (let i = 0; i < extractTotal; i++) if (!extractSelected.has(i)) next.add(i);
+      extractSelected = next;
+      renderExtractGrid();
+    });
+    document.getElementById('extract-clear').addEventListener('click', () => {
+      extractSelected.clear();
+      renderExtractGrid();
+    });
+    async function loadExtractFile(file) {
+      if (!isPdf(file)) { showToast('请选择PDF文件', 'error'); return; }
+      extractFile = file;
+      try {
+        const bytes = await readBytes(file);
+        extractDoc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+        extractTotal = extractDoc.getPageCount();
+        extractSelected.clear();
+        setExtractInfo(`已加载：${file.name} · ${extractTotal}页 · ${formatBytes(file.size)}`);
+        showExtractConfig(true);
+        renderExtractGrid();
+      } catch (e) {
+        console.error(e);
+        if (e.message.includes('encrypt') || e.message.includes('Encrypted')) {
+          setExtractInfo('该PDF已加密，本工具不破解密码，无法处理', false);
+        } else {
+          setExtractInfo('加载失败：' + e.message, false);
+        }
+        showExtractConfig(false);
+      }
+    }
+    bindDropzone('extract-dropzone', 'extract-input', files => loadExtractFile(files[0]), false);
+    document.getElementById('extract-btn').addEventListener('click', async () => {
+      if (!extractDoc) { showToast('请先选择文件', 'error'); return; }
+      if (extractSelected.size === 0) { showToast('请至少选择一页', 'error'); return; }
+      const btn = document.getElementById('extract-btn');
+      setLoading(btn, true);
+      try {
+        const newDoc = await PDFDocument.create();
+        const indices = Array.from(extractSelected).sort((a, b) => a - b);
+        const pages = await newDoc.copyPages(extractDoc, indices);
+        pages.forEach(p => newDoc.addPage(p));
+        const out = await newDoc.save();
+        const base = getBaseName(extractFile.name);
+        download(out, `${base}_提取${indices.length}页.pdf`);
+        showToast(`提取完成（${indices.length}页）`, 'success');
+      } catch (e) {
+        console.error(e);
+        showToast('提取失败：' + e.message, 'error', 5000);
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+
+    /* ============ 初始化 ============ */
+    renderMergeList();
+    console.log('[PDF工具箱] 初始化完成，pdf-lib 版本：', (window.PDFLib && window.PDFLib.PDFDocument) ? 'loaded' : 'FAILED');
+  </script>
+</body>
+</html>
