@@ -553,9 +553,9 @@ main {
       const newFiles = [...fileInput.files];
       for (const file of newFiles) {
         try {
-          const img = await loadImage(file);
+          const { img, url } = await loadImage(file);
           files.push(file);
-          images.push({ img, origSize: file.size, name: file.name, type: file.type });
+          images.push({ img, url, origSize: file.size, name: file.name, type: file.type });
         } catch (err) {
           console.error("加载图片失败:", file.name, err);
         }
@@ -590,8 +590,7 @@ main {
         const img = new Image();
         const url = URL.createObjectURL(file);
         img.onload = () => {
-          URL.revokeObjectURL(url);
-          resolve(img);
+          resolve({ img, url });
         };
         img.onerror = (err) => {
           URL.revokeObjectURL(url);
@@ -613,7 +612,7 @@ main {
           await updatePreview();
         };
         const img = document.createElement('img');
-        img.src = data.img.src;
+        img.src = data.url;
         div.appendChild(img);
         thumbs.appendChild(div);
       });
@@ -682,7 +681,7 @@ main {
       const compBlob = compressedBlobs[currentIndex];
       if (!item || !compBlob) return;
 
-      imgBefore.src = item.img.src;
+      imgBefore.src = item.url;
       
       if (imgAfter.src.startsWith('blob:')) {
         URL.revokeObjectURL(imgAfter.src);
@@ -858,6 +857,10 @@ main {
     clearBtn.onclick = () => {
       if (!images.length) return;
       if (confirm('确定清空所有图片吗？')) {
+        images.forEach(item => {
+          if (item.url) URL.revokeObjectURL(item.url);
+        });
+        
         files = [];
         images = [];
         compressedBlobs = [];
