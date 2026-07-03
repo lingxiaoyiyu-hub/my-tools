@@ -7,561 +7,452 @@
   <meta name="description" content="一个免除后顾之忧的高效、纯本地运行的静态小工具聚合平台。">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f8fa; color: #24292f; min-height: 100vh; display: flex; flex-direction: column; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f0f4f8;
-      color: #1a1a2e;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    /* ── Header ── */
+    header { background: #24292f; padding: 14px 0; }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 16px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-size: 1.15rem; font-weight: 700; white-space: nowrap; }
+    .logo-icon { width: 36px; height: 36px; background: rgba(255,255,255,.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .search-wrap { flex: 1; max-width: 420px; position: relative; }
+    .search-wrap input { width: 100%; padding: 7px 12px 7px 34px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-size: .88rem; outline: none; transition: all .2s; font-family: inherit; }
+    .search-wrap input::placeholder { color: rgba(255,255,255,.45); }
+    .search-wrap input:focus { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.45); }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: .55; pointer-events: none; }
 
-    /* ── 顶部 Header ── */
-    .top-bar {
-      background: linear-gradient(135deg, #0f4c35 0%, #1a7a52 50%, #0d9e61 100%);
-      box-shadow: 0 4px 20px rgba(5,150,105,0.3);
-    }
-    .top-bar-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 20px;
-      gap: 16px;
-    }
-    .site-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.3px;
-      white-space: nowrap;
-    }
-    .logo-icon {
-      width: 38px; height: 38px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(4px);
-    }
+    /* ── Main layout ── */
+    .main { flex: 1; padding: 28px 0 44px; }
+    .main-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2.2fr 1fr; gap: 20px; padding: 0 20px; align-items: start; }
 
-    /* 搜索 */
-    .top-search-area {
-      flex: 1;
-      max-width: 480px;
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 24px;
-      padding: 6px 8px 6px 18px;
-      backdrop-filter: blur(8px);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .top-search-area:focus-within {
-      background: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.5);
-    }
-    .top-search-input {
-      border: none; background: transparent; outline: none;
-      font-size: 0.88rem; flex: 1; color: #fff;
-    }
-    .top-search-input::placeholder { color: rgba(255,255,255,0.6); }
-    .search-tags { display: flex; gap: 6px; margin: 0 10px; }
-    .search-tag {
-      font-size: 0.7rem; color: rgba(255,255,255,0.75);
-      background: rgba(255,255,255,0.1); border-radius: 20px;
-      padding: 2px 9px; cursor: pointer; transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .search-tag:hover { background: rgba(255,255,255,0.25); color: #fff; }
-    .search-btn {
-      background: rgba(255,255,255,0.9); color: #0d9e61;
-      border: none; border-radius: 18px; font-size: 0.82rem;
-      font-weight: 700; padding: 6px 16px; cursor: pointer;
-      transition: background 0.2s;
-    }
-    .search-btn:hover { background: #fff; }
+    /* ── Left column ── */
+    .left-col { display: flex; flex-direction: column; gap: 16px; }
+    .page-head { }
+    .page-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 5px; }
+    .page-desc { color: #57606a; font-size: .88rem; }
 
-    /* ── 主体 ── */
-    .main { flex: 1; background: #f0f4f8; padding: 24px 0 32px; }
-    .main-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 2.2fr 1fr; gap: 20px;
-      padding: 0 20px;
-    }
+    /* Category filter */
+    .cat-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cat-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid #d0d7de; background: #fff; color: #24292f; font-size: .82rem; cursor: pointer; transition: all .15s; font-family: inherit; }
+    .cat-btn:hover { background: #f3f4f6; border-color: #8c959f; }
+    .cat-btn.active { background: #24292f; color: #fff; border-color: #24292f; }
 
-    /* ── 卡片容器 ── */
-    .card-box {
-      background: #fff; border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      overflow: hidden;
-    }
-    .card-box-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 18px 20px 14px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .card-box-title {
-      font-size: 1rem; font-weight: 800; color: #111;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .card-box-title::before {
-      content: '';
-      display: inline-block; width: 4px; height: 18px;
-      background: linear-gradient(to bottom, #059669, #10b981);
-      border-radius: 2px;
-    }
-    .more-link { font-size: 0.8rem; color: #0d9e61; text-decoration: none; }
-    .more-link:hover { text-decoration: underline; }
+    /* Tools grid — horizontal cards */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .tool-card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 16px; text-decoration: none; color: inherit; display: flex; gap: 13px; align-items: flex-start; transition: border-color .15s, box-shadow .15s; }
+    .tool-card:hover { border-color: #0969da; box-shadow: 0 2px 10px rgba(9,105,218,.11); }
+    .tool-icon { width: 56px; height: 56px; flex-shrink: 0; border-radius: 8px; overflow: hidden; }
+    .tool-info { flex: 1; min-width: 0; }
+    .tool-name { font-size: .9rem; font-weight: 600; color: #0969da; margin-bottom: 4px; }
+    .tool-desc { font-size: .78rem; color: #57606a; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .tool-tag { display: inline-block; margin-top: 7px; padding: 2px 8px; border-radius: 12px; font-size: .68rem; font-weight: 500; background: #dafbe1; color: #1a7f37; border: 1px solid #2da44e; }
 
-    /* ── 工具网格 ── */
-    .tools-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 14px; padding: 18px;
-    }
-    .tool-card {
-      border-radius: 14px; padding: 22px 14px;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      text-decoration: none; color: inherit;
-      border: 1.5px solid #eef0f4;
-      background: #fafbfd;
-      transition: all 0.25s ease;
-      position: relative; overflow: hidden;
-    }
-    .tool-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, transparent 50%, rgba(5,150,105,0.04));
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .tool-card:hover::before { opacity: 1; }
-    .tool-card:hover {
-      border-color: #059669;
-      box-shadow: 0 8px 24px rgba(5,150,105,0.15);
-      transform: translateY(-3px);
-    }
-    .tool-icon {
-      width: 76px; height: 76px;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.28s cubic-bezier(.34,1.56,.64,1);
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
-    }
-    .tool-card:hover .tool-icon { transform: scale(1.1) rotate(-3deg); }
-    .tool-name {
-      font-size: 0.84rem; font-weight: 600; color: #2d3748; text-align: center;
-    }
-    .tool-card.soon {
-      opacity: 0.45; cursor: not-allowed; background: #f9f9f9;
-    }
-    .tool-card.soon:hover {
-      transform: none; box-shadow: none; border-color: #eef0f4;
-    }
-    .tool-card.soon:hover::before { opacity: 0; }
-    .tool-card.soon:hover .tool-icon { transform: none; }
-    .soon-badge {
-      position: absolute; top: 10px; right: 10px;
-      font-size: 0.6rem; font-weight: 700; color: #aaa;
-      background: #f0f0f0; border-radius: 4px; padding: 2px 5px;
-    }
-
-    /* ── 文库列表 ── */
-    .articles { display: flex; flex-direction: column; padding: 8px 0; }
-    .article {
-      display: flex; gap: 14px; padding: 14px 20px;
-      text-decoration: none; color: inherit;
-      border-bottom: 1px solid #f5f5f5; transition: background 0.15s;
-    }
+    /* ── Right panel ── */
+    .panel { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; overflow: hidden; }
+    .panel-title { font-size: .88rem; font-weight: 700; color: #24292f; padding: 13px 16px; border-bottom: 1px solid #d0d7de; }
+    .article { display: flex; gap: 12px; padding: 14px 16px; text-decoration: none; color: inherit; border-bottom: 1px solid #eaeef2; transition: background .1s; }
     .article:last-child { border-bottom: none; }
-    .article:hover { background: #f9fbff; }
-    .article-thumb {
-      width: 76px; height: 54px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .article-info { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
-    .article-title {
-      font-size: 0.84rem; font-weight: 500; line-height: 1.45;
-      color: #2d3748;
-      display: -webkit-box; -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical; overflow: hidden;
-      transition: color 0.2s;
-    }
-    .article:hover .article-title { color: #059669; }
-    .article-meta { font-size: 0.7rem; color: #aaa; }
-    .article-desc {
-      font-size: 0.74rem;
-      color: #718096;
-      line-height: 1.4;
-      margin-top: 3px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
+    .article:hover { background: #f6f8fa; }
+    .article-thumb { width: 46px; height: 46px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .article-body { flex: 1; }
+    .article-title { font-size: .84rem; font-weight: 600; color: #24292f; margin-bottom: 4px; line-height: 1.4; transition: color .1s; }
+    .article:hover .article-title { color: #0969da; }
+    .article-desc { font-size: .75rem; color: #57606a; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
     /* ── Footer ── */
-    footer {
-      background: #fff; border-top: 1px solid #eee;
-      text-align: center; padding: 20px;
-      font-size: 0.78rem; color: #aaa;
-    }
+    footer { background: #fff; border-top: 1px solid #d0d7de; text-align: center; padding: 20px; font-size: .78rem; color: #8c959f; }
 
-    @media (max-width: 960px) {
-      .main-inner { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 720px) {
-      .top-bar-content { flex-direction: column; }
-      .top-search-area { max-width: 100%; }
-      .tools-grid { grid-template-columns: repeat(2, 1fr); }
-      .search-tags { display: none; }
+    /* ── Responsive ── */
+    @media (max-width: 960px) { .main-inner { grid-template-columns: 1fr; } }
+    @media (max-width: 680px) {
+      .header-inner { flex-direction: column; align-items: stretch; }
+      .search-wrap { max-width: 100%; }
+      .tools-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="top-bar">
-    <div class="top-bar-content">
-      <a href="/" class="site-logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" stroke="#fff" stroke-width="2.5" fill="none">
-            <rect x="2" y="7" width="20" height="14" rx="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="#fff" stroke-width="2.5" fill="none">
+          <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </div>
+      小乘工具箱
+    </a>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" width="15" height="15" stroke="#fff" stroke-width="2.5" fill="none">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="searchInput" placeholder="搜索工具或分类...">
+    </div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="main-inner">
+
+    <!-- 左：工具列表 -->
+    <div class="left-col">
+      <div class="page-head">
+        <h1 class="page-title">在线工具</h1>
+        <p class="page-desc">纯本地运行，无需上传，即开即用。</p>
+      </div>
+
+      <div class="cat-filters">
+        <button class="cat-btn active" data-cat="all">全部</button>
+        <button class="cat-btn" data-cat="image">图片处理</button>
+        <button class="cat-btn" data-cat="text">文本排版</button>
+        <button class="cat-btn" data-cat="system">系统工具</button>
+        <button class="cat-btn" data-cat="productivity">效率工具</button>
+      </div>
+
+      <div class="tools-grid" id="toolsGrid">
+
+        <!-- 图片水印助手 -->
+        <a href="watermark/" class="tool-card" data-cat="image">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-wm" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-wm)"/>
+              <rect x="7" y="23" width="48" height="29" rx="5" fill="rgba(255,255,255,0.92)"/>
+              <path d="M22 23 l5-8 h10 l5 8" fill="rgba(255,255,255,0.92)"/>
+              <circle cx="52" cy="27" r="3.5" fill="#fbbf24"/>
+              <circle cx="31" cy="37" r="10.5" fill="#93c5fd"/>
+              <circle cx="31" cy="37" r="7" fill="#2563eb"/>
+              <circle cx="31" cy="37" r="3.5" fill="#1e3a8a"/>
+              <circle cx="28.5" cy="34.5" r="2.2" fill="rgba(255,255,255,0.6)"/>
+              <rect x="39" y="10" width="21" height="15" rx="4" fill="#f59e0b"/>
+              <text x="49.5" y="22" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial,sans-serif">W</text>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">图片水印助手</div>
+            <div class="tool-desc">批量添加水印与胶片/徕卡风格边框，支持本地预览与导出。</div>
+            <span class="tool-tag">图片处理</span>
+          </div>
+        </a>
+
+        <!-- 运行库修复 -->
+        <a href="system-repair/" class="tool-card" data-cat="system">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-sr" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#075985"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-sr)"/>
+              <rect x="14" y="14" width="36" height="36" rx="7" fill="rgba(255,255,255,0.92)"/>
+              <rect x="21" y="21" width="22" height="22" rx="4" fill="#0ea5e9"/>
+              <rect x="21" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="29" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="37" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="21" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="29" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="37" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="9" y="21" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="9" y="29" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="9" y="37" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="50" y="21" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="50" y="29" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <rect x="50" y="37" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+              <path d="M25 32 l5 5 l10-10" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">运行库修复</div>
+            <div class="tool-desc">一键检测并修复常见系统运行库缺失问题。</div>
+            <span class="tool-tag">系统工具</span>
+          </div>
+        </a>
+
+        <!-- 文本排版助手 -->
+        <a href="typesetter/" class="tool-card" data-cat="text">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-tp" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#92400e"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-tp)"/>
+              <rect x="14" y="13" width="32" height="42" rx="5" fill="rgba(0,0,0,0.12)"/>
+              <rect x="10" y="9" width="32" height="42" rx="5" fill="rgba(255,255,255,0.96)"/>
+              <path d="M32 9 L42 19 L32 19 Z" fill="#fde68a"/>
+              <rect x="16" y="18" width="20" height="4" rx="2" fill="#f59e0b"/>
+              <rect x="22" y="18" width="6" height="16" rx="2" fill="#f59e0b"/>
+              <rect x="16" y="39" width="20" height="2.5" rx="1.25" fill="#fde68a"/>
+              <rect x="16" y="44" width="14" height="2.5" rx="1.25" fill="#fde68a"/>
+              <rect x="16" y="49" width="18" height="2" rx="1" fill="#fde68a"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">文本排版助手</div>
+            <div class="tool-desc">一键排版、清除 HTML、简繁转换、错别字检查。</div>
+            <span class="tool-tag">文本排版</span>
+          </div>
+        </a>
+
+        <!-- 日历排班助手 -->
+        <a href="shift-helper/" class="tool-card" data-cat="productivity">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-sh" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#3730a3"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-sh)"/>
+              <rect x="8" y="14" width="48" height="44" rx="7" fill="rgba(255,255,255,0.92)"/>
+              <rect x="8" y="14" width="48" height="16" rx="7" fill="#6366f1"/>
+              <rect x="8" y="22" width="48" height="8" fill="#6366f1"/>
+              <rect x="18" y="8" width="6" height="12" rx="3" fill="rgba(255,255,255,0.85)"/>
+              <rect x="40" y="8" width="6" height="12" rx="3" fill="rgba(255,255,255,0.85)"/>
+              <circle cx="18" cy="38" r="2.8" fill="#e0e7ff"/>
+              <circle cx="26" cy="38" r="2.8" fill="#e0e7ff"/>
+              <circle cx="34" cy="38" r="6" fill="#6366f1"/>
+              <circle cx="42" cy="38" r="2.8" fill="#e0e7ff"/>
+              <circle cx="50" cy="38" r="2.8" fill="#e0e7ff"/>
+              <path d="M31 38 l2.5 2.5 l5-5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="18" cy="50" r="2.8" fill="#e0e7ff"/>
+              <circle cx="26" cy="50" r="2.8" fill="#e0e7ff"/>
+              <circle cx="34" cy="50" r="2.8" fill="#e0e7ff"/>
+              <circle cx="42" cy="50" r="2.8" fill="#e0e7ff"/>
+              <circle cx="50" cy="50" r="2.8" fill="#c7d2fe"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">日历排班助手</div>
+            <div class="tool-desc">四班三倒等排班计算，生成排班表并支持打印导出。</div>
+            <span class="tool-tag">效率工具</span>
+          </div>
+        </a>
+
+        <!-- 图片智能压缩 -->
+        <a href="compressor/" class="tool-card" data-cat="image">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-cp" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#064e3b"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-cp)"/>
+              <rect x="7" y="10" width="40" height="32" rx="6" fill="rgba(255,255,255,0.92)"/>
+              <rect x="7" y="10" width="40" height="17" rx="6" fill="#bae6fd" opacity="0.8"/>
+              <rect x="7" y="19" width="40" height="8" fill="#bae6fd" opacity="0.8"/>
+              <circle cx="41" cy="16" r="4" fill="#fbbf24"/>
+              <path d="M7 42 L22 26 L38 42 Z" fill="#6ee7b7"/>
+              <path d="M21 42 L33 29 L47 42 Z" fill="#a7f3d0"/>
+              <rect x="39" y="37" width="22" height="22" rx="6" fill="#059669"/>
+              <path d="M44 49 l6-6 l6 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <line x1="50" y1="43" x2="50" y2="56" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">图片智能压缩</div>
+            <div class="tool-desc">本地压缩图片体积，保持清晰度的同时减小文件大小。</div>
+            <span class="tool-tag">图片处理</span>
+          </div>
+        </a>
+
+        <!-- 二维码美化助手 -->
+        <a href="qrcode/" class="tool-card" data-cat="productivity">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-qr" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#581c87"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-qr)"/>
+              <rect x="9" y="9" width="46" height="46" rx="6" fill="rgba(255,255,255,0.93)"/>
+              <rect x="14" y="14" width="15" height="15" rx="3" fill="#9333ea"/>
+              <rect x="17" y="17" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="19.5" y="19.5" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="35" y="14" width="15" height="15" rx="3" fill="#9333ea"/>
+              <rect x="38" y="17" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="40.5" y="19.5" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="14" y="35" width="15" height="15" rx="3" fill="#9333ea"/>
+              <rect x="17" y="38" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="19.5" y="40.5" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="35" y="35" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="41" y="35" width="4" height="4" rx="1" fill="#c084fc"/>
+              <rect x="47" y="35" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="35" y="41" width="4" height="4" rx="1" fill="#c084fc"/>
+              <rect x="41" y="41" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="47" y="41" width="4" height="4" rx="1" fill="#c084fc"/>
+              <rect x="35" y="47" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="41" y="47" width="4" height="4" rx="1" fill="#9333ea"/>
+              <rect x="47" y="47" width="4" height="4" rx="1" fill="#c084fc"/>
+              <path d="M54 8 L56 13.5 L62 14 L57.5 18 L59 24 L54 21 L49 24 L50.5 18 L46 14 L52 13.5 Z" fill="#fbbf24"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">二维码美化助手</div>
+            <div class="tool-desc">生成并美化二维码，支持自定义样式与配色。</div>
+            <span class="tool-tag">效率工具</span>
+          </div>
+        </a>
+
+        <!-- PDF 工具箱 -->
+        <a href="pdf-tools/" class="tool-card" data-cat="text">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-pd" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#7f1d1d"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-pd)"/>
+              <rect x="15" y="10" width="32" height="44" rx="5" fill="rgba(0,0,0,0.15)"/>
+              <rect x="11" y="7" width="32" height="44" rx="5" fill="rgba(255,255,255,0.97)"/>
+              <path d="M33 7 L43 17 L33 17 Z" fill="#fee2e2"/>
+              <line x1="33" y1="7" x2="43" y2="17" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+              <rect x="16" y="24" width="18" height="2.5" rx="1.25" fill="#fca5a5" opacity="0.7"/>
+              <rect x="16" y="30" width="14" height="2" rx="1" fill="#fca5a5" opacity="0.5"/>
+              <rect x="7" y="42" width="50" height="17" rx="5" fill="#dc2626"/>
+              <text x="32" y="54.5" text-anchor="middle" font-size="14" font-weight="900" fill="white" font-family="Arial,sans-serif" letter-spacing="1.5">PDF</text>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">PDF 工具箱</div>
+            <div class="tool-desc">合并、拆分、压缩 PDF，纯本地处理，无需上传。</div>
+            <span class="tool-tag">文本排版</span>
+          </div>
+        </a>
+
+        <!-- 噪音时钟 -->
+        <a href="zen-pomodoro/" class="tool-card" data-cat="productivity">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-zc" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#134e4a"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-zc)"/>
+              <circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+              <circle cx="32" cy="32" r="21" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+              <circle cx="32" cy="32" r="18" fill="rgba(255,255,255,0.93)"/>
+              <line x1="32" y1="15" x2="32" y2="19" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
+              <line x1="32" y1="45" x2="32" y2="49" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
+              <line x1="15" y1="32" x2="19" y2="32" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
+              <line x1="45" y1="32" x2="49" y2="32" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="32" y2="21" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="40" y2="37" stroke="#14b8a6" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="2.8" fill="#0f766e"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">噪音时钟</div>
+            <div class="tool-desc">白噪音与番茄钟结合，提升专注与休息质量。</div>
+            <span class="tool-tag">效率工具</span>
+          </div>
+        </a>
+
+        <!-- 公益站导航 -->
+        <a href="api-nav/" class="tool-card" data-cat="productivity">
+          <div class="tool-icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-nv" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#3b0764"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="16" fill="url(#g-nv)"/>
+              <path d="M10 48 L32 57 L54 48 L32 39 Z" fill="rgba(255,255,255,0.25)"/>
+              <path d="M10 37 L32 46 L54 37 L32 28 Z" fill="rgba(255,255,255,0.52)"/>
+              <path d="M10 26 L32 35 L54 26 L32 17 Z" fill="rgba(255,255,255,0.92)"/>
+              <circle cx="32" cy="26" r="4" fill="#7c3aed"/>
+              <circle cx="19" cy="26" r="2.5" fill="rgba(167,139,250,0.7)"/>
+              <circle cx="45" cy="26" r="2.5" fill="rgba(167,139,250,0.7)"/>
+              <line x1="32" y1="26" x2="19" y2="26" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+              <line x1="32" y1="26" x2="45" y2="26" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">公益站导航</div>
+            <div class="tool-desc">常用公益站点与公共服务网址聚合，即点即用。</div>
+            <span class="tool-tag">效率工具</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- 右：项目推荐 -->
+    <div class="panel">
+      <div class="panel-title">项目推荐</div>
+      <a href="https://github.com/lingxiaoyiyu-hub/WritingStudio-3.5.0" target="_blank" class="article">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path>
           </svg>
         </div>
-        小乘工具箱
+        <div class="article-body">
+          <div class="article-title">WritingStudio (本地写作助手)</div>
+          <div class="article-desc">面向中文小说创作的本地 AI 写作工作台，支持全书大纲、分卷章节创作、角色管理与 AI 润色。</div>
+        </div>
       </a>
-
-      <div class="top-search-area">
-        <svg viewBox="0 0 24 24" width="15" height="15" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none" style="flex-shrink:0;margin-right:6px">
-          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="searchInput" class="top-search-input" placeholder="搜索工具...">
-        <div class="search-tags">
-          <span class="search-tag">水印</span>
-          <span class="search-tag">排版</span>
-          <span class="search-tag">排班</span>
+      <a href="https://github.com/lingxiaoyiyu-hub/free-for-dev" target="_blank" class="article">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
         </div>
-        <button class="search-btn">搜索</button>
-      </div>
+        <div class="article-body">
+          <div class="article-title">free-for-dev (免费开发资源)</div>
+          <div class="article-desc">开发者免费资源库：整理并收集了各种拥有免费额度的 SaaS、PaaS、IaaS 服务及开发工具，专为开发者和 DevOps 打造。</div>
+        </div>
+      </a>
     </div>
+
   </div>
+</div>
 
-  <!-- Main -->
-  <div class="main">
-    <div class="main-inner">
+<footer>
+  <p>© 2026 小乘工具箱. All rights reserved. Powered by GitHub Pages.</p>
+</footer>
 
-      <!-- 左：工具网格 -->
-      <div class="card-box">
-        <div class="card-box-header">
-          <div class="card-box-title">在线工具</div>
-          <a href="#" class="more-link">更多 →</a>
-        </div>
-        <div class="tools-grid" id="toolsGrid">
+<script>
+  var searchInput = document.getElementById('searchInput');
+  var catBtns = document.querySelectorAll('.cat-btn');
+  var cards = document.querySelectorAll('#toolsGrid .tool-card');
+  var currentCat = 'all';
 
-          <!-- 图片水印助手 -->
-          <a href="watermark/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-wm" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-wm)"/>
-                <rect x="7" y="23" width="48" height="29" rx="5" fill="rgba(255,255,255,0.92)"/>
-                <path d="M22 23 l5-8 h10 l5 8" fill="rgba(255,255,255,0.92)"/>
-                <circle cx="52" cy="27" r="3.5" fill="#fbbf24"/>
-                <circle cx="31" cy="37" r="10.5" fill="#93c5fd"/>
-                <circle cx="31" cy="37" r="7" fill="#2563eb"/>
-                <circle cx="31" cy="37" r="3.5" fill="#1e3a8a"/>
-                <circle cx="28.5" cy="34.5" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                <rect x="39" y="10" width="21" height="15" rx="4" fill="#f59e0b"/>
-                <text x="49.5" y="22" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial,sans-serif">W</text>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#2563eb">图片水印助手</span>
-          </a>
-
-          <!-- 运行库修复 -->
-          <a href="system-repair/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-sr" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#075985"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-sr)"/>
-                <rect x="14" y="14" width="36" height="36" rx="7" fill="rgba(255,255,255,0.92)"/>
-                <rect x="21" y="21" width="22" height="22" rx="4" fill="#0ea5e9"/>
-                <rect x="21" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="29" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="37" y="9" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="21" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="29" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="37" y="50" width="4" height="5" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="9" y="21" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="9" y="29" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="9" y="37" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="50" y="21" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="50" y="29" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <rect x="50" y="37" width="5" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
-                <path d="M25 32 l5 5 l10-10" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#0284c7">运行库修复</span>
-          </a>
-
-          <!-- 文本排版助手 -->
-          <a href="typesetter/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-tp" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#92400e"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-tp)"/>
-                <rect x="14" y="13" width="32" height="42" rx="5" fill="rgba(0,0,0,0.12)"/>
-                <rect x="10" y="9" width="32" height="42" rx="5" fill="rgba(255,255,255,0.96)"/>
-                <path d="M32 9 L42 19 L32 19 Z" fill="#fde68a"/>
-                <rect x="16" y="18" width="20" height="4" rx="2" fill="#f59e0b"/>
-                <rect x="22" y="18" width="6" height="16" rx="2" fill="#f59e0b"/>
-                <rect x="16" y="39" width="20" height="2.5" rx="1.25" fill="#fde68a"/>
-                <rect x="16" y="44" width="14" height="2.5" rx="1.25" fill="#fde68a"/>
-                <rect x="16" y="49" width="18" height="2" rx="1" fill="#fde68a"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#d97706">文本排版助手</span>
-          </a>
-
-          <!-- 日历排班助手 -->
-          <a href="shift-helper/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-sh" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#3730a3"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-sh)"/>
-                <rect x="8" y="14" width="48" height="44" rx="7" fill="rgba(255,255,255,0.92)"/>
-                <rect x="8" y="14" width="48" height="16" rx="7" fill="#6366f1"/>
-                <rect x="8" y="22" width="48" height="8" fill="#6366f1"/>
-                <rect x="18" y="8" width="6" height="12" rx="3" fill="rgba(255,255,255,0.85)"/>
-                <rect x="40" y="8" width="6" height="12" rx="3" fill="rgba(255,255,255,0.85)"/>
-                <circle cx="18" cy="38" r="2.8" fill="#e0e7ff"/>
-                <circle cx="26" cy="38" r="2.8" fill="#e0e7ff"/>
-                <circle cx="34" cy="38" r="6" fill="#6366f1"/>
-                <circle cx="42" cy="38" r="2.8" fill="#e0e7ff"/>
-                <circle cx="50" cy="38" r="2.8" fill="#e0e7ff"/>
-                <path d="M31 38 l2.5 2.5 l5-5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <circle cx="18" cy="50" r="2.8" fill="#e0e7ff"/>
-                <circle cx="26" cy="50" r="2.8" fill="#e0e7ff"/>
-                <circle cx="34" cy="50" r="2.8" fill="#e0e7ff"/>
-                <circle cx="42" cy="50" r="2.8" fill="#e0e7ff"/>
-                <circle cx="50" cy="50" r="2.8" fill="#c7d2fe"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#4f46e5">日历排班助手</span>
-          </a>
-
-          <!-- 图片智能压缩 -->
-          <a href="compressor/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-cp" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#064e3b"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-cp)"/>
-                <rect x="7" y="10" width="40" height="32" rx="6" fill="rgba(255,255,255,0.92)"/>
-                <rect x="7" y="10" width="40" height="17" rx="6" fill="#bae6fd" opacity="0.8"/>
-                <rect x="7" y="19" width="40" height="8" fill="#bae6fd" opacity="0.8"/>
-                <circle cx="41" cy="16" r="4" fill="#fbbf24"/>
-                <path d="M7 42 L22 26 L38 42 Z" fill="#6ee7b7"/>
-                <path d="M21 42 L33 29 L47 42 Z" fill="#a7f3d0"/>
-                <rect x="39" y="37" width="22" height="22" rx="6" fill="#059669"/>
-                <path d="M44 49 l6-6 l6 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <line x1="50" y1="43" x2="50" y2="56" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#059669">图片智能压缩</span>
-          </a>
-
-          <!-- 二维码美化助手 -->
-          <a href="qrcode/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-qr" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#581c87"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-qr)"/>
-                <rect x="9" y="9" width="46" height="46" rx="6" fill="rgba(255,255,255,0.93)"/>
-                <rect x="14" y="14" width="15" height="15" rx="3" fill="#9333ea"/>
-                <rect x="17" y="17" width="9" height="9" rx="1.5" fill="white"/>
-                <rect x="19.5" y="19.5" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="35" y="14" width="15" height="15" rx="3" fill="#9333ea"/>
-                <rect x="38" y="17" width="9" height="9" rx="1.5" fill="white"/>
-                <rect x="40.5" y="19.5" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="14" y="35" width="15" height="15" rx="3" fill="#9333ea"/>
-                <rect x="17" y="38" width="9" height="9" rx="1.5" fill="white"/>
-                <rect x="19.5" y="40.5" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="35" y="35" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="41" y="35" width="4" height="4" rx="1" fill="#c084fc"/>
-                <rect x="47" y="35" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="35" y="41" width="4" height="4" rx="1" fill="#c084fc"/>
-                <rect x="41" y="41" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="47" y="41" width="4" height="4" rx="1" fill="#c084fc"/>
-                <rect x="35" y="47" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="41" y="47" width="4" height="4" rx="1" fill="#9333ea"/>
-                <rect x="47" y="47" width="4" height="4" rx="1" fill="#c084fc"/>
-                <path d="M54 8 L56 13.5 L62 14 L57.5 18 L59 24 L54 21 L49 24 L50.5 18 L46 14 L52 13.5 Z" fill="#fbbf24"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#9333ea">二维码美化助手</span>
-          </a>
-
-          <!-- PDF工具箱 -->
-          <a href="pdf-tools/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-pd" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#7f1d1d"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-pd)"/>
-                <rect x="15" y="10" width="32" height="44" rx="5" fill="rgba(0,0,0,0.15)"/>
-                <rect x="11" y="7" width="32" height="44" rx="5" fill="rgba(255,255,255,0.97)"/>
-                <path d="M33 7 L43 17 L33 17 Z" fill="#fee2e2"/>
-                <line x1="33" y1="7" x2="43" y2="17" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
-                <rect x="16" y="24" width="18" height="2.5" rx="1.25" fill="#fca5a5" opacity="0.7"/>
-                <rect x="16" y="30" width="14" height="2" rx="1" fill="#fca5a5" opacity="0.5"/>
-                <rect x="7" y="42" width="50" height="17" rx="5" fill="#dc2626"/>
-                <text x="32" y="54.5" text-anchor="middle" font-size="14" font-weight="900" fill="white" font-family="Arial,sans-serif" letter-spacing="1.5">PDF</text>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#dc2626">PDF工具箱</span>
-          </a>
-
-          <!-- 噪音时钟 -->
-          <a href="zen-pomodoro/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-zc" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#134e4a"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-zc)"/>
-                <circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-                <circle cx="32" cy="32" r="21" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-                <circle cx="32" cy="32" r="18" fill="rgba(255,255,255,0.93)"/>
-                <line x1="32" y1="15" x2="32" y2="19" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
-                <line x1="32" y1="45" x2="32" y2="49" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
-                <line x1="15" y1="32" x2="19" y2="32" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
-                <line x1="45" y1="32" x2="49" y2="32" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round"/>
-                <line x1="43.5" y1="20.5" x2="41.3" y2="22.7" stroke="#0f766e" stroke-width="1.4" stroke-linecap="round" opacity="0.5"/>
-                <line x1="20.5" y1="43.5" x2="22.7" y2="41.3" stroke="#0f766e" stroke-width="1.4" stroke-linecap="round" opacity="0.5"/>
-                <line x1="32" y1="32" x2="32" y2="21" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="32" y1="32" x2="40" y2="37" stroke="#14b8a6" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="32" cy="32" r="2.8" fill="#0f766e"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#0d9488">噪音时钟</span>
-          </a>
-
-          <!-- 公益站导航 -->
-          <a href="api-nav/" class="tool-card">
-            <div class="tool-icon">
-              <svg viewBox="0 0 64 64" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="g-nv" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#3b0764"/>
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#g-nv)"/>
-                <path d="M10 48 L32 57 L54 48 L32 39 Z" fill="rgba(255,255,255,0.25)"/>
-                <path d="M10 37 L32 46 L54 37 L32 28 Z" fill="rgba(255,255,255,0.52)"/>
-                <path d="M10 26 L32 35 L54 26 L32 17 Z" fill="rgba(255,255,255,0.92)"/>
-                <circle cx="32" cy="26" r="4" fill="#7c3aed"/>
-                <circle cx="19" cy="26" r="2.5" fill="rgba(167,139,250,0.7)"/>
-                <circle cx="45" cy="26" r="2.5" fill="rgba(167,139,250,0.7)"/>
-                <line x1="32" y1="26" x2="19" y2="26" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
-                <line x1="32" y1="26" x2="45" y2="26" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <span class="tool-name" style="color:#7c3aed">公益站导航</span>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- 右：项目推荐 -->
-      <div class="card-box">
-        <div class="card-box-header">
-          <div class="card-box-title">项目推荐</div>
-        </div>
-        <div class="articles">
-          <a href="https://github.com/lingxiaoyiyu-hub/WritingStudio-3.5.0" target="_blank" class="article">
-            <div class="article-thumb" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path>
-              </svg>
-            </div>
-            <div class="article-info" style="flex: 1;">
-              <div class="article-title" style="font-weight: 700; margin-bottom: 2px;">WritingStudio (本地写作助手)</div>
-              <div class="article-desc">面向中文小说创作的本地 AI 写作工作台，支持全书大纲、分卷章节创作、角色管理与 AI 润色。</div>
-            </div>
-          </a>
-          <a href="https://github.com/lingxiaoyiyu-hub/free-for-dev" target="_blank" class="article">
-            <div class="article-thumb" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </div>
-            <div class="article-info" style="flex: 1;">
-              <div class="article-title" style="font-weight: 700; margin-bottom: 2px;">free-for-dev (免费开发资源)</div>
-              <div class="article-desc">开发者免费资源库：整理并收集了各种拥有免费额度的 SaaS、PaaS、IaaS 服务及开发工具，专为开发者和 DevOps 打造。</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2026 小乘工具箱. All rights reserved. Powered by GitHub Pages.</p>
-  </footer>
-
-  <script>
-    const input = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('#toolsGrid .tool-card');
-    input.addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      cards.forEach(c => {
-        c.style.display = c.querySelector('.tool-name').textContent.toLowerCase().includes(q) ? 'flex' : 'none';
-      });
+  function filterCards() {
+    var q = searchInput.value.toLowerCase();
+    cards.forEach(function(card) {
+      var name = card.querySelector('.tool-name').textContent.toLowerCase();
+      var desc = card.querySelector('.tool-desc') ? card.querySelector('.tool-desc').textContent.toLowerCase() : '';
+      var cat = card.getAttribute('data-cat') || '';
+      var matchCat = currentCat === 'all' || cat === currentCat;
+      var matchSearch = !q || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+      card.style.display = (matchCat && matchSearch) ? '' : 'none';
     });
-    document.querySelectorAll('.search-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        input.value = tag.textContent;
-        input.dispatchEvent(new Event('input'));
-      });
+  }
+
+  catBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      catBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentCat = btn.getAttribute('data-cat') || 'all';
+      filterCards();
     });
-  </script>
+  });
+
+  searchInput.addEventListener('input', filterCards);
+</script>
 </body>
 </html>
