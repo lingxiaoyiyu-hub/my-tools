@@ -5,316 +5,373 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>小乘工具箱 - 离线高效小工具聚合</title>
   <meta name="description" content="一个免除后顾之忧的高效、纯本地运行的静态小工具聚合平台。">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f0f4f8;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── 顶部 Header ── */
+    .top-bar {
+      background: linear-gradient(135deg, #0f4c35 0%, #1a7a52 50%, #0d9e61 100%);
+      box-shadow: 0 4px 20px rgba(5,150,105,0.3);
+    }
+    .top-bar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      gap: 16px;
+    }
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    /* 搜索 */
+    .top-search-area {
+      flex: 1;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 24px;
+      padding: 6px 8px 6px 18px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .top-search-area:focus-within {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .top-search-input {
+      border: none; background: transparent; outline: none;
+      font-size: 0.88rem; flex: 1; color: #fff;
+    }
+    .top-search-input::placeholder { color: rgba(255,255,255,0.6); }
+    .search-tags { display: flex; gap: 6px; margin: 0 10px; }
+    .search-tag {
+      font-size: 0.7rem; color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      padding: 2px 9px; cursor: pointer; transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .search-tag:hover { background: rgba(255,255,255,0.25); color: #fff; }
+    .search-btn {
+      background: rgba(255,255,255,0.9); color: #0d9e61;
+      border: none; border-radius: 18px; font-size: 0.82rem;
+      font-weight: 700; padding: 6px 16px; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-btn:hover { background: #fff; }
+
+    /* ── 主体 ── */
+    .main { flex: 1; background: #f0f4f8; padding: 24px 0 32px; }
+    .main-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2.2fr 1fr; gap: 20px;
+      padding: 0 20px;
+    }
+
+    /* ── 卡片容器 ── */
+    .card-box {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .card-box-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .card-box-title {
+      font-size: 1rem; font-weight: 800; color: #111;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-box-title::before {
+      content: '';
+      display: inline-block; width: 4px; height: 18px;
+      background: linear-gradient(to bottom, #059669, #10b981);
+      border-radius: 2px;
+    }
+    .more-link { font-size: 0.8rem; color: #0d9e61; text-decoration: none; }
+    .more-link:hover { text-decoration: underline; }
+
+    /* ── 工具网格 ── */
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; padding: 18px;
+    }
+    .tool-card {
+      border-radius: 14px; padding: 22px 14px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      text-decoration: none; color: inherit;
+      border: 1.5px solid #eef0f4;
+      background: #fafbfd;
+      transition: all 0.25s ease;
+      position: relative; overflow: hidden;
+    }
+    .tool-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 50%, rgba(5,150,105,0.04));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover {
+      border-color: #059669;
+      box-shadow: 0 8px 24px rgba(5,150,105,0.15);
+      transform: translateY(-3px);
+    }
+    .tool-icon {
+      width: 58px; height: 58px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.25s;
+    }
+    .tool-card:hover .tool-icon { transform: scale(1.1) rotate(-3deg); }
+    .tool-name {
+      font-size: 0.84rem; font-weight: 600; color: #2d3748; text-align: center;
+    }
+    .tool-card.soon {
+      opacity: 0.45; cursor: not-allowed; background: #f9f9f9;
+    }
+    .tool-card.soon:hover {
+      transform: none; box-shadow: none; border-color: #eef0f4;
+    }
+    .tool-card.soon:hover::before { opacity: 0; }
+    .tool-card.soon:hover .tool-icon { transform: none; }
+    .soon-badge {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 0.6rem; font-weight: 700; color: #aaa;
+      background: #f0f0f0; border-radius: 4px; padding: 2px 5px;
+    }
+
+    /* ── 文库列表 ── */
+    .articles { display: flex; flex-direction: column; padding: 8px 0; }
+    .article {
+      display: flex; gap: 14px; padding: 14px 20px;
+      text-decoration: none; color: inherit;
+      border-bottom: 1px solid #f5f5f5; transition: background 0.15s;
+    }
+    .article:last-child { border-bottom: none; }
+    .article:hover { background: #f9fbff; }
+    .article-thumb {
+      width: 76px; height: 54px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .article-info { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+    .article-title {
+      font-size: 0.84rem; font-weight: 500; line-height: 1.45;
+      color: #2d3748;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+      transition: color 0.2s;
+    }
+    .article:hover .article-title { color: #059669; }
+    .article-meta { font-size: 0.7rem; color: #aaa; }
+
+    /* ── Footer ── */
+    footer {
+      background: #fff; border-top: 1px solid #eee;
+      text-align: center; padding: 20px;
+      font-size: 0.78rem; color: #aaa;
+    }
+
+    @media (max-width: 960px) {
+      .main-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .top-bar-content { flex-direction: column; }
+      .top-search-area { max-width: 100%; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .search-tags { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top bar / Header -->
+  <!-- Header -->
   <div class="top-bar">
     <div class="top-bar-content">
       <a href="/" class="site-logo">
-        <!-- Briefcase Icon -->
-        <svg viewBox="0 0 24 24" width="26" height="26" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-        </svg>
-        <span>小乘工具箱</span>
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="#fff" stroke-width="2.5" fill="none">
+            <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        小乘工具箱
       </a>
-      
+
       <div class="top-search-area">
-        <input type="text" id="searchInput" class="top-search-input" placeholder="搜索其实很简单...">
-        <div class="search-tags">
-          <span class="search-tag-link">格式化</span>
-          <span class="search-tag-link">二维码</span>
-          <span class="search-tag-link">放假安排</span>
-        </div>
-        <button class="top-search-btn" id="searchBtn">搜索</button>
-      </div>
-
-      <div class="top-right-links">
-        <a href="#" class="top-right-link">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="17 1 21 5 17 9"></polyline>
-            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-            <polyline points="7 23 3 19 7 15"></polyline>
-            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-          </svg>
-          token中转
-        </a>
-        <a href="#" class="top-right-link">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="8" y1="6" x2="21" y2="6"></line>
-            <line x1="8" y1="12" x2="21" y2="12"></line>
-            <line x1="8" y1="18" x2="21" y2="18"></line>
-            <line x1="3" y1="6" x2="3.01" y2="6"></line>
-            <line x1="3" y1="12" x2="3.01" y2="12"></line>
-            <line x1="3" y1="18" x2="3.01" y2="18"></line>
-          </svg>
-          排行榜
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation Menu Bar -->
-  <div class="nav-bar-container">
-    <div class="nav-bar-content">
-      <div class="nav-tabs">
-        <a href="#" class="nav-tab">我的</a>
-        <a href="#" class="nav-tab active">首页</a>
-        <a href="#" class="nav-tab">工具</a>
-        <a href="#" class="nav-tab">文库</a>
-        <a href="#" class="nav-tab">码库</a>
-        <a href="#" class="nav-tab">软件</a>
-        <a href="#" class="nav-tab">网址</a>
-        <a href="#" class="nav-tab">话题</a>
-        <a href="#" class="nav-tab">小摊</a>
-      </div>
-      <!-- Right bubble chat icon -->
-      <a href="#" class="nav-chat-icon">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        <svg viewBox="0 0 24 24" width="15" height="15" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none" style="flex-shrink:0;margin-right:6px">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-      </a>
+        <input type="text" id="searchInput" class="top-search-input" placeholder="搜索工具...">
+        <div class="search-tags">
+          <span class="search-tag">水印</span>
+          <span class="search-tag">排版</span>
+          <span class="search-tag">排班</span>
+        </div>
+        <button class="search-btn">搜索</button>
+      </div>
     </div>
   </div>
 
-  <!-- Main Content Layout -->
-  <div class="main-layout-container">
-    <div class="main-layout-content">
-      
-      <!-- Left Column: Online Tools -->
-      <div class="section-box left-section">
-        <div class="section-header">
-          <h2>在线工具</h2>
-          <a href="#" class="section-more-link">更多 &gt;</a>
+  <!-- Main -->
+  <div class="main">
+    <div class="main-inner">
+
+      <!-- 左：工具网格 -->
+      <div class="card-box">
+        <div class="card-box-header">
+          <div class="card-box-title">在线工具</div>
+          <a href="#" class="more-link">更多 →</a>
         </div>
-        
-        <div class="tools-grid">
-          <!-- 图片水印助手 -->
-          <a href="watermark/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #3b82f6;">
-              <!-- Camera Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                <circle cx="12" cy="13" r="4"></circle>
-              </svg>
+        <div class="tools-grid" id="toolsGrid">
+
+          <a href="watermark/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#3b82f6" stroke-width="2" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
             </div>
-            <span class="tool-card-name">图片水印助手</span>
+            <span class="tool-name">图片水印助手</span>
           </a>
 
-          <!-- 运行库修复 -->
-          <a href="system-repair/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #0ea5e9;">
-              <!-- Shield Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                <path d="M2 17l10 5 10-5"></path>
-              </svg>
+          <a href="system-repair/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#0ea5e9" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
-            <span class="tool-card-name">运行库修复</span>
+            <span class="tool-name">运行库修复</span>
           </a>
 
-          <!-- 文本排版助手 -->
-          <a href="typesetter/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #d97706;">
-              <!-- Text format Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="4 7 4 4 20 4 20 7"></polyline>
-                <line x1="9" y1="20" x2="15" y2="20"></line>
-                <line x1="12" y1="4" x2="12" y2="20"></line>
-              </svg>
+          <a href="typesetter/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#d97706" stroke-width="2" fill="none"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
             </div>
-            <span class="tool-card-name">文本排版助手</span>
+            <span class="tool-name">文本排版助手</span>
           </a>
 
-          <!-- 日历排班助手 -->
-          <a href="shift-helper/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #2563eb;">
-              <!-- Calendar Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
+          <a href="shift-helper/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#dbeafe,#c7d2fe)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#2563eb" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             </div>
-            <span class="tool-card-name">日历排班助手</span>
+            <span class="tool-name">日历排班助手</span>
           </a>
 
-          <!-- 图片智能压缩 -->
-          <a href="compressor/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #059669;">
-              <!-- Image Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
+          <a href="compressor/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#059669" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
             </div>
-            <span class="tool-card-name">图片智能压缩</span>
+            <span class="tool-name">图片智能压缩</span>
           </a>
 
-          <!-- 二维码美化助手 -->
-          <a href="qrcode/" class="tool-card active-card">
-            <div class="tool-card-icon" style="color: #059669;">
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-              </svg>
+          <a href="qrcode/" class="tool-card">
+            <div class="tool-icon" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff)">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#9333ea" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><line x1="14" y1="14" x2="14" y2="14"></line><line x1="17" y1="14" x2="17" y2="14"></line><line x1="20" y1="14" x2="20" y2="14"></line><line x1="14" y1="17" x2="14" y2="17"></line><line x1="17" y1="17" x2="17" y2="17"></line><line x1="20" y1="17" x2="20" y2="17"></line><line x1="14" y1="20" x2="14" y2="20"></line><line x1="17" y1="20" x2="17" y2="20"></line><line x1="20" y1="20" x2="20" y2="20"></line></svg>
             </div>
-            <span class="tool-card-name">二维码美化助手</span>
+            <span class="tool-name">二维码美化助手</span>
           </a>
 
-          <!-- Markdown编辑器 -->
-          <div class="tool-card coming-soon-card">
-            <div class="tool-card-icon" style="color: #ec4899;">
-              <!-- Edit Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path>
-              </svg>
+          <div class="tool-card soon">
+            <span class="soon-badge">即将上线</span>
+            <div class="tool-icon" style="background:#f5f5f5">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#ccc" stroke-width="2" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>
             </div>
-            <span class="tool-card-name">Markdown编辑器</span>
+            <span class="tool-name">Markdown编辑器</span>
           </div>
 
-          <!-- 日期时间计算器 -->
-          <div class="tool-card coming-soon-card">
-            <div class="tool-card-icon" style="color: #f59e0b;">
-              <!-- Calendar Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
+          <div class="tool-card soon">
+            <span class="soon-badge">即将上线</span>
+            <div class="tool-icon" style="background:#f5f5f5">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#ccc" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             </div>
-            <span class="tool-card-name">日期时间计算器</span>
+            <span class="tool-name">日期时间计算器</span>
           </div>
 
-          <!-- 摩斯电码 -->
-          <div class="tool-card coming-soon-card">
-            <div class="tool-card-icon" style="color: #8b5cf6;">
-              <!-- Radio/Wifi Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="2"></circle>
-                <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
-              </svg>
+          <div class="tool-card soon">
+            <span class="soon-badge">即将上线</span>
+            <div class="tool-icon" style="background:#f5f5f5">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="#ccc" stroke-width="2" fill="none"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path></svg>
             </div>
-            <span class="tool-card-name">摩斯电码转换</span>
+            <span class="tool-name">摩斯电码转换</span>
           </div>
 
-          <!-- PDF调整 -->
-          <div class="tool-card coming-soon-card">
-            <div class="tool-card-icon" style="color: #ef4444;">
-              <!-- FileText Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-            </div>
-            <span class="tool-card-name">PDF页面调整</span>
-          </div>
-
-          <!-- 对比归并 -->
-          <div class="tool-card coming-soon-card">
-            <div class="tool-card-icon" style="color: #10b981;">
-              <!-- GitMerge/Diff Icon -->
-              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="18" cy="18" r="3"></circle>
-                <circle cx="6" cy="6" r="3"></circle>
-                <path d="M6 9a9 9 0 0 1 9 9"></path>
-              </svg>
-            </div>
-            <span class="tool-card-name">文本对比与归并</span>
-          </div>
         </div>
       </div>
-      
-      <!-- Right Column: Technology Library -->
-      <div class="section-box right-section">
-        <div class="section-header">
-          <h2>技术文库</h2>
-          <a href="#" class="section-more-link">更多 &gt;</a>
+
+      <!-- 右：文库 -->
+      <div class="card-box">
+        <div class="card-box-header">
+          <div class="card-box-title">技术文库</div>
+          <a href="#" class="more-link">更多 →</a>
         </div>
-        
-        <div class="articles-list">
-          <!-- Article 1 -->
-          <a href="#" class="article-item">
-            <div class="article-thumb" style="background: #e0f2fe; color: #0284c7;">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
+        <div class="articles">
+          <a href="#" class="article">
+            <div class="article-thumb" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#0284c7" stroke-width="2" fill="none"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
             <div class="article-info">
-              <h3 class="article-title">面向视频扩散模型的局部细节偏好优化方法 LocalDPO</h3>
-              <span class="article-time">4小时前</span>
+              <div class="article-title">面向视频扩散模型的局部细节偏好优化方法 LocalDPO</div>
+              <div class="article-meta">4小时前</div>
             </div>
           </a>
-
-          <!-- Article 2 -->
-          <a href="#" class="article-item">
-            <div class="article-thumb" style="background: #d1fae5; color: #059669;">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
-              </svg>
+          <a href="#" class="article">
+            <div class="article-thumb" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#059669" stroke-width="2" fill="none"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>
             </div>
             <div class="article-info">
-              <h3 class="article-title">消息队列处理的高速化与高并发结算事务锁优化实践</h3>
-              <span class="article-time">1天前</span>
+              <div class="article-title">消息队列处理的高速化与高并发结算事务锁优化实践</div>
+              <div class="article-meta">1天前</div>
             </div>
           </a>
-
-          <!-- Article 3 -->
-          <a href="#" class="article-item">
-            <div class="article-thumb" style="background: #fef3c7; color: #d97706;">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
+          <a href="#" class="article">
+            <div class="article-thumb" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#d97706" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
             <div class="article-info">
-              <h3 class="article-title">一文了解：前端本地静态工具中的数据安全与隐私防泄漏最佳实践</h3>
-              <span class="article-time">2天前</span>
+              <div class="article-title">前端本地静态工具中的数据安全与隐私防泄漏最佳实践</div>
+              <div class="article-meta">2天前</div>
             </div>
           </a>
-
-          <!-- Article 4 -->
-          <a href="#" class="article-item">
-            <div class="article-thumb" style="background: #e0e7ff; color: #4f46e5;">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
+          <a href="#" class="article">
+            <div class="article-thumb" style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe)">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#4f46e5" stroke-width="2" fill="none"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </div>
             <div class="article-info">
-              <h3 class="article-title">揭秘：零服务器运行成本、高性能静态小工具聚合网站搭建实战</h3>
-              <span class="article-time">3天前</span>
+              <div class="article-title">零服务器运行成本、高性能静态小工具聚合网站搭建实战</div>
+              <div class="article-meta">3天前</div>
             </div>
           </a>
-
-          <!-- Article 5 -->
-          <a href="#" class="article-item">
-            <div class="article-thumb" style="background: #fae8ff; color: #c084fc;">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-              </svg>
+          <a href="#" class="article">
+            <div class="article-thumb" style="background:linear-gradient(135deg,#fae8ff,#f5d0fe)">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#c084fc" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             </div>
             <div class="article-info">
-              <h3 class="article-title">From Silos to Service Topology: Why We Built a Real-Time Service Map</h3>
-              <span class="article-time">1周前</span>
+              <div class="article-title">From Silos to Service Topology: Why We Built a Real-Time Service Map</div>
+              <div class="article-meta">1周前</div>
             </div>
           </a>
         </div>
@@ -328,20 +385,18 @@
   </footer>
 
   <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.tools-grid .tool-card');
-
-    searchInput.addEventListener('input', function(e) {
-      const query = e.target.value.trim().toLowerCase();
-      
-      cards.forEach(card => {
-        const title = card.querySelector('.tool-card-name').textContent.toLowerCase();
-        
-        if (title.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+    const input = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('#toolsGrid .tool-card');
+    input.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      cards.forEach(c => {
+        c.style.display = c.querySelector('.tool-name').textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        input.value = tag.textContent;
+        input.dispatchEvent(new Event('input'));
       });
     });
   </script>
