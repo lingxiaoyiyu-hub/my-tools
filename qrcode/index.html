@@ -477,6 +477,10 @@
     copyBtn.addEventListener('click', async () => {
       const text = (textEl.value || '').trim();
       if (!text) { showToast('请先输入内容'); return; }
+      if (!window.isSecureContext || !navigator.clipboard || typeof ClipboardItem === 'undefined') {
+        showToast('当前 HTTP 不支持复制图片，请下载 PNG');
+        return;
+      }
       try {
         await render();
         if (!canvas.width || !canvas.height || canvas.style.display === 'none') {
