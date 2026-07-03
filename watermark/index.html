@@ -872,11 +872,36 @@ dropzone.ondrop = async e => {
   }
 };
 
+function setControlsDisabled(disabled) {
+  const elements = document.querySelectorAll("aside input, aside select, aside button, .upload-dropzone");
+  elements.forEach(el => {
+    if (el.id === "downloadZip") return;
+    if (el.classList.contains("upload-dropzone")) {
+      el.style.pointerEvents = disabled ? "none" : "";
+      el.style.opacity = disabled ? "0.6" : "";
+    } else {
+      el.disabled = disabled;
+    }
+  });
+}
+
 fileInput.addEventListener("change", async e => {
   files = [...e.target.files];
   images = [];
   currentIndex = 0;
-  for (const file of files) images.push(await loadImage(file));
+  setControlsDisabled(true);
+  try {
+    for (const file of files) {
+      try {
+        const img = await loadImage(file);
+        images.push(img);
+      } catch (err) {
+        console.error("加载图片失败:", file.name, err);
+      }
+    }
+  } finally {
+    setControlsDisabled(false);
+  }
   buildThumbs();
   buildSelect();
   updateButtons();
@@ -891,32 +916,53 @@ $("currentSelect").addEventListener("change", e => {
 
 $("downloadOne").addEventListener("click", async () => {
   if (!images.length) return;
-  await renderToCanvas(currentIndex);
-  downloadBlob(await canvasToBlob(makeExportCanvas()), outputName(files[currentIndex].name));
+  setControlsDisabled(true);
+  try {
+    await renderToCanvas(currentIndex);
+    downloadBlob(await canvasToBlob(makeExportCanvas()), outputName(files[currentIndex].name));
+  } finally {
+    setControlsDisabled(false);
+  }
 });
 
 $("downloadZip").addEventListener("click", async () => {
   if (!images.length) return;
+  setControlsDisabled(true);
   $("downloadZip").disabled = true;
   $("downloadZip").textContent = "处理中...";
-  const entries = [];
-  for (let i = 0; i < images.length; i++) {
-    await renderToCanvas(i);
-    const blob = await canvasToBlob(makeExportCanvas());
-    entries.push({ name: outputName(files[i].name), data: new Uint8Array(await blob.arrayBuffer()) });
+  try {
+    const entries = [];
+    for (let i = 0; i < images.length; i++) {
+      $("downloadZip").textContent = `处理中 (${i + 1}/${images.length})...`;
+      await renderToCanvas(i);
+      const blob = await canvasToBlob(makeExportCanvas());
+      entries.push({ name: outputName(files[i].name), data: new Uint8Array(await blob.arrayBuffer()) });
+    }
+    const zipBlob = makeZip(entries);
+    downloadBlob(zipBlob, "批量水印图片.zip");
+  } catch (err) {
+    console.error("批量导出失败:", err);
+    alert("批量导出失败，请重试！");
+  } finally {
+    setControlsDisabled(false);
+    $("downloadZip").textContent = "批量导出ZIP";
+    $("downloadZip").disabled = false;
   }
-  const zipBlob = makeZip(entries);
-  downloadBlob(zipBlob, "批量水印图片.zip");
-  $("downloadZip").textContent = "批量导出ZIP";
-  $("downloadZip").disabled = false;
 });
 
 function loadImage(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = (err) => {
+      URL.revokeObjectURL(url);
+      reject(err);
+    };
+    img.src = url;
   });
 }
 
@@ -1916,12 +1962,14 @@ function makeZip(entries) {
     const nameBytes = encoder.encode(entry.name);
     const data = entry.data;
     const crc = crc32(data);
+    
+    // Local File Header
     const local = new Uint8Array(30 + nameBytes.length);
     const localView = new DataView(local.buffer);
     localView.setUint32(0, 0x04034b50, true);
-    localView.setUint16(4, 20, true);
-    localView.setUint16(8, 0, true);
-    localView.setUint16(10, 0, true);
+    localView.setUint16(4, 20, true);             // Version needed
+    localView.setUint16(6, 0x0800, true);         // General purpose bit flag: set UTF-8 (bit 11)
+    localView.setUint16(8, 0, true);              // Compression method (0 = stored)
     localView.setUint32(14, crc, true);
     localView.setUint32(18, data.length, true);
     localView.setUint32(22, data.length, true);
@@ -1929,11 +1977,13 @@ function makeZip(entries) {
     local.set(nameBytes, 30);
     files.push(local, data);
 
+    // Central Directory File Header
     const cd = new Uint8Array(46 + nameBytes.length);
     const cdView = new DataView(cd.buffer);
     cdView.setUint32(0, 0x02014b50, true);
-    cdView.setUint16(4, 20, true);
-    cdView.setUint16(6, 20, true);
+    cdView.setUint16(4, 20, true);                 // Version made by
+    cdView.setUint16(6, 20, true);                 // Version needed
+    cdView.setUint16(8, 0x0800, true);             // General purpose bit flag: set UTF-8 (bit 11)
     cdView.setUint32(16, crc, true);
     cdView.setUint32(20, data.length, true);
     cdView.setUint32(24, data.length, true);
