@@ -146,7 +146,7 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
       <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
         <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="searchInput" class="search-input" placeholder="搜索名称或域名...">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索站点或类型...">
     </div>
   </div>
 
@@ -238,7 +238,6 @@ function renderSites() {
       <div class="card-header">
         <div class="site-name-area">
           <span class="site-title">${esc(s.name)}</span>
-          <span class="site-domain">${esc(s.domain)}</span>
         </div>
         <div class="card-tags">
           ${(s.tags||[]).map(t => '<span class="card-tag">' + esc(t) + '</span>').join('')}
