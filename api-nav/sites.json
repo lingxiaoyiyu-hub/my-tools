@@ -1,7 +1,7 @@
 {
   "announcement": {
-    "enabled": false,
-    "text": ""
+    "enabled": true,
+    "text": "如遇站点失效或其他问题，可以反馈给我\n如果有好的站点，也可以投稿"
   },
   "sites": [
     {
