@@ -38,6 +38,17 @@
         "生图",
         "稳定"
       ]
+    },
+    {
+      "id": "1783140061597",
+      "date": "2026-07-04",
+      "name": "Aerolink",
+      "domain": "https://aerolink.lat/register?ref=LWFUL-S",
+      "url": "https://aerolink.lat/register?ref=LWFUL-S",
+      "description": "注册送1个月pro会员，每5小时10＄额度，每周70刀，只有claude模型，也是claude专用站点，邀请1人2.5＄。实测非常的稳定，额度注册2个号的话，基本够用了。注意：注册成功后，需用TG关注一下站点的频道，才可激活。",
+      "tags": [
+        "稳定"
+      ]
     }
   ]
 }
