@@ -1,0 +1,175 @@
+/* ============================================================================
+   tool-theme.css — 工具子页统一视觉规范（Vercel / Linear 风格 chrome）
+   ----------------------------------------------------------------------------
+   这是「首页视觉」抽出的可复用外壳（header / logo / 搜索框 / 小铺按钮 /
+   页面标题区 / footer / 页面底色），供各工具子页「按需接入」。
+
+   接入方式（单个页面 opt-in，绝不影响未接入的页面）：
+     1. <body class="tool-page">
+     2. 在该页自己的 CSS 之后引入： <link rel="stylesheet" href="/tool-theme.css">
+
+   冲突处理原则：
+     - 全部规则以 body.tool-page 命名空间限定 → 靠特异性压过页面自有 CSS
+       （如 prompts.css 的 `header{}` 0,0,1  <  `body.tool-page header{}` 0,1,1）。
+     - 需要压过 shared-white.css 的 !important 处，本文件也用 !important，
+       且特异性更高（多一个 .tool-page 类）→ 稳定胜出。
+     - 因此本文件既不改 shared-white.css，也不改各页自有 CSS。
+
+   注意：本文件只统一「外壳 chrome」。页面内部组件（卡片/筛选/标签/输出面板）
+   的配色留待 phase 2，避免影响功能，详见 docs/tool-page-visual-standard.md。
+   ============================================================================ */
+
+/* ── 设计令牌（与首页一致）────────────────────────────────────────────── */
+body.tool-page{
+  --bg:#fdfcfa;
+  --bg-subtle:#f8f6f1;
+  --fg:#0a0a0a;
+  --muted:#54585c;
+  --muted-2:#6b7280;
+  --border:#f0ede4;
+  --border-strong:#e2dcc9;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Helvetica,Arial,sans-serif;
+  background:var(--bg) !important;
+  color:var(--fg) !important;
+  font-family:var(--sans) !important;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Header：暖白底 + 细边框（取代 prompts 的深色 header / api 的玻璃拟态）── */
+body.tool-page header{
+  background:var(--bg) !important;
+  border-bottom:1px solid var(--border) !important;
+  height:auto !important;
+  padding:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  position:static !important;
+}
+body.tool-page .header-inner{
+  max-width:1180px;
+  margin:0 auto;
+  padding:14px 24px !important;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:transparent !important;
+}
+
+/* ── Logo：深色圆角方块 + 白色 glyph（取代渐变机器人脸）───────────────── */
+body.tool-page .logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--fg) !important;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+}
+body.tool-page .logo-mark{
+  position:relative;
+  width:28px; height:28px;
+  flex-shrink:0;
+}
+body.tool-page .logo-mark svg{ width:28px; height:28px; display:block; }
+/* shared-white 会把 .logo svg 描边强制成 currentColor（深色），
+   这里恢复 glyph 的白色描边，保证深底方块上的图形可见 */
+body.tool-page .logo-mark svg path{ stroke:#fff !important; }
+
+/* ── 右侧集群：搜索框 + 小铺按钮 ─────────────────────────────────────── */
+body.tool-page .header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1;
+  justify-content:flex-end;
+}
+
+/* ── 搜索框：浅底细边（取代深色 header 上的半透明白框）──────────────── */
+body.tool-page .search-wrap{
+  position:relative;
+  width:100%;
+  max-width:280px;
+  flex:0 1 280px;
+}
+body.tool-page .search-wrap svg,
+body.tool-page .search-wrap .search-icon{
+  position:absolute;
+  left:11px; top:50%;
+  transform:translateY(-50%);
+  color:var(--muted-2) !important;
+  stroke:currentColor !important;
+  opacity:1 !important;
+  pointer-events:none;
+}
+body.tool-page .search-wrap input{
+  width:100%;
+  font-family:inherit;
+  font-size:13px;
+  padding:8px 12px 8px 34px !important;
+  border-radius:8px !important;
+  border:1px solid var(--border) !important;
+  background:var(--bg-subtle) !important;
+  color:var(--fg) !important;
+  outline:none;
+  transition:border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+}
+body.tool-page .search-wrap input::placeholder{ color:var(--muted-2) !important; }
+body.tool-page .search-wrap input:focus{
+  border-color:var(--fg) !important;
+  background:var(--bg) !important;
+  box-shadow:0 0 0 3px rgba(10,10,10,.08) !important;
+}
+
+/* ── 小铺按钮：实心近黑药丸（取代绿色发光渐变）───────────────────────── */
+body.tool-page .shop-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 16px !important;
+  border-radius:8px !important;
+  background:var(--fg) !important;
+  color:#fff !important;
+  border:1px solid var(--fg) !important;
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  white-space:nowrap;
+  box-shadow:none !important;
+  transition:transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+}
+body.tool-page .shop-btn:hover{
+  transform:translateY(-1px);
+  background:#1a1a1a !important;
+  box-shadow:0 6px 16px rgba(0,0,0,.18) !important;
+}
+body.tool-page .shop-btn:active{ transform:translateY(0); }
+body.tool-page .shop-btn svg{ color:#fff !important; stroke:currentColor !important; }
+
+/* ── 工具页标题区：深色标题 + 灰副标题（page-head / pb-page-head 通用）── */
+body.tool-page .page-title,
+body.tool-page .pb-page-title{
+  color:var(--fg) !important;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+body.tool-page .page-sub,
+body.tool-page .pb-page-sub{ color:var(--muted) !important; }
+
+/* ── Footer：透明底 + 细顶边（取代强制白底 surface）─────────────────── */
+body.tool-page footer{
+  background:transparent !important;
+  border-top:1px solid var(--border) !important;
+  color:var(--muted-2) !important;
+  box-shadow:none !important;
+}
+
+/* ── 响应式：窄屏时搜索框换行占满 ────────────────────────────────────── */
+@media (max-width:640px){
+  body.tool-page .header-inner{ flex-wrap:wrap; row-gap:10px; }
+  body.tool-page .header-right{ flex-wrap:wrap; row-gap:10px; flex:1 1 100%; }
+  body.tool-page .search-wrap{ order:3; flex:1 1 100%; max-width:100%; }
+}
