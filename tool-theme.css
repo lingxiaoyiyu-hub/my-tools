@@ -608,6 +608,135 @@ body.tool-page .modal-close:hover{
 /* stat 统计文字：深色 */
 body.tool-page .stat{ color:var(--muted) !important; }
 
+/* ════════════════════════════════════════════════════════════════════════
+   PHASE 2 变量重映射层（根治变量名不匹配问题）
+   ────────────────────────────────────────────────────────────────────────
+   背景：api-nav/shift-helper/compressor/temp-mail 等页内联 :root 定义了
+   深色或纯白变量（--bg/--card/--cb/--border/--text/--muted/--primary 等），
+   主体元素通过 var(--card) 引用。phase 2 用 body.tool-page .xxx 类名硬压，
+   但变量名不匹配导致部分元素仍解析到旧色值。
+
+   解法：在 body.tool-page 命名空间重定义这些变量到首页暖白系。
+   特异性 body.tool-page (0,1,1) > :root (0,1,0)，稳赢。
+   功能色（--success/--danger/--warn/--early/--mid/--night/--team0-3 等）保留不动。
+   ════════════════════════════════════════════════════════════════════════ */
+body.tool-page{
+  /* 重映射各页 :root 里的"配色基础变量"到首页暖白系 */
+  --bg:#fdfcfa;          /* 覆盖 api-nav #090d16 / shift #f5f7fa / temp #f7f8fa */
+  --card:#fdfcfa;        /* 覆盖 api-nav #131b2e / shift #fff / temp #fff */
+  --cb:#f0ede4;          /* 覆盖 api-nav #1e293b（边框变量名） */
+  --border:#f0ede4;      /* 覆盖 shift #e5e7eb / temp #e5e7eb */
+  --text:#0a0a0a;        /* 覆盖 api-nav #f8fafc / shift #1f2937 / temp #111827 */
+  --muted:#54585c;       /* 覆盖各页 #6b7280 / #64748b */
+  --muted-2:#6b7280;
+  --primary:#0a0a0a;     /* 覆盖 temp-mail #111827（主色统一近黑） */
+  --phover:#2b2b30;      /* 覆盖 api-nav #2563eb */
+  --soft:#f8f6f1;        /* 覆盖 temp-mail #f3f4f6 */
+  /* --success/--danger/--warn/--early/--mid/--night/--team0-3 等功能色保留 */
+}
+
+/* shift-helper 班次功能色保留（不统一成暖白，属于语义色） */
+body.tool-page.shift-helper-keep,
+body.tool-page{
+  --early:#86efac;
+  --mid:#93c5fd;
+  --night:#a78bfa;
+  --day12:#fdba74;
+  --night12:#818cf8;
+  --rest:#cbd5e1;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   PHASE 2 硬编码颜色兜底层
+   ────────────────────────────────────────────────────────────────────────
+   变量重映射覆盖了 var(--card)/var(--bg) 等，但部分页内联 CSS 用了硬编码
+   颜色（#fff/#f9fafb/rgba 蓝绿透明底）。这里补针对性规则。
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* shift-helper 表格：表头/行标签底色统一暖白subtle，单元格白底统一暖白 */
+body.tool-page .calendar th,
+body.tool-page .calendar td,
+body.tool-page .stats-table th,
+body.tool-page .stats-table td{
+  background:var(--bg) !important;
+  border-color:var(--border) !important;
+  color:var(--fg) !important;
+}
+body.tool-page .calendar th,
+body.tool-page .calendar td.row-label,
+body.tool-page .stats-table th{
+  background:var(--bg-subtle) !important;
+}
+body.tool-page .calendar th.weekend{
+  color:#ef4444 !important; /* 周末红色保留（语义色） */
+}
+
+/* shift-helper 班次单元格：保留功能色背景，文字色保留 */
+body.tool-page .calendar td[class*="shift-"]{
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* api-nav 蓝色透明底元素：统一成暖白subtle + 米色边 */
+body.tool-page .info-card,
+body.tool-page .feedback-btn,
+body.tool-page .tag-btn,
+body.tool-page .card-tag,
+body.tool-page .visit-btn,
+body.tool-page .test-btn,
+body.tool-page .modal,
+body.tool-page .form-input,
+body.tool-page .form-textarea,
+body.tool-page .search-input{
+  background:var(--bg-subtle) !important;
+  border-color:var(--border) !important;
+  color:var(--fg) !important;
+}
+
+/* api-nav 按钮hover/active：统一近黑 */
+body.tool-page .tag-btn.active,
+body.tool-page .visit-btn:hover,
+body.tool-page .btn-primary{
+  background:var(--fg) !important;
+  border-color:var(--fg) !important;
+  color:#fff !important;
+}
+body.tool-page .tag-btn:hover,
+body.tool-page .test-btn:hover,
+body.tool-page .nav-link:hover{
+  color:var(--fg) !important;
+  border-color:var(--border-strong) !important;
+}
+
+/* api-nav latency-dot 功能色保留（在线绿/离线红） */
+body.tool-page .latency-dot.online{ background:#10b981 !important; }
+body.tool-page .latency-dot.offline{ background:#ef4444 !important; }
+
+/* shift-helper .tip 提示条：保留黄色语义（但底色统一成暖黄系） */
+body.tool-page .tip{
+  background:#fef9c3 !important;
+  border-left-color:#ca8a04 !important;
+  color:#713f12 !important;
+}
+
+/* temp-mail .notice 提示条：橙色语义保留但统一暖系 */
+body.tool-page .notice{
+  background:#fff7ed !important;
+  border-color:#fed7aa !important;
+  color:#9a3412 !important;
+}
+
+/* temp-mail .domain 域名文字：统一muted */
+body.tool-page .domain{
+  color:var(--muted-2) !important;
+}
+
+/* 全站 .card:hover 统一（覆盖 temp-mail/compressor 等硬编码hover） */
+body.tool-page .card:hover{
+  border-color:var(--border-strong) !important;
+  background:var(--bg) !important;
+}
+
 /* ── 响应式：窄屏时搜索框换行占满 ────────────────────────────────────── */
 @media (max-width:640px){
   body.tool-page .header-inner{ flex-wrap:wrap; row-gap:10px; }
