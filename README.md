@@ -25,7 +25,7 @@
 | 🔳 二维码美化助手 | 生成并美化二维码，支持自定义样式与配色 | [/qrcode/](https://xcbot.cyou/qrcode/) |
 | 📕 PDF 工具箱 | 合并、拆分、压缩 PDF，纯本地处理，无需上传 | [/pdf-tools/](https://xcbot.cyou/pdf-tools/) |
 | ⏱️ 噪音时钟 | 白噪音与番茄钟结合，提升专注与休息质量 | [/zen-pomodoro/](https://xcbot.cyou/zen-pomodoro/) |
-| 🧭 公益站导航 | 常用公益站点与公共服务网址聚合，即点即用 | [/api-nav/](https://xcbot.cyou/api-nav/) |
+| 🧭 公益站导航 | 免费大模型、AI 绘图、公益中转站导航，整理可直接打开使用的 AI 资源 | [/api-nav/](https://xcbot.cyou/api-nav/) |
 
 ## 📸 截图预览
 
