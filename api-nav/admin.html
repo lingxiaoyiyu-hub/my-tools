@@ -460,6 +460,7 @@ function renderAnnounce() {
 
 function toggleAnnounce() {
   announceEnabled = !announceEnabled;
+  db.announcement.enabled = announceEnabled;
   const btn = document.getElementById('announceToggle');
   btn.classList.toggle('on', announceEnabled);
   document.getElementById('announceToggleLabel').textContent = announceEnabled ? '已开启（显示在前台）' : '已关闭';
@@ -467,13 +468,6 @@ function toggleAnnounce() {
 
 async function saveAnnounceAndPublish() {
   const text = document.getElementById('announceText').value.trim();
-  // 有文字时自动开启，清空时自动关闭
-  if (text) announceEnabled = true;
-  if (!text) announceEnabled = false;
-  // 同步 UI 状态
-  const btn = document.getElementById('announceToggle');
-  btn.classList.toggle('on', announceEnabled);
-  document.getElementById('announceToggleLabel').textContent = announceEnabled ? '已开启（显示在前台）' : '已关闭';
   db.announcement = {
     enabled: announceEnabled,
     text: text
