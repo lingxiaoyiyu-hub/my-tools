@@ -52,50 +52,58 @@
 <div class="main">
   <div class="main-inner pb-layout">
 
-    <!-- 左侧：分类栏 + 搜索 + 标签区 -->
-    <div class="pb-left">
-
-      <!-- 页面标题 + 小铺入口 -->
-      <div class="page-head">
-        <div class="page-head-text">
-          <h1 class="page-title">AI 提示词生成器</h1>
-          <p class="page-sub">中文点选标签，自动组合英文绘图提示词。本地运行，无需登录。</p>
-        </div>
-        <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-mini">
-          ✨ AI 工具会员低价入口 →
-        </a>
+    <!-- 页面标题（横跨三栏上方） -->
+    <div class="pb-page-head">
+      <div class="pb-page-head-text">
+        <h1 class="pb-page-title">AI 提示词生成器</h1>
+        <p class="pb-page-sub">中文点选标签，自动组合英文绘图提示词。本地运行，无需登录。</p>
       </div>
+      <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="pb-shop-mini">
+        ✨ AI 工具会员低价入口 →
+      </a>
+    </div>
 
-      <!-- 主体大搜索框 -->
+    <!-- 左侧：分类竖向导航 -->
+    <aside class="pb-sidebar" id="pbSidebar">
+      <div class="pb-sidebar-title">分类</div>
+      <nav class="pb-cat-nav" id="pbCategories">
+        <!-- 由 JS 渲染 -->
+      </nav>
+    </aside>
+
+    <!-- 中间：搜索框 + 标签区 -->
+    <section class="pb-content">
+      <!-- 搜索框 -->
       <div class="pb-search-wrap">
-        <svg class="pb-search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="#8c959f" stroke-width="2" fill="none" aria-hidden="true">
+        <svg class="pb-search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="#8c959f" stroke-width="2" fill="none" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="pbSearchInput" class="pb-search-input" placeholder="搜索提示词、标签、风格、模型关键词...">
+        <input type="text" id="pbSearchInput" class="pb-search-input" placeholder="搜索全部标签（中英文）...">
       </div>
 
-      <!-- 分类栏 -->
-      <div class="pb-categories" id="pbCategories">
+      <!-- 标签区元信息 -->
+      <div class="pb-tags-meta">
+        <span id="pbTagsCount">加载中...</span>
+      </div>
+
+      <!-- 标签网格 -->
+      <div class="pb-tags-grid" id="pbTagsGrid">
         <!-- 由 JS 渲染 -->
       </div>
 
-      <!-- 标签区 -->
-      <div class="pb-tags-area">
-        <div class="pb-tags-meta">
-          <span id="pbTagsCount">加载中...</span>
-        </div>
-        <div class="pb-tags-grid" id="pbTagsGrid">
-          <!-- 由 JS 渲染 -->
-        </div>
-        <div class="pb-empty" id="pbEmpty" style="display:none;">
-          没有匹配的标签
-        </div>
+      <!-- 空状态 -->
+      <div class="pb-empty" id="pbEmpty" style="display:none;">
+        没有匹配的标签
       </div>
 
-    </div>
+      <!-- 加载更多 -->
+      <div class="pb-load-more-wrap" id="pbLoadMoreWrap" style="display:none;">
+        <button class="pb-load-more-btn" id="pbLoadMoreBtn" type="button">加载更多</button>
+      </div>
+    </section>
 
     <!-- 右侧：输出面板 -->
-    <aside class="pb-right" id="pbOutputPanel">
+    <aside class="pb-output" id="pbOutputPanel">
       <div class="pb-output-sticky">
 
         <div class="pb-output-head">
@@ -107,15 +115,12 @@
         <div class="pb-output-section">
           <div class="pb-output-label">
             <span class="pb-label-dot pb-dot-pos"></span>
-            正向提示词
-            <span class="pb-label-hint" id="pbPosCount">0</span>
+            <span class="pb-label-text">正向</span>
+            <span class="pb-label-count" id="pbPosCount">0</span>
+            <button class="pb-text-btn" id="pbCopyPos" type="button">复制</button>
           </div>
           <div class="pb-output-box" id="pbPositiveBox">
-            <div class="pb-output-placeholder">点击左侧标签添加</div>
-          </div>
-          <div class="pb-output-actions">
-            <button class="pb-btn pb-btn-primary" id="pbCopyPos" type="button">复制正向</button>
-            <button class="pb-btn" id="pbClearPos" type="button">清空正向</button>
+            <div class="pb-output-placeholder">点击标签添加</div>
           </div>
         </div>
 
@@ -123,22 +128,19 @@
         <div class="pb-output-section">
           <div class="pb-output-label">
             <span class="pb-label-dot pb-dot-neg"></span>
-            负面提示词
-            <span class="pb-label-hint" id="pbNegCount">0</span>
+            <span class="pb-label-text">负面</span>
+            <span class="pb-label-count" id="pbNegCount">0</span>
+            <button class="pb-text-btn pb-text-btn-danger" id="pbCopyNeg" type="button">复制</button>
           </div>
           <div class="pb-output-box pb-output-box-neg" id="pbNegativeBox">
             <div class="pb-output-placeholder">点击负面词标签添加</div>
           </div>
-          <div class="pb-output-actions">
-            <button class="pb-btn pb-btn-warn" id="pbCopyNeg" type="button">复制负面</button>
-            <button class="pb-btn" id="pbClearNeg" type="button">清空负面</button>
-          </div>
         </div>
 
-        <!-- 全局操作 -->
-        <div class="pb-output-section pb-global-actions">
-          <button class="pb-btn pb-btn-full" id="pbCopyAll" type="button">一键复制全部</button>
-          <button class="pb-btn pb-btn-ghost-full" id="pbClearAll" type="button">清空全部</button>
+        <!-- 底部主操作 -->
+        <div class="pb-output-footer">
+          <button class="pb-btn pb-btn-primary" id="pbCopyAll" type="button">复制全部</button>
+          <button class="pb-btn pb-btn-ghost" id="pbClearAll" type="button">清空</button>
         </div>
 
         <!-- 复制提示 -->
@@ -197,6 +199,9 @@
   </div>
 
 </div>
+
+<!-- 预览卡单实例（hover 标签时显示，JS 控制） -->
+<div id="pbPreview" class="pb-preview" style="display:none" role="tooltip" aria-hidden="true"></div>
 
 <script src="prompt-builder.js"></script>
 </body>
