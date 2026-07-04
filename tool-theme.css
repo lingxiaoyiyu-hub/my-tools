@@ -21,6 +21,8 @@
 
 /* ── 设计令牌（与首页一致）────────────────────────────────────────────── */
 body.tool-page{
+  --tool-shell:1180px;
+  --tool-gutter:24px;
   --bg:#fdfcfa;
   --bg-subtle:#f8f6f1;
   --fg:#0a0a0a;
@@ -58,9 +60,9 @@ body.tool-page header{
 }
 body.tool-page .header-inner{
   width: 100% !important;
-  max-width:1000px;
+  max-width:var(--tool-shell);
   margin:0 auto;
-  padding:12px 24px !important;
+  padding:12px var(--tool-gutter) !important;
   display:flex;
   align-items:center;
   justify-content:flex-start;
@@ -178,6 +180,32 @@ body.tool-page footer{
   border-top:1px solid var(--border) !important;
   color:var(--muted-2) !important;
   box-shadow:none !important;
+}
+
+/* ── 页面比例：统一成首页 1180px 内容轴 ─────────────────────────────── */
+body.tool-page .container,
+body.tool-page .main-inner,
+body.tool-page .app,
+body.tool-page .app-container{
+  width:100% !important;
+  max-width:var(--tool-shell) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  padding-left:var(--tool-gutter) !important;
+  padding-right:var(--tool-gutter) !important;
+}
+
+/* typesetter 没有页面 wrapper，单独让工具条/编辑器/状态栏跟首页内容轴对齐。 */
+body.tool-page > .actionbar,
+body.tool-page > .statusbar{
+  padding-left:max(var(--tool-gutter), calc((100vw - var(--tool-shell)) / 2 + var(--tool-gutter))) !important;
+  padding-right:max(var(--tool-gutter), calc((100vw - var(--tool-shell)) / 2 + var(--tool-gutter))) !important;
+}
+
+body.tool-page #editor{
+  max-width:var(--tool-shell) !important;
+  padding-left:var(--tool-gutter) !important;
+  padding-right:var(--tool-gutter) !important;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -755,4 +783,37 @@ body.tool-page .card:hover{
   body.tool-page .header-inner{ flex-wrap:wrap; row-gap:10px; }
   body.tool-page .header-right{ flex-wrap:wrap; row-gap:10px; flex:1 1 100%; }
   body.tool-page .search-wrap{ order:3; flex:1 1 100%; max-width:100%; }
+}
+
+/* ── 最终布局覆盖：所有工具页统一成首页 1180px / 24px 内容轴 ─────── */
+body.tool-page > header{
+  width:100% !important;
+  flex:0 0 auto !important;
+}
+
+body.tool-page .header-inner,
+body.tool-page .container,
+body.tool-page .main-inner,
+body.tool-page .app,
+body.tool-page .app-container{
+  width:100% !important;
+  max-width:var(--tool-shell) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  padding-left:var(--tool-gutter) !important;
+  padding-right:var(--tool-gutter) !important;
+  box-sizing:border-box !important;
+}
+
+body.tool-page > .actionbar,
+body.tool-page > .statusbar{
+  padding-left:max(var(--tool-gutter), calc((100vw - var(--tool-shell)) / 2 + var(--tool-gutter))) !important;
+  padding-right:max(var(--tool-gutter), calc((100vw - var(--tool-shell)) / 2 + var(--tool-gutter))) !important;
+}
+
+body.tool-page #editor{
+  max-width:var(--tool-shell) !important;
+  padding-left:var(--tool-gutter) !important;
+  padding-right:var(--tool-gutter) !important;
+  box-sizing:border-box !important;
 }
