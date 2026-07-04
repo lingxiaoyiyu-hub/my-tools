@@ -1,20 +1,9 @@
 {
   "announcement": {
-    "enabled": true,
-    "text": "羊毛公益中转站，用来整理和推荐我亲手检测过的公益羊毛站、免费福利入口、实用资源站和限时活动信息。\n\n我希望它不是一个一次性的链接列表，而是一个可以长期维护、持续变好的公益导航。大家也可以通过反馈投稿，跟我反馈。"
+    "enabled": false,
+    "text": ""
   },
   "sites": [
-    {
-      "id": "1783132373670",
-      "date": "2026-07-04",
-      "name": "vip中转站",
-      "domain": "https://vip.j3gb.com/register?aff=A3YM8QJ5LDFX",
-      "url": "https://vip.j3gb.com/register?aff=A3YM8QJ5LDFX",
-      "description": "属于半免费站点，注册送15＄ 邀请一人送30＄，非常的稳定，为了防止滥用，注册有点麻烦，大家自测一下吧！",
-      "tags": [
-        "稳定"
-      ]
-    },
     {
       "id": "1783132700754",
       "date": "2026-07-04",
