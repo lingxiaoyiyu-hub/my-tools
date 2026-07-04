@@ -202,22 +202,45 @@
   .chip.active { background: #059669; color: white; border-color: #059669; }
 </style>
 <link rel="stylesheet" href="../shared-white.css">
+  <link rel="stylesheet" href="/tool-theme.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
-<body>
-  <div class="app">
-    <div class="top-bar">
-      <a class="brand" href="/">
-        <svg viewBox="0 0 24 24" width="22" height="22" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-        </svg>
-        XCbot 工具箱
+<body class="tool-page">
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 28 28" fill="none">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2b2b30"></stop>
+                <stop offset="1" stop-color="#0a0a0a"></stop>
+              </linearGradient>
+              <linearGradient id="logoGloss" x1="0" y1="0" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff" stop-opacity="0.35"></stop>
+                <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <rect width="28" height="28" rx="8" fill="url(#logoGrad)"></rect>
+            <rect width="28" height="14" rx="8" fill="url(#logoGloss)"></rect>
+            <path d="M9 9.5l10 9M19 9.5L9 18.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round"></path>
+            <circle cx="14" cy="6.4" r="1.4" fill="#ff8a4c"></circle>
+          </svg>
+        </span>
+        <span>XCbot 工具箱</span>
       </a>
-      <div class="pill">纯本地运行 · 不上传任何内容</div>
+      <div class="header-right">
+        <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="11" rx="2"></rect><path d="M14 4l6 6-7.5 7.5"></path><circle cx="17" cy="6" r="1" fill="currentColor" stroke="none"></circle></svg>
+          <span>会员小铺</span>
+        </a>
+      </div>
     </div>
+  </header>
+
+  <div class="app">
 
     <div class="card">
       <div class="grid">

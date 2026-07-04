@@ -132,20 +132,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 }
 </style>
 <link rel="stylesheet" href="../shared-white.css">
+  <link rel="stylesheet" href="/tool-theme.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
-<body>
+<body class="tool-page">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 28 28" fill="none">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2b2b30"></stop>
+              <stop offset="1" stop-color="#0a0a0a"></stop>
+            </linearGradient>
+            <linearGradient id="logoGloss" x1="0" y1="0" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#ffffff" stop-opacity="0.35"></stop>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+          <rect width="28" height="28" rx="8" fill="url(#logoGrad)"></rect>
+          <rect width="28" height="14" rx="8" fill="url(#logoGloss)"></rect>
+          <path d="M9 9.5l10 9M19 9.5L9 18.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round"></path>
+          <circle cx="14" cy="6.4" r="1.4" fill="#ff8a4c"></circle>
+        </svg>
+      </span>
+      <span>XCbot 工具箱</span>
+    </a>
+    <div class="header-right">
+      <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="11" rx="2"></rect><path d="M14 4l6 6-7.5 7.5"></path><circle cx="17" cy="6" r="1" fill="currentColor" stroke="none"></circle></svg>
+        <span>会员小铺</span>
+      </a>
+    </div>
+  </div>
+</header>
 
 <div class="header" style="position: relative;">
-  <a href="../" class="home-btn" style="position: absolute; top: 12px; right: 20px; color: rgba(255, 255, 255, 0.8); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.15s;">
-    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-      <polyline points="9 22 9 12 15 12 15 22"></polyline>
-    </svg>
-    返回工具箱首页
-  </a>
   <h1>🏭 日历排班助手</h1>
   <p>四班三倒 / 四班两倒 / 三班三倒 / 三班两倒｜化工 · 电厂 · 制药 · 保安通用｜本地运行 数据不外传</p>
 </div>
