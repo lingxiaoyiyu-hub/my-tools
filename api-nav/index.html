@@ -8,7 +8,7 @@
 :root{--bg:#090d16;--card:#131b2e;--cb:#1e293b;--primary:#3b82f6;--phover:#2563eb;--text:#f8fafc;--muted:#64748b;--success:#10b981;--danger:#ef4444;--warn:#f59e0b}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
-
+ 
 /* Header */
 header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:center;padding:0 24px;background:rgba(9,13,22,.8);backdrop-filter:blur(12px);z-index:10;position:sticky;top:0}
 .logo{font-size:1.05rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:8px;text-decoration:none}
@@ -17,19 +17,19 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .nav-link:hover{color:var(--primary)}
 .feedback-btn{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--primary);padding:6px 14px;border-radius:99px;font-size:.82rem;cursor:pointer;transition:all .2s;font-weight:600}
 .feedback-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-
+ 
 /* Announcement */
 #announceBanner{display:none;background:linear-gradient(90deg,rgba(245,158,11,.12),rgba(245,158,11,.06));border-bottom:1px solid rgba(245,158,11,.25);padding:10px 24px;font-size:.88rem;color:var(--warn);align-items:center;gap:10px;position:sticky;top:56px;z-index:9}
 #announceBanner span{flex:1}
 #announceBanner button{background:none;border:none;color:var(--warn);cursor:pointer;font-size:1.1rem;opacity:.7;padding:0 4px}
 #announceBanner button:hover{opacity:1}
-
+ 
 /* Main */
 .container{max-width:1000px;width:100%;margin:0 auto;padding:32px 24px;flex:1;display:flex;flex-direction:column;gap:24px}
-.info-card{background:linear-gradient(135deg,rgba(59,130,246,.08) 0%,rgba(16,185,129,.04) 100%);border:1px solid var(--cb);border-radius:16px;padding:24px}
-.info-title{font-size:1.4rem;font-weight:800;margin-bottom:8px;background:linear-gradient(to right,#3b82f6,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.info-desc{font-size:.9rem;color:var(--muted);line-height:1.6}
-
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.page-title{font-size:1.5rem;font-weight:700}
+.page-sub{font-size:.85rem;margin-top:4px;line-height:1.5}
+ 
 /* Controls */
 .controls-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--cb);padding-bottom:16px}
 .tags-filter{display:flex;gap:8px;flex-wrap:wrap}
@@ -40,7 +40,7 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .search-input{width:100%;background:var(--card);border:1px solid var(--cb);color:var(--text);border-radius:99px;padding:8px 16px 8px 36px;font-size:.88rem;outline:none;transition:border-color .2s}
 .search-input:focus{border-color:var(--primary)}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
-
+ 
 /* Grid */
 .sites-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .site-card{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative}
@@ -61,7 +61,7 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .visit-btn:hover{background:var(--primary);border-color:var(--primary);color:#fff}
 .test-btn{background:none;border:none;color:var(--muted);font-size:.72rem;cursor:pointer;text-decoration:underline}
 .test-btn:hover{color:var(--primary)}
-
+ 
 /* Feedback Modal */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center}
 .modal-overlay.show{display:flex}
@@ -80,7 +80,7 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--phover)}
 .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--cb)}.btn-ghost:hover{background:rgba(255,255,255,.1)}
 .fb-success{display:none;text-align:center;color:var(--success);font-size:.92rem;padding:12px;background:rgba(16,185,129,.08);border-radius:10px;border:1px solid rgba(16,185,129,.2)}
-
+ 
 /* Footer */
 footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.78rem;color:var(--muted)}
 </style>
@@ -91,7 +91,7 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body class="tool-page">
-
+ 
 <header>
   <div class="header-inner">
     <a href="/" class="logo">
@@ -123,7 +123,7 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
     </div>
   </div>
 </header>
-
+ 
 <!-- Announcement Banner -->
 <div id="announceBanner" style="display:none">
   <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" style="flex-shrink:0">
@@ -132,15 +132,15 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
   <span id="announceText"></span>
   <button onclick="document.getElementById('announceBanner').style.display='none'" title="关闭公告">&times;</button>
 </div>
-
+ 
 <div class="container">
-  <div class="info-card">
-    <div class="info-title">公益站导航</div>
-    <div class="info-desc">
-      这里整理可以免费使用的大模型、AI 聊天、AI 绘图和公益中转站入口，方便快速找到能直接打开体验的 AI 资源。站点信息会按日常可用性持续筛选更新，使用时请注意保护账号、隐私和敏感内容。
+  <div class="page-head">
+    <div class="page-head-text">
+      <h1 class="page-title">公益站导航</h1>
+      <p class="page-sub">这里整理可以免费使用的大模型、AI 聊天、AI 绘图和公益中转站入口，方便快速找到能直接打开体验的 AI 资源。站点信息会按日常可用性持续筛选更新，使用时请注意保护账号、隐私和敏感内容。</p>
     </div>
   </div>
-
+ 
   <div class="controls-row">
     <div class="tags-filter" id="tagsFilter">
       <button class="tag-btn active" data-tag="全部">全部</button>
@@ -155,21 +155,21 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
       <input type="text" id="searchInput" class="search-input" placeholder="搜索站点或类型...">
     </div>
   </div>
-
+ 
   <div class="sites-grid" id="sitesGrid"></div>
 </div>
-
+ 
 <footer>
   <p>&copy; 2026 公益站导航. 所有收录信息均来自公开共享，本站不对任何收录中转站及其活动负责。</p>
 </footer>
-
+ 
 <!-- Feedback Modal -->
 <div class="modal-overlay" id="feedbackModal">
   <div class="modal">
     <button class="modal-close" onclick="closeFeedback()">&times;</button>
     <div class="modal-title">✉️ 投稿 &amp; 反馈</div>
     <div class="modal-sub">推荐一个好站，或者告诉我们哪个站挂了。感谢参与建设！</div>
-
+ 
     <div id="fbForm" style="display:flex;flex-direction:column;gap:16px">
       <div class="form-group">
         <label class="form-label">昵称（选填）</label>
@@ -188,23 +188,23 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
         <button class="btn btn-ghost" onclick="closeFeedback()">取消</button>
       </div>
     </div>
-
+ 
     <div class="fb-success" id="fbSuccess">
       🎉 感谢您的投稿！我们会尽快审核处理。
     </div>
   </div>
 </div>
-
+ 
 <script>
 let allSites = [];
 let activeTag = '全部';
-
+ 
 // ─── Load ─────────────────────────────────────────
 async function loadSites() {
   try {
     const res = await fetch('sites.json?t=' + Date.now());
     const data = await res.json();
-
+ 
     // New format: { announcement, sites }
     if (Array.isArray(data)) {
       allSites = data;
@@ -223,7 +223,7 @@ async function loadSites() {
       '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:40px">数据文件加载失败，请稍后再试。</div>';
   }
 }
-
+ 
 // ─── Render ───────────────────────────────────────
 function renderSites() {
   const grid = document.getElementById('sitesGrid');
@@ -233,12 +233,12 @@ function renderSites() {
     const matchQ = s.name.toLowerCase().includes(q) || s.domain.toLowerCase().includes(q);
     return matchTag && matchQ;
   });
-
+ 
   if (!filtered.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">没有符合条件的站点。</div>';
     return;
   }
-
+ 
   grid.innerHTML = filtered.map(s => `
     <div class="site-card">
       <div class="card-header">
@@ -260,7 +260,7 @@ function renderSites() {
     </div>
   `).join('');
 }
-
+ 
 // ─── Ping ─────────────────────────────────────────
 async function testPing(id, url) {
   const el = document.getElementById('lat-' + id);
@@ -278,7 +278,7 @@ async function testPing(id, url) {
     el.innerHTML = '<span class="latency-dot offline"></span><span style="color:var(--danger)">超时 / 离线</span>';
   }
 }
-
+ 
 // ─── Feedback Modal ───────────────────────────────
 function openFeedback() {
   document.getElementById('feedbackModal').classList.add('show');
@@ -288,15 +288,16 @@ function openFeedback() {
   document.getElementById('fbUrl').value = '';
   document.getElementById('fbName').value = '';
 }
-
+ 
+// close modal
 function closeFeedback() {
   document.getElementById('feedbackModal').classList.remove('show');
 }
-
+ 
 function submitFeedback() {
   const msg = document.getElementById('fbMessage').value.trim();
   if (!msg) { alert('请填写反馈内容！'); return; }
-
+ 
   const fb = {
     id: String(Date.now()),
     name: document.getElementById('fbName').value.trim() || '匿名',
@@ -305,27 +306,27 @@ function submitFeedback() {
     time: new Date().toLocaleString('zh-CN'),
     read: false
   };
-
+ 
   const list = JSON.parse(localStorage.getItem('nav_feedbacks') || '[]');
   list.push(fb);
   localStorage.setItem('nav_feedbacks', JSON.stringify(list));
-
+ 
   document.getElementById('fbForm').style.display = 'none';
   document.getElementById('fbSuccess').style.display = 'block';
   setTimeout(closeFeedback, 2000);
 }
-
+ 
 // Close modal on backdrop click
 document.getElementById('feedbackModal').addEventListener('click', function(e) {
   if (e.target === this) closeFeedback();
 });
-
+ 
 // ─── Helpers ──────────────────────────────────────
 function esc(s) {
   if (!s) return '';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
+ 
 // ─── Event Listeners ──────────────────────────────
 document.getElementById('searchInput').addEventListener('input', renderSites);
 document.querySelectorAll('#tagsFilter .tag-btn').forEach(btn => {
@@ -336,7 +337,7 @@ document.querySelectorAll('#tagsFilter .tag-btn').forEach(btn => {
     renderSites();
   });
 });
-
+ 
 window.onload = loadSites;
 </script>
 </body>
