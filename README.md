@@ -26,6 +26,7 @@
 | 📕 PDF 工具箱 | 合并、拆分、压缩 PDF，纯本地处理，无需上传 | [/pdf-tools/](https://xcbot.cyou/pdf-tools/) |
 | ⏱️ 噪音时钟 | 白噪音与番茄钟结合，提升专注与休息质量 | [/zen-pomodoro/](https://xcbot.cyou/zen-pomodoro/) |
 | 🧭 公益站导航 | 免费大模型、AI 绘图、公益中转站导航，整理可直接打开使用的 AI 资源 | [/api-nav/](https://xcbot.cyou/api-nav/) |
+| 📮 临时邮箱导航 | 一次性邮箱、临时收信和邮件转发服务聚合，适合注册测试和保护真实邮箱 | [/temp-mail/](https://xcbot.cyou/temp-mail/) |
 
 ## 📸 截图预览
 
@@ -55,6 +56,7 @@
 ├── pdf-tools/              # PDF 工具箱
 ├── zen-pomodoro/           # 噪音时钟
 ├── api-nav/                # 公益站导航（含后台管理 admin.html + sites.json CMS）
+├── temp-mail/              # 临时邮箱聚合导航
 ├── docs/
 │   └── screenshots/        # README 截图
 └── .github/workflows/
