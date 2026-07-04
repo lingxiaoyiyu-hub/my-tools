@@ -6,10 +6,8 @@
   <url><loc>https://xcbot.cyou/watermark/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://xcbot.cyou/compressor/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://xcbot.cyou/qrcode/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://xcbot.cyou/pdf-tools/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://xcbot.cyou/temp-mail/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://xcbot.cyou/typesetter/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://xcbot.cyou/shift-helper/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://xcbot.cyou/system-repair/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://xcbot.cyou/zen-pomodoro/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

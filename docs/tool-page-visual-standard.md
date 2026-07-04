@@ -2,7 +2,7 @@
 
 首页已完成 Vercel / Linear 风格改版。本文档把首页「最终视觉规则」固化为一套可复用规范，
 并给出子工具页**逐页、按需接入**的做法。**当前处于试点阶段**：只接入了 `/prompts/`
-与 `/prompt-builder/` 两页，未全站铺开。
+与 `/prompts/` 一页，未全站铺开。
 
 ---
 
@@ -57,7 +57,6 @@
 | 页面 | 自有 CSS | 与规范的冲突点 | 处理 |
 |------|----------|----------------|------|
 | `/prompts/` | `prompts.css` | 自定义深色 `header{background:#24292f}`、渐变 logo、绿色发光 `.shop-btn` | ✅ 试点：`tool-theme.css` 以更高特异性覆盖，未改 prompts.css |
-| `/prompt-builder/` | `prompt-builder.css` | header 未自定义（靠 shared-white），logo/搜索/按钮沿用旧结构 | ✅ 试点：换新 header 结构 + `tool-theme.css` |
 | `/api-nav/` | 全内联（深色主题 `--bg:#090d16`） | **整页深色**，设计语言不同 | ⚠️ 特例，**不纳入本次统一**，单独评估 |
 | 其余子页 | 引用 shared-white，多为内联/极简 | header 结构不一 | ⏳ 待试点验证后再逐页接入 |
 | 根 `styles.css` | — | **无任何页面引用（孤儿文件）** | 🔎 本次不动，后续可清理 |
@@ -79,5 +78,5 @@
 - 不改 `shared-white.css`、`prompts.css`、`prompt-builder.css` 等自有 CSS 文件
 - 不改任何 JS / 数据（`tags.json`、`aiart-prompts.json` 等）
 - 不改 api-nav 深色主题
-- 不全站铺开；仅 `/prompts/`、`/prompt-builder/` 两页试点
+- 不全站铺开；`/prompts/` 曾试点
 - 不 commit、不 push

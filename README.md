@@ -23,8 +23,6 @@
 | 📅 日历排班助手 | 四班三倒等排班计算，生成排班表并支持打印导出 | [/shift-helper/](https://xcbot.cyou/shift-helper/) |
 | 🗜️ 图片智能压缩 | 本地压缩图片体积，保持清晰度的同时减小文件大小 | [/compressor/](https://xcbot.cyou/compressor/) |
 | 🔳 二维码美化助手 | 生成并美化二维码，支持自定义样式与配色 | [/qrcode/](https://xcbot.cyou/qrcode/) |
-| 📕 PDF 工具箱 | 合并、拆分、压缩 PDF，纯本地处理，无需上传 | [/pdf-tools/](https://xcbot.cyou/pdf-tools/) |
-| ⏱️ 噪音时钟 | 白噪音与番茄钟结合，提升专注与休息质量 | [/zen-pomodoro/](https://xcbot.cyou/zen-pomodoro/) |
 | 🧭 公益站导航 | 免费大模型、AI 绘图、公益中转站导航，整理可直接打开使用的 AI 资源 | [/api-nav/](https://xcbot.cyou/api-nav/) |
 | 📮 临时邮箱导航 | 一次性邮箱、临时收信和邮件转发服务聚合，适合注册测试和保护真实邮箱 | [/temp-mail/](https://xcbot.cyou/temp-mail/) |
 
@@ -56,8 +54,6 @@
 ├── shift-helper/           # 日历排班助手
 ├── compressor/             # 图片智能压缩
 ├── qrcode/                 # 二维码美化助手
-├── pdf-tools/              # PDF 工具箱
-├── zen-pomodoro/           # 噪音时钟
 ├── api-nav/                # 公益站导航（含后台管理 admin.html + sites.json CMS）
 ├── temp-mail/              # 临时邮箱聚合导航
 ├── docs/
