@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 提示词生成器 - 小乘工具箱</title>
+  <meta name="description" content="中文点选标签，自动组合英文绘图提示词。支持主体、场景、风格、光照、镜头、构图、色彩、质量、负面词分类，一键复制正向与负面提示词。">
+  <link rel="stylesheet" href="/shared-white.css">
+  <link rel="stylesheet" href="prompt-builder.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" width="28" height="28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo-bg" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#60a5fa"/>
+              <stop offset="0.52" stop-color="#34d399"/>
+              <stop offset="1" stop-color="#f59e0b"/>
+            </linearGradient>
+            <linearGradient id="logo-face" x1="12" y1="10" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset="1" stop-color="#f8fafc"/>
+            </linearGradient>
+          </defs>
+          <rect x="3" y="3" width="34" height="34" rx="10" fill="url(#logo-bg)"/>
+          <rect x="10" y="13" width="20" height="16" rx="5" fill="url(#logo-face)" opacity="0.96"/>
+          <path d="M16 13V9.5A4 4 0 0 1 20 5.5a4 4 0 0 1 4 4V13" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="16.5" cy="21" r="2" fill="#2563eb"/>
+          <circle cx="23.5" cy="21" r="2" fill="#059669"/>
+          <path d="M16 25.5c2.2 1.7 5.8 1.7 8 0" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M31 10.5l1.1 2.2 2.4.35-1.75 1.7.42 2.4L31 16l-2.15 1.15.42-2.4-1.75-1.7 2.4-.35z" fill="#fef3c7"/>
+        </svg>
+      </div>
+      小乘工具箱
+    </a>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" width="15" height="15" stroke="#fff" stroke-width="2.5" fill="none">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="searchInput" placeholder="搜索标题 / 作者 / 提示词 / 标签...">
+    </div>
+    <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-btn">
+      <i class="btn-icon">✨</i> 我的小铺
+    </a>
+  </div>
+</header>
+
+<div class="main">
+  <div class="main-inner pb-layout">
+
+    <!-- 左侧：分类栏 + 搜索 + 标签区 -->
+    <div class="pb-left">
+
+      <!-- 页面标题 + 小铺入口 -->
+      <div class="page-head">
+        <div class="page-head-text">
+          <h1 class="page-title">AI 提示词生成器</h1>
+          <p class="page-sub">中文点选标签，自动组合英文绘图提示词。本地运行，无需登录。</p>
+        </div>
+        <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-mini">
+          ✨ AI 工具会员低价入口 →
+        </a>
+      </div>
+
+      <!-- 主体大搜索框 -->
+      <div class="pb-search-wrap">
+        <svg class="pb-search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="#8c959f" stroke-width="2" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="pbSearchInput" class="pb-search-input" placeholder="搜索提示词、标签、风格、模型关键词...">
+      </div>
+
+      <!-- 分类栏 -->
+      <div class="pb-categories" id="pbCategories">
+        <!-- 由 JS 渲染 -->
+      </div>
+
+      <!-- 标签区 -->
+      <div class="pb-tags-area">
+        <div class="pb-tags-meta">
+          <span id="pbTagsCount">加载中...</span>
+        </div>
+        <div class="pb-tags-grid" id="pbTagsGrid">
+          <!-- 由 JS 渲染 -->
+        </div>
+        <div class="pb-empty" id="pbEmpty" style="display:none;">
+          没有匹配的标签
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 右侧：输出面板 -->
+    <aside class="pb-right" id="pbOutputPanel">
+      <div class="pb-output-sticky">
+
+        <div class="pb-output-head">
+          <h2 class="pb-output-title">输出提示词</h2>
+          <span class="pb-output-count" id="pbOutputCount">0 项</span>
+        </div>
+
+        <!-- 正向提示词 -->
+        <div class="pb-output-section">
+          <div class="pb-output-label">
+            <span class="pb-label-dot pb-dot-pos"></span>
+            正向提示词
+            <span class="pb-label-hint" id="pbPosCount">0</span>
+          </div>
+          <div class="pb-output-box" id="pbPositiveBox">
+            <div class="pb-output-placeholder">点击左侧标签添加</div>
+          </div>
+          <div class="pb-output-actions">
+            <button class="pb-btn pb-btn-primary" id="pbCopyPos" type="button">复制正向</button>
+            <button class="pb-btn" id="pbClearPos" type="button">清空正向</button>
+          </div>
+        </div>
+
+        <!-- 负面提示词 -->
+        <div class="pb-output-section">
+          <div class="pb-output-label">
+            <span class="pb-label-dot pb-dot-neg"></span>
+            负面提示词
+            <span class="pb-label-hint" id="pbNegCount">0</span>
+          </div>
+          <div class="pb-output-box pb-output-box-neg" id="pbNegativeBox">
+            <div class="pb-output-placeholder">点击负面词标签添加</div>
+          </div>
+          <div class="pb-output-actions">
+            <button class="pb-btn pb-btn-warn" id="pbCopyNeg" type="button">复制负面</button>
+            <button class="pb-btn" id="pbClearNeg" type="button">清空负面</button>
+          </div>
+        </div>
+
+        <!-- 全局操作 -->
+        <div class="pb-output-section pb-global-actions">
+          <button class="pb-btn pb-btn-full" id="pbCopyAll" type="button">一键复制全部</button>
+          <button class="pb-btn pb-btn-ghost-full" id="pbClearAll" type="button">清空全部</button>
+        </div>
+
+        <!-- 复制提示 -->
+        <div class="pb-toast" id="pbToast" style="display:none;">已复制</div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 底部相关工具 -->
+  <div class="related-section">
+    <div class="related-inner">
+      <h3 class="related-title">相关工具</h3>
+      <div class="related-grid">
+        <a href="/prompts/" class="related-card">
+          <div class="related-icon related-icon-pink">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
+          </div>
+          <div class="related-name">AI 绘图提示词库</div>
+        </a>
+        <a href="/compressor/" class="related-card">
+          <div class="related-icon related-icon-blue">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </div>
+          <div class="related-name">图片压缩</div>
+        </a>
+        <a href="/watermark/" class="related-card">
+          <div class="related-icon related-icon-green">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/></svg>
+          </div>
+          <div class="related-name">图片水印助手</div>
+        </a>
+        <a href="/qrcode/" class="related-card">
+          <div class="related-icon related-icon-purple">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="related-name">二维码美化助手</div>
+        </a>
+        <a href="/api-nav/" class="related-card">
+          <div class="related-icon related-icon-orange">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="related-name">公益站导航</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 合规说明 -->
+  <div class="pb-disclaimer">
+    <div class="pb-disclaimer-inner">
+      <p>本工具的标签数据由本站整理，参考 AI 绘图社区通用术语，不复制特定项目数据。所有提示词组合逻辑在浏览器本地运行，不会上传任何内容到服务器。</p>
+      <p class="pb-disclaimer-meta">数据版本 v1.0 · 共 <span id="pbTotalCount">0</span> 个标签 · 最后更新 2026-07</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="prompt-builder.js"></script>
+</body>
+</html>

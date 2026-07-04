@@ -1,0 +1,2960 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "total": 488,
+    "categories": [
+      "主体",
+      "场景",
+      "风格",
+      "光照",
+      "镜头",
+      "构图",
+      "色彩",
+      "质量",
+      "负面词"
+    ],
+    "stats": {
+      "主体": 100,
+      "场景": 70,
+      "风格": 72,
+      "光照": 39,
+      "镜头": 40,
+      "构图": 36,
+      "色彩": 38,
+      "质量": 36,
+      "负面词": 57
+    },
+    "license": "自建数据，参考 AI 绘图社区通用术语，不复制特定项目数据。可自由使用。",
+    "source": "https://github.com/lingxiaoyiyu-hub/my-tools"
+  },
+  "tags": [
+    {
+      "zh": "1girl",
+      "en": "1girl",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "1boy",
+      "en": "1boy",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "少女",
+      "en": "young girl",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "少年",
+      "en": "young boy",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "成年女性",
+      "en": "adult woman",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "成年男性",
+      "en": "adult man",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "老年女性",
+      "en": "elderly woman",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "老年男性",
+      "en": "elderly man",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "儿童",
+      "en": "child",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "婴儿",
+      "en": "baby",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "女性肖像",
+      "en": "female portrait",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "男性肖像",
+      "en": "male portrait",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "武士",
+      "en": "samurai",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "忍者",
+      "en": "ninja",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "骑士",
+      "en": "knight",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "法师",
+      "en": "mage",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "公主",
+      "en": "princess",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "王子",
+      "en": "prince",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "女巫",
+      "en": "witch",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "天使",
+      "en": "angel",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "恶魔",
+      "en": "demon",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "机器人",
+      "en": "robot",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "宇航员",
+      "en": "astronaut",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "医生",
+      "en": "doctor",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "护士",
+      "en": "nurse",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "学生",
+      "en": "student",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "老师",
+      "en": "teacher",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "警察",
+      "en": "police officer",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "消防员",
+      "en": "firefighter",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "厨师",
+      "en": "chef",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "运动员",
+      "en": "athlete",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "音乐家",
+      "en": "musician",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "舞者",
+      "en": "dancer",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "画家",
+      "en": "painter",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "摄影师",
+      "en": "photographer",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "模特",
+      "en": "model",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "超级英雄",
+      "en": "superhero",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "反派",
+      "en": "villain",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "精灵",
+      "en": "elf",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "矮人",
+      "en": "dwarf",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "龙",
+      "en": "dragon",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "独角兽",
+      "en": "unicorn",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "凤凰",
+      "en": "phoenix",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "美人鱼",
+      "en": "mermaid",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "狼人",
+      "en": "werewolf",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "吸血鬼",
+      "en": "vampire",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "丧尸",
+      "en": "zombie",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "幽灵",
+      "en": "ghost",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "长头发",
+      "en": "long hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "短头发",
+      "en": "short hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "双马尾",
+      "en": "twintails",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "马尾辫",
+      "en": "ponytail",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "卷发",
+      "en": "curly hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "金发",
+      "en": "blonde hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "银发",
+      "en": "silver hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "黑发",
+      "en": "black hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "红发",
+      "en": "red hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "蓝发",
+      "en": "blue hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "粉发",
+      "en": "pink hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "白发",
+      "en": "white hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "渐变发色",
+      "en": "gradient hair",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "异色瞳",
+      "en": "heterochromia",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "蓝眼睛",
+      "en": "blue eyes",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "绿眼睛",
+      "en": "green eyes",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "金眼睛",
+      "en": "golden eyes",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "红眼睛",
+      "en": "red eyes",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "微笑",
+      "en": "smile",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "大笑",
+      "en": "laughing",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "严肃",
+      "en": "serious",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "悲伤",
+      "en": "sad",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "愤怒",
+      "en": "angry",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "惊讶",
+      "en": "surprised",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "害羞",
+      "en": "shy",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "眼镜",
+      "en": "glasses",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "墨镜",
+      "en": "sunglasses",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "帽子",
+      "en": "hat",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "围巾",
+      "en": "scarf",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "耳环",
+      "en": "earrings",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "项链",
+      "en": "necklace",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "纹身",
+      "en": "tattoo",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "猫",
+      "en": "cat",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "狗",
+      "en": "dog",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "鸟",
+      "en": "bird",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "鱼",
+      "en": "fish",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "马",
+      "en": "horse",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "鹿",
+      "en": "deer",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "兔子",
+      "en": "rabbit",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "狐狸",
+      "en": "fox",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "狼",
+      "en": "wolf",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "熊",
+      "en": "bear",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "老虎",
+      "en": "tiger",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "狮子",
+      "en": "lion",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "蝴蝶",
+      "en": "butterfly",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "花朵",
+      "en": "flower",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "树",
+      "en": "tree",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "剑",
+      "en": "sword",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "弓",
+      "en": "bow",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "书",
+      "en": "book",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "钟表",
+      "en": "clock",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "水晶球",
+      "en": "crystal ball",
+      "category": "主体",
+      "type": "positive"
+    },
+    {
+      "zh": "森林",
+      "en": "forest",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "山脉",
+      "en": "mountains",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "海滩",
+      "en": "beach",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "海洋",
+      "en": "ocean",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "湖泊",
+      "en": "lake",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "河流",
+      "en": "river",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "瀑布",
+      "en": "waterfall",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "草原",
+      "en": "grassland",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "沙漠",
+      "en": "desert",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "雪山",
+      "en": "snow mountain",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "火山",
+      "en": "volcano",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "洞穴",
+      "en": "cave",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "岛屿",
+      "en": "island",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "天空",
+      "en": "sky",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "星空",
+      "en": "starry sky",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "银河",
+      "en": "milky way",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "极光",
+      "en": "aurora",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "日出",
+      "en": "sunrise",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "日落",
+      "en": "sunset",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "夜晚",
+      "en": "night",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "雨天",
+      "en": "rainy day",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "雪天",
+      "en": "snowy day",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "雾天",
+      "en": "foggy day",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "暴风雨",
+      "en": "storm",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "彩虹",
+      "en": "rainbow",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "满月",
+      "en": "full moon",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "城市",
+      "en": "city",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "街道",
+      "en": "street",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "小巷",
+      "en": "alley",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "摩天大楼",
+      "en": "skyscraper",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "屋顶",
+      "en": "rooftop",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "桥梁",
+      "en": "bridge",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "港口",
+      "en": "harbor",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "火车站",
+      "en": "train station",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "机场",
+      "en": "airport",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "废墟",
+      "en": "ruins",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "城堡",
+      "en": "castle",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "宫殿",
+      "en": "palace",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "神庙",
+      "en": "temple",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "教堂",
+      "en": "church",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "图书馆",
+      "en": "library",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "咖啡馆",
+      "en": "cafe",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "酒吧",
+      "en": "bar",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "餐厅",
+      "en": "restaurant",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "厨房",
+      "en": "kitchen",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "卧室",
+      "en": "bedroom",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "浴室",
+      "en": "bathroom",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "客厅",
+      "en": "living room",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "教室",
+      "en": "classroom",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "办公室",
+      "en": "office",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "实验室",
+      "en": "laboratory",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "医院",
+      "en": "hospital",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "工厂",
+      "en": "factory",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "仓库",
+      "en": "warehouse",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "花园",
+      "en": "garden",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "田野",
+      "en": "field",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "果园",
+      "en": "orchard",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "市场",
+      "en": "market",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "游乐园",
+      "en": "amusement park",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "太空站",
+      "en": "space station",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "月球表面",
+      "en": "lunar surface",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "火星",
+      "en": "mars",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "奇幻世界",
+      "en": "fantasy world",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "赛博朋克城市",
+      "en": "cyberpunk city",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "蒸汽朋克",
+      "en": "steampunk",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "末日废土",
+      "en": "post-apocalyptic wasteland",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "水下世界",
+      "en": "underwater world",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "云端",
+      "en": "above the clouds",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "迷宫",
+      "en": "labyrinth",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "梦境",
+      "en": "dreamscape",
+      "category": "场景",
+      "type": "positive"
+    },
+    {
+      "zh": "写实风格",
+      "en": "realistic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "超写实",
+      "en": "hyperrealistic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "照片级",
+      "en": "photorealistic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "8K高清",
+      "en": "8k resolution",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "电影感",
+      "en": "cinematic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "胶片质感",
+      "en": "film grain",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "宝丽来",
+      "en": "polaroid",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "黑白",
+      "en": "black and white",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "单色",
+      "en": "monochrome",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "复古",
+      "en": "vintage",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "怀旧",
+      "en": "retro",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "90年代风格",
+      "en": "90s style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "像素艺术",
+      "en": "pixel art",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "体素艺术",
+      "en": "voxel art",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "动漫风格",
+      "en": "anime style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "漫画风格",
+      "en": "comic style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "美漫风格",
+      "en": "american comic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "日漫风格",
+      "en": "manga style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "吉卜力风格",
+      "en": "studio ghibli style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "新海诚风格",
+      "en": "makoto shinkai style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "水墨画",
+      "en": "ink wash painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "工笔画",
+      "en": "gongbi painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "国画",
+      "en": "chinese painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "浮世绘",
+      "en": "ukiyo-e",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "油画",
+      "en": "oil painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "水彩画",
+      "en": "watercolor",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "丙烯画",
+      "en": "acrylic painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "粉彩画",
+      "en": "pastel painting",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "素描",
+      "en": "sketch",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "铅笔画",
+      "en": "pencil drawing",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "炭笔画",
+      "en": "charcoal drawing",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "速写",
+      "en": "gesture drawing",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "印象派",
+      "en": "impressionism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "后印象派",
+      "en": "post-impressionism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "表现主义",
+      "en": "expressionism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "超现实主义",
+      "en": "surrealism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "立体主义",
+      "en": "cubism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "抽象艺术",
+      "en": "abstract art",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "极简主义",
+      "en": "minimalism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "波普艺术",
+      "en": "pop art",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "装饰艺术",
+      "en": "art deco",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "新艺术运动",
+      "en": "art nouveau",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "巴洛克",
+      "en": "baroque",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "洛可可",
+      "en": "rococo",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "哥特式",
+      "en": "gothic",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "文艺复兴",
+      "en": "renaissance",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "浪漫主义",
+      "en": "romanticism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "未来主义",
+      "en": "futurism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "达达主义",
+      "en": "dadaism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "极繁主义",
+      "en": "maximalism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "3D渲染",
+      "en": "3d render",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "等距视角",
+      "en": "isometric",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "低多边形",
+      "en": "low poly",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "粘土风格",
+      "en": "claymation",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "折纸风格",
+      "en": "origami",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "纸雕风格",
+      "en": "paper craft",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "毛绒玩具",
+      "en": "plush toy",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "乐高风格",
+      "en": "lego style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "积木风格",
+      "en": "blocky style",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "赛璐珞",
+      "en": "cel shading",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "扁平化设计",
+      "en": "flat design",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "拟物化",
+      "en": "skeuomorphism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "玻璃拟态",
+      "en": "glassmorphism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "新拟态",
+      "en": "neumorphism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "蒸汽波",
+      "en": "vaporwave",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "合成波",
+      "en": "synthwave",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "复古未来主义",
+      "en": "retrofuturism",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "暗黑奇幻",
+      "en": "dark fantasy",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "高奇幻",
+      "en": "high fantasy",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "童话风格",
+      "en": "fairytale",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "梦幻",
+      "en": "dreamy",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "超现实",
+      "en": "surreal",
+      "category": "风格",
+      "type": "positive"
+    },
+    {
+      "zh": "自然光",
+      "en": "natural light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "阳光",
+      "en": "sunlight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "柔和光",
+      "en": "soft light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "硬光",
+      "en": "hard light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "漫射光",
+      "en": "diffused light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "环境光",
+      "en": "ambient light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "侧光",
+      "en": "side light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "逆光",
+      "en": "backlight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "逆光剪影",
+      "en": "backlit silhouette",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "轮廓光",
+      "en": "rim light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "边缘光",
+      "en": "edge light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "顶光",
+      "en": "top light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "底光",
+      "en": "under light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "前光",
+      "en": "front light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "伦勃朗光",
+      "en": "rembrandt lighting",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "蝴蝶光",
+      "en": "butterfly lighting",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "环形光",
+      "en": "ring light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "分割光",
+      "en": "split lighting",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "黄金时刻",
+      "en": "golden hour",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "蓝色时刻",
+      "en": "blue hour",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "魔幻时刻",
+      "en": "magic hour",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "丁达尔效应",
+      "en": "tyndall effect",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "体积光",
+      "en": "volumetric light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "光线穿透",
+      "en": "light rays",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "霓虹灯光",
+      "en": "neon light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "烛光",
+      "en": "candlelight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "火光",
+      "en": "firelight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "月光",
+      "en": "moonlight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "星光",
+      "en": "starlight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "闪电",
+      "en": "lightning",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "聚光灯",
+      "en": "spotlight",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "舞台灯",
+      "en": "stage light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "电影灯",
+      "en": "cinematic light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "柔光箱",
+      "en": "softbox light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "反光板",
+      "en": "reflector",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "发光",
+      "en": "glowing",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "生物发光",
+      "en": "bioluminescence",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "荧光",
+      "en": "fluorescent",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "全息光",
+      "en": "holographic light",
+      "category": "光照",
+      "type": "positive"
+    },
+    {
+      "zh": "特写",
+      "en": "close-up",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "极特写",
+      "en": "extreme close-up",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "面部特写",
+      "en": "face close-up",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "眼部特写",
+      "en": "eye close-up",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "中景",
+      "en": "medium shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "中近景",
+      "en": "medium close-up",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "中远景",
+      "en": "medium long shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "全景",
+      "en": "full shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "远景",
+      "en": "long shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "大远景",
+      "en": "extreme long shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "鸟瞰",
+      "en": "bird's eye view",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "俯视",
+      "en": "high angle",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "仰视",
+      "en": "low angle",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "荷兰角",
+      "en": "dutch angle",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "过肩镜头",
+      "en": "over the shoulder",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "主观视角",
+      "en": "pov",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "第一人称视角",
+      "en": "first person view",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "上帝视角",
+      "en": "god's eye view",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "虫眼视角",
+      "en": "worm's eye view",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "50mm镜头",
+      "en": "50mm lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "85mm镜头",
+      "en": "85mm lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "广角镜头",
+      "en": "wide angle lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "鱼眼镜头",
+      "en": "fisheye lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "长焦镜头",
+      "en": "telephoto lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "微距镜头",
+      "en": "macro lens",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "移轴镜头",
+      "en": "tilt-shift",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "浅景深",
+      "en": "shallow depth of field",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "深景深",
+      "en": "deep depth of field",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "背景虚化",
+      "en": "bokeh",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "散景",
+      "en": "blurry background",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "运动模糊",
+      "en": "motion blur",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "全景深",
+      "en": "pan focus",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "移轴摄影",
+      "en": "tilt-shift photography",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "哈苏相机",
+      "en": "hasselblad",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "莱卡相机",
+      "en": "leica",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "宝丽来相机",
+      "en": "polaroid camera",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "胶片相机",
+      "en": "film camera",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "无人机航拍",
+      "en": "drone shot",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "手持相机",
+      "en": "handheld camera",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "纪录片风格",
+      "en": "documentary style",
+      "category": "镜头",
+      "type": "positive"
+    },
+    {
+      "zh": "对称构图",
+      "en": "symmetrical composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "三分法",
+      "en": "rule of thirds",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "黄金分割",
+      "en": "golden ratio",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "居中构图",
+      "en": "centered composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "对角线构图",
+      "en": "diagonal composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "引导线",
+      "en": "leading lines",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "框架构图",
+      "en": "framing",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "前景",
+      "en": "foreground",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "中景",
+      "en": "midground",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "背景",
+      "en": "background",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "负空间",
+      "en": "negative space",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "正空间",
+      "en": "positive space",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "留白",
+      "en": "white space",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "密集构图",
+      "en": "dense composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "极简构图",
+      "en": "minimalist composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "三角形构图",
+      "en": "triangular composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "圆形构图",
+      "en": "circular composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "S形构图",
+      "en": "s-curve",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "L形构图",
+      "en": "l-shape composition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "垂直线",
+      "en": "vertical lines",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "水平线",
+      "en": "horizontal lines",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "放射线",
+      "en": "radial lines",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "重复",
+      "en": "repetition",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "节奏",
+      "en": "rhythm",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "平衡",
+      "en": "balance",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "不平衡",
+      "en": "imbalance",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "层次感",
+      "en": "layered",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "纵深感",
+      "en": "depth",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "全景图",
+      "en": "panorama",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "拼贴",
+      "en": "collage",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "蒙太奇",
+      "en": "montage",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "双重曝光",
+      "en": "double exposure",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "多重曝光",
+      "en": "multiple exposure",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "镜像",
+      "en": "mirror reflection",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "倒影",
+      "en": "reflection",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "剪影",
+      "en": "silhouette",
+      "category": "构图",
+      "type": "positive"
+    },
+    {
+      "zh": "暖色调",
+      "en": "warm color palette",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "冷色调",
+      "en": "cool color palette",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "柔和色调",
+      "en": "pastel colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "鲜艳色彩",
+      "en": "vibrant colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "高饱和",
+      "en": "high saturation",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "低饱和",
+      "en": "low saturation",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "去饱和",
+      "en": "desaturated",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "单色调",
+      "en": "monochromatic",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "双色调",
+      "en": "duotone",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "三色调",
+      "en": "tritone",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "互补色",
+      "en": "complementary colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "类似色",
+      "en": "analogous colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "三色搭配",
+      "en": "triadic colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "莫兰迪色",
+      "en": "morandi colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "马卡龙色",
+      "en": "macaron colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "霓虹色",
+      "en": "neon colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "赛博朋克色",
+      "en": "cyberpunk colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "大地色",
+      "en": "earth tones",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "金属色",
+      "en": "metallic colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "彩虹色",
+      "en": "rainbow colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "渐变色",
+      "en": "gradient colors",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "粉彩色",
+      "en": "pastel",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "红色",
+      "en": "red",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "橙色",
+      "en": "orange",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "黄色",
+      "en": "yellow",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "绿色",
+      "en": "green",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "青色",
+      "en": "cyan",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "蓝色",
+      "en": "blue",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "紫色",
+      "en": "purple",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "粉色",
+      "en": "pink",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "棕色",
+      "en": "brown",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "黑色",
+      "en": "black",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "白色",
+      "en": "white",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "灰色",
+      "en": "gray",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "金色",
+      "en": "gold",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "银色",
+      "en": "silver",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "铜色",
+      "en": "copper",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "玫瑰金",
+      "en": "rose gold",
+      "category": "色彩",
+      "type": "positive"
+    },
+    {
+      "zh": "杰作",
+      "en": "masterpiece",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "最佳质量",
+      "en": "best quality",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "高分辨率",
+      "en": "high resolution",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "超精细",
+      "en": "ultra detailed",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "精细细节",
+      "en": "fine details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "高清",
+      "en": "hd",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "全高清",
+      "en": "full hd",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "4K",
+      "en": "4k",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "8K",
+      "en": "8k",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "超高分辨率",
+      "en": "ultra high res",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "原始图片",
+      "en": "raw photo",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "极度精细",
+      "en": "absurdly detailed",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "复杂细节",
+      "en": "intricate details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "锐利对焦",
+      "en": "sharp focus",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "完美对焦",
+      "en": "perfect focus",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "景深",
+      "en": "depth of field",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "专业摄影",
+      "en": "professional photography",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "获奖作品",
+      "en": "award winning",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "杰作级别",
+      "en": "masterpiece quality",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "极致细节",
+      "en": "extreme detail",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "高对比",
+      "en": "high contrast",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "低对比",
+      "en": "low contrast",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "清晰线条",
+      "en": "clear lines",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "干净线条",
+      "en": "clean lines",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "平滑",
+      "en": "smooth",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "无瑕疵",
+      "en": "flawless",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "完美人体",
+      "en": "perfect anatomy",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "对称脸",
+      "en": "symmetrical face",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "美丽脸",
+      "en": "beautiful face",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "精致五官",
+      "en": "detailed eyes",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "长发飘逸",
+      "en": "flowing hair",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "皮肤细节",
+      "en": "skin details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "毛孔细节",
+      "en": "pore details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "毛发细节",
+      "en": "hair details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "服装细节",
+      "en": "clothing details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "背景细节",
+      "en": "background details",
+      "category": "质量",
+      "type": "positive"
+    },
+    {
+      "zh": "低分辨率",
+      "en": "lowres",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "最差质量",
+      "en": "worst quality",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "低质量",
+      "en": "low quality",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "普通质量",
+      "en": "normal quality",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "模糊",
+      "en": "blurry",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "失焦",
+      "en": "out of focus",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "模糊不清",
+      "en": "unclear",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "噪点",
+      "en": "noise",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "压缩痕迹",
+      "en": "jpeg artifacts",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "水印",
+      "en": "watermark",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "文字",
+      "en": "text",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "签名",
+      "en": "signature",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "logo",
+      "en": "logo",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "用户名",
+      "en": "username",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "时间戳",
+      "en": "timestamp",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "画框",
+      "en": "frame",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余手指",
+      "en": "extra fingers",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余肢体",
+      "en": "extra limbs",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "断手指",
+      "en": "bad fingers",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "畸形手",
+      "en": "deformed hands",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "缺手指",
+      "en": "missing fingers",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "手指融合",
+      "en": "fused fingers",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "畸形",
+      "en": "deformed",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "扭曲",
+      "en": "distorted",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "解剖错误",
+      "en": "bad anatomy",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "比例错误",
+      "en": "wrong proportions",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余腿",
+      "en": "extra legs",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "缺腿",
+      "en": "missing legs",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余手臂",
+      "en": "extra arms",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "缺手臂",
+      "en": "missing arms",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多头",
+      "en": "extra heads",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "缺头",
+      "en": "missing head",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多眼睛",
+      "en": "extra eyes",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "缺眼睛",
+      "en": "missing eyes",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "面部畸形",
+      "en": "deformed face",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "丑陋",
+      "en": "ugly",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "恐怖",
+      "en": "creepy",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "恐怖谷",
+      "en": "uncanny",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "卡通",
+      "en": "cartoon",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "3D风格",
+      "en": "3d",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "灰度",
+      "en": "grayscale",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "过度曝光",
+      "en": "overexposed",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "欠曝光",
+      "en": "underexposed",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "过饱和",
+      "en": "oversaturated",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "裁切",
+      "en": "cropped",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "画框外",
+      "en": "out of frame",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "残缺",
+      "en": "mutilated",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余乳头",
+      "en": "extra nipples",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "怀孕",
+      "en": "pregnant",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "色情",
+      "en": "nsfw",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "血腥",
+      "en": "gore",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "暴力",
+      "en": "violence",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "多余人物",
+      "en": "extra people",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "路人",
+      "en": "strangers",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "背景杂乱",
+      "en": "cluttered background",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "低质量背景",
+      "en": "bad background",
+      "category": "负面词",
+      "type": "negative"
+    },
+    {
+      "zh": "简单背景",
+      "en": "plain background",
+      "category": "负面词",
+      "type": "negative"
+    }
+  ]
+}
