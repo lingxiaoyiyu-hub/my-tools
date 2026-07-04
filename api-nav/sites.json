@@ -1,7 +1,7 @@
 {
   "announcement": {
-    "enabled": false,
-    "text": ""
+    "enabled": true,
+    "text": "1111111111111111"
   },
   "sites": [
     {
