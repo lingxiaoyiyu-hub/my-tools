@@ -766,8 +766,47 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 160px;
+  max-height: 140px;
   object-fit: cover;
+}
+
+/* 示例来源标题（截断 1 行） */
+.pb-pv-pvtitle {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: #57606a;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 来源 / 查看链接 */
+.pb-pv-links {
+  margin-top: 4px;
+  font-size: 11.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pb-pv-link {
+  color: #0969da;
+  text-decoration: none;
+}
+.pb-pv-link:hover {
+  text-decoration: underline;
+}
+.pb-pv-link-sep {
+  color: #8c959f;
+}
+
+/* compact 模式下不显示图片区域（compact 本就无 img，保险） */
+.pb-preview.compact .pb-pv-img-wrap,
+.pb-preview.compact .pb-pv-pvtitle,
+.pb-preview.compact .pb-pv-links {
+  display: none;
 }
 
 /* 移动端强制隐藏预览卡（双保险） */

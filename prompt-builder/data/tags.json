@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "total": 488,
     "categories": [
       "主体",
@@ -27,7 +27,7 @@
     "license": "自建数据，参考 AI 绘图社区通用术语，不复制特定项目数据。可自由使用。",
     "source": "https://github.com/lingxiaoyiyu-hub/my-tools",
     "descCount": 329,
-    "previewImageCount": 0,
+    "previewImageCount": 193,
     "descStats": {
       "主体": {
         "total": 100,
@@ -64,6 +64,28 @@
       "负面词": {
         "total": 57,
         "desc": 35
+      }
+    },
+    "previewImageStats": {
+      "风格": {
+        "total": 72,
+        "matched": 61
+      },
+      "光照": {
+        "total": 39,
+        "matched": 36
+      },
+      "镜头": {
+        "total": 40,
+        "matched": 37
+      },
+      "构图": {
+        "total": 36,
+        "matched": 29
+      },
+      "色彩": {
+        "total": 38,
+        "matched": 30
       }
     }
   },
@@ -1297,7 +1319,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "追求真实感，接近肉眼所见，适合人物肖像与生活场景",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/d-ultraman-limited-edition-general-version-1.jpg",
+      "previewSourceUrl": "https://x.com/94vanAI/thread/2005249915052810691/photo/2",
+      "previewDetailUrl": "https://aiart.pics/prompt/d-ultraman-limited-edition-general-version",
+      "previewTitle": "D+奥特曼限时发售通用版"
     },
     {
       "zh": "超写实",
@@ -1305,7 +1330,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "比真实更真实，细节拉满，常带戏剧性光影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/nano-banana-pro-gemini-3-0-photography-style-1.jpg",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1997730658953683172",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-gemini-3-0-photography-style",
+      "previewTitle": "纳米香蕉Pro | 天使3.0摄影风格"
     },
     {
       "zh": "照片级",
@@ -1313,7 +1341,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "模拟相机出片，带景深与轻微颗粒，最像照片的风格",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/landmine-fashion-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/hawl_beta/thread/2000842029383999499",
+      "previewDetailUrl": "https://aiart.pics/prompt/landmine-fashion-photography",
+      "previewTitle": "地雷系时尚摄影"
     },
     {
       "zh": "8K高清",
@@ -1321,7 +1352,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "高分辨率质感提示词，提升整体清晰度",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251215/leaf-cutout-art-scene-1.jpg",
+      "previewSourceUrl": "https://x.com/dotey/thread/2000439814022144346",
+      "previewDetailUrl": "https://aiart.pics/prompt/leaf-cutout-art-scene",
+      "previewTitle": "树叶剪纸艺术场景"
     },
     {
       "zh": "电影感",
@@ -1329,7 +1363,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "电影画面调性，宽画幅、低对比、青橙色调常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251207/from-single-reference-image-to-cinematic-short-1.jpg",
+      "previewSourceUrl": "https://x.com/firatbilal/status/1996027417215815991",
+      "previewDetailUrl": "https://aiart.pics/prompt/from-single-reference-image-to-cinematic-short",
+      "previewTitle": "从单一参考图像到电影短片的导演之路"
     },
     {
       "zh": "胶片质感",
@@ -1337,7 +1374,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "模拟胶片颗粒，带复古怀旧氛围",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251209/tokyo-street-neon-noir-real-vs-anime-1.jpg",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1998062549367947304",
+      "previewDetailUrl": "https://aiart.pics/prompt/tokyo-street-neon-noir-real-vs-anime",
+      "previewTitle": "东京街头霓虹夜影：真人VS动漫"
     },
     {
       "zh": "宝丽来",
@@ -1345,7 +1385,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "即时成像质感，偏色、漏光、白边框",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251224/instant-polaroid-portal-1.jpg",
+      "previewSourceUrl": "https://x.com/hellokaton/status/2003381235331268757",
+      "previewDetailUrl": "https://aiart.pics/prompt/instant-polaroid-portal",
+      "previewTitle": "瞬间宝丽来门"
     },
     {
       "zh": "黑白",
@@ -1353,7 +1396,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "去除色彩，用灰阶表达，适合突出构图与情绪",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/90s-style-mixed-media-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/jojogh_007/status/1998291670379659740",
+      "previewDetailUrl": "https://aiart.pics/prompt/90s-style-mixed-media-portrait",
+      "previewTitle": "90年代风格混合媒体肖像"
     },
     {
       "zh": "单色",
@@ -1361,7 +1407,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "单一色相渲染，可黑白也可单色系",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/high-contrast-monochrome-side-profile-rim-lit-portrait-use-user-face-reference-1.jpg",
+      "previewSourceUrl": "https://x.com/SimplyAnnisa/status/1991333326603579944",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-contrast-monochrome-side-profile-rim-lit-portrait-use-user-face-reference",
+      "previewTitle": "高对比度单色侧脸轮廓肖像（使用用户面部参考）"
     },
     {
       "zh": "复古",
@@ -1369,7 +1418,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "老照片调性，泛黄、褪色、颗粒感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/google-gemini-nano-banana-pro-3-0-young-woman-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/Just_sharon7/status/2004570362848367063",
+      "previewDetailUrl": "https://aiart.pics/prompt/google-gemini-nano-banana-pro-3-0-young-woman-portrait",
+      "previewTitle": "Google Gemini Nano Banana pro 3.0 - 年轻女性肖像"
     },
     {
       "zh": "怀旧",
@@ -1377,7 +1429,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "七八十年代视觉调性，柔和低饱和",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251222/nano-banana-pro-gameplay-prompt-1.jpg",
+      "previewSourceUrl": "https://x.com/munou_ac/status/1996207810099781767",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-gameplay-prompt",
+      "previewTitle": "Nano Banana Pro 游玩提示"
     },
     {
       "zh": "90年代风格",
@@ -1385,7 +1440,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "90 年代审美，胶片 + 鲜艳 + 颗粒",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/90s-style-mixed-media-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/jojogh_007/status/1998291670379659740",
+      "previewDetailUrl": "https://aiart.pics/prompt/90s-style-mixed-media-portrait",
+      "previewTitle": "90年代风格混合媒体肖像"
     },
     {
       "zh": "像素艺术",
@@ -1393,7 +1451,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "低分辨率像素点阵，复古游戏画面",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "体素艺术",
@@ -1409,7 +1470,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "日式动画调性，赛璐珞上色、大眼、简化五官",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/anime-style-keyframe-sequence-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/smoermeow/status/1997652408705462448",
+      "previewDetailUrl": "https://aiart.pics/prompt/anime-style-keyframe-sequence-analysis",
+      "previewTitle": "动漫风格关键帧序列分析"
     },
     {
       "zh": "漫画风格",
@@ -1417,7 +1481,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "漫画分镜与墨线，带网点与夸张表情",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/create-comic-style-illustration.png",
+      "previewSourceUrl": "https://x.com/miilesus/status/1921944436684038496",
+      "previewDetailUrl": "https://aiart.pics/prompt/create-comic-style-illustration",
+      "previewTitle": "创作漫画风格插画"
     },
     {
       "zh": "美漫风格",
@@ -1433,7 +1500,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "日本漫画黑白墨线，网点阴影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/cross-dimensional-cat-rescue-1.jpg",
+      "previewSourceUrl": "https://x.com/servasyy_ai/thread/2000792645032120355",
+      "previewDetailUrl": "https://aiart.pics/prompt/cross-dimensional-cat-rescue",
+      "previewTitle": "穿越次元救援猫"
     },
     {
       "zh": "吉卜力风格",
@@ -1449,7 +1519,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "新海诚式，极致云层与光影、青春感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251209/makoto-shinkai-style-aesthetic-background-illustration-comparison-1.jpg",
+      "previewSourceUrl": "https://x.com/VoxcatAI/status/1996524339790024830",
+      "previewDetailUrl": "https://aiart.pics/prompt/makoto-shinkai-style-aesthetic-background-illustration-comparison",
+      "previewTitle": "新海诚风格唯美背景插画对比"
     },
     {
       "zh": "水墨画",
@@ -1457,7 +1530,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "中国画水墨晕染，留白与笔触",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/traditional-japanese-ink-wash-painting-1.jpg",
+      "previewSourceUrl": "https://x.com/azed_ai/status/1999811065933410795",
+      "previewDetailUrl": "https://aiart.pics/prompt/traditional-japanese-ink-wash-painting",
+      "previewTitle": "传统日式墨色画"
     },
     {
       "zh": "工笔画",
@@ -1465,7 +1541,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "中国画工笔细描，线条严谨、设色细腻",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251209/water-margins-top-30-characters-traditional-chinese-painting-style-1.jpg",
+      "previewSourceUrl": "https://x.com/MingleeJ/status/1992057312622874857",
+      "previewDetailUrl": "https://aiart.pics/prompt/water-margins-top-30-characters-traditional-chinese-painting-style",
+      "previewTitle": "《水浒》排名前30人物工笔画图生成"
     },
     {
       "zh": "国画",
@@ -1481,7 +1560,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "日本浮世绘木版画，平面色块、粗轮廓",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/ukiyo-e-style-demon-slayer-characters-makeup-photos-1.jpg",
+      "previewSourceUrl": "https://x.com/lijigang/status/2005570989627953487",
+      "previewDetailUrl": "https://aiart.pics/prompt/ukiyo-e-style-demon-slayer-characters-makeup-photos",
+      "previewTitle": "浮世绘风格《鬼灭之刃》柱定妆照"
     },
     {
       "zh": "油画",
@@ -1489,7 +1571,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "油画质感，厚涂笔触、层次丰富",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/mixed-media-portrait-art-multiple-expressions-of-a-womans-image-1.jpg",
+      "previewSourceUrl": "https://x.com/langzihan/status/1997921391300206644",
+      "previewDetailUrl": "https://aiart.pics/prompt/mixed-media-portrait-art-multiple-expressions-of-a-womans-image",
+      "previewTitle": "混合媒介肖像艺术：女性形象的多重表达"
     },
     {
       "zh": "水彩画",
@@ -1497,7 +1582,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "水彩透明晕染，边缘不规则",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251223/one-click-solution-for-ecommerce-images-1.jpg",
+      "previewSourceUrl": "https://x.com/yyyole/thread/2002724036355240392",
+      "previewDetailUrl": "https://aiart.pics/prompt/one-click-solution-for-ecommerce-images",
+      "previewTitle": "电商图一键搞定方法"
     },
     {
       "zh": "丙烯画",
@@ -1521,7 +1609,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "黑白铅笔速写，线条为主",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/mixed-media-portrait-art-multiple-expressions-of-a-womans-image-1.jpg",
+      "previewSourceUrl": "https://x.com/langzihan/status/1997921391300206644",
+      "previewDetailUrl": "https://aiart.pics/prompt/mixed-media-portrait-art-multiple-expressions-of-a-womans-image",
+      "previewTitle": "混合媒介肖像艺术：女性形象的多重表达"
     },
     {
       "zh": "铅笔画",
@@ -1529,7 +1620,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "铅笔细节描绘，带排线与阴影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/3d-optical-illusion-notebook-art-1.jpg",
+      "previewSourceUrl": "https://x.com/ShreyaYadav___/status/1998041456871920002",
+      "previewDetailUrl": "https://aiart.pics/prompt/3d-optical-illusion-notebook-art",
+      "previewTitle": "3D光学错觉笔记本艺术"
     },
     {
       "zh": "炭笔画",
@@ -1537,7 +1631,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "炭笔粗黑对比，适合肖像",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/mixed-media-portrait-art-multiple-expressions-of-a-womans-image-1.jpg",
+      "previewSourceUrl": "https://x.com/langzihan/status/1997921391300206644",
+      "previewDetailUrl": "https://aiart.pics/prompt/mixed-media-portrait-art-multiple-expressions-of-a-womans-image",
+      "previewTitle": "混合媒介肖像艺术：女性形象的多重表达"
     },
     {
       "zh": "速写",
@@ -1545,7 +1642,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "快速捕捉动态，线条松散有力",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/tomato-egg-stir-fry-recipe.jpeg",
+      "previewSourceUrl": "https://x.com/cnyzgkc/status/1992570337977082030?s=46",
+      "previewDetailUrl": "https://aiart.pics/prompt/tomato-egg-stir-fry-recipe",
+      "previewTitle": "菜谱-番茄炒蛋"
     },
     {
       "zh": "印象派",
@@ -1553,7 +1653,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "莫奈式笔触，光与色的瞬间印象",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "后印象派",
@@ -1561,7 +1664,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "梵高式强烈笔触与色彩",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "表现主义",
@@ -1569,7 +1675,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "主观情绪化造型与色彩",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/abstract-expressionism-portrait-of-nano-banana-pro-over-gemini-1.jpg",
+      "previewSourceUrl": "https://x.com/AkatsokK/status/2004296089202049432",
+      "previewDetailUrl": "https://aiart.pics/prompt/abstract-expressionism-portrait-of-nano-banana-pro-over-gemini",
+      "previewTitle": "抽象表现主义风格的Nano Banana Pro与Gemini肖像"
     },
     {
       "zh": "超现实主义",
@@ -1577,7 +1686,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "梦境般不合常理的组合",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/colorful-knitting.jpeg",
+      "previewSourceUrl": "https://x.com/umesh_ai/status/1936665222271615107",
+      "previewDetailUrl": "https://aiart.pics/prompt/colorful-knitting",
+      "previewTitle": "五颜六色的针织"
     },
     {
       "zh": "立体主义",
@@ -1585,7 +1697,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "毕加索式几何分解重组",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "抽象艺术",
@@ -1593,7 +1708,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "非具象，以形色表达情绪",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/higgsfield-nano-banana-pro-young-japanese-woman-1.jpg",
+      "previewSourceUrl": "https://x.com/iX00AI/status/2005030581684633795",
+      "previewDetailUrl": "https://aiart.pics/prompt/higgsfield-nano-banana-pro-young-japanese-woman",
+      "previewTitle": "Higgsfield Nano Banana Pro🍌 - 20多岁日本女性"
     },
     {
       "zh": "极简主义",
@@ -1601,7 +1719,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "尽可能少的元素，强调留白",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251224/mirror-product-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/AllaAisling/status/2003605790603514100",
+      "previewDetailUrl": "https://aiart.pics/prompt/mirror-product-photography",
+      "previewTitle": "镜面产品摄影"
     },
     {
       "zh": "波普艺术",
@@ -1609,7 +1730,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "安迪沃霍尔式高饱和丝网印刷",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/pop-art-portrait.jpeg",
+      "previewSourceUrl": "https://x.com/IqraSaifiii/status/1969543847597277339",
+      "previewDetailUrl": "https://aiart.pics/prompt/pop-art-portrait",
+      "previewTitle": "波普艺术肖像"
     },
     {
       "zh": "装饰艺术",
@@ -1617,7 +1741,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "20 年代几何装饰，华丽对称",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/art-deco-futurism.jpeg",
+      "previewSourceUrl": "https://x.com/hc_dsn/status/1936095679879037143",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-deco-futurism",
+      "previewTitle": "装饰艺术未来主义"
     },
     {
       "zh": "新艺术运动",
@@ -1625,7 +1752,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "慕夏式有机曲线与植物纹样",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251221/art-nouveau-holographic-insect-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/2002457740543750561",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-nouveau-holographic-insect",
+      "previewTitle": "艺术 nouveau 霓虹昆虫"
     },
     {
       "zh": "巴洛克",
@@ -1633,7 +1763,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "17 世纪华丽戏剧光影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/one-person-three-parallel-universes-1.jpg",
+      "previewSourceUrl": "https://x.com/yinlin66/thread/1997697540138135935",
+      "previewDetailUrl": "https://aiart.pics/prompt/one-person-three-parallel-universes",
+      "previewTitle": "同一个人，三个平行宇宙"
     },
     {
       "zh": "洛可可",
@@ -1641,7 +1774,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "18 世纪纤巧繁复洛可可",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/create-victorian-portrait-nano-banana-pro-1.jpg",
+      "previewSourceUrl": "https://x.com/ZaraIrahh/status/1992762678989971671",
+      "previewDetailUrl": "https://aiart.pics/prompt/create-victorian-portrait-nano-banana-pro",
+      "previewTitle": "用Nano Banana Pro创建维多利亚时代风格的自我画像"
     },
     {
       "zh": "哥特式",
@@ -1649,7 +1785,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "尖拱与暗色调，神秘庄严",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/gothic-noir-vigilante-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/Maheen_Khan675/status/1998597524232503557",
+      "previewDetailUrl": "https://aiart.pics/prompt/gothic-noir-vigilante-portrait",
+      "previewTitle": "哥特式夜行侠肖像"
     },
     {
       "zh": "文艺复兴",
@@ -1657,7 +1796,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "古典均衡、人文主义写实",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/renaissance-cartographer-drawing-sci-fi-satellite-maps-1.jpg",
+      "previewSourceUrl": "https://x.com/IamEmily2050/status/2004868305358930159",
+      "previewDetailUrl": "https://aiart.pics/prompt/renaissance-cartographer-drawing-sci-fi-satellite-maps",
+      "previewTitle": "文艺复兴时期制图师绘制科幻卫星地图"
     },
     {
       "zh": "浪漫主义",
@@ -1665,7 +1807,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "19 世纪激情与自然崇高",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "未来主义",
@@ -1673,7 +1818,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "速度与机械的动态美学",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/art-deco-futurism.jpeg",
+      "previewSourceUrl": "https://x.com/hc_dsn/status/1936095679879037143",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-deco-futurism",
+      "previewTitle": "装饰艺术未来主义"
     },
     {
       "zh": "达达主义",
@@ -1689,7 +1837,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "元素堆叠到极致，信息密集",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/chaotic-anime-illustration-poster-design-1.jpg",
+      "previewSourceUrl": "https://x.com/hero_aicreative/status/1998767486813221171",
+      "previewDetailUrl": "https://aiart.pics/prompt/chaotic-anime-illustration-poster-design",
+      "previewTitle": "混沌风格的二次元插画海报设计"
     },
     {
       "zh": "3D渲染",
@@ -1697,7 +1848,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "三维渲染出图，材质与光影可调",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/exquisite-3d-render-of-handheld-console.jpeg",
+      "previewSourceUrl": "https://x.com/egeberkina/status/1993592049430650957",
+      "previewDetailUrl": "https://aiart.pics/prompt/exquisite-3d-render-of-handheld-console",
+      "previewTitle": "掌上游戏机的精美3D渲染图"
     },
     {
       "zh": "等距视角",
@@ -1705,7 +1859,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "30 度等距投影，游戏地图常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/art-movements-history-isometric-pixel-art-1.jpg",
+      "previewSourceUrl": "https://x.com/sundyme/thread/1994598434335330697",
+      "previewDetailUrl": "https://aiart.pics/prompt/art-movements-history-isometric-pixel-art",
+      "previewTitle": "艺术流派发展史像素画"
     },
     {
       "zh": "低多边形",
@@ -1713,7 +1870,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "少量多边形构成，几何简洁",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/die-cut-line-drawing-to-3d-product-visualization.png",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1994022879051014312",
+      "previewDetailUrl": "https://aiart.pics/prompt/die-cut-line-drawing-to-3d-product-visualization",
+      "previewTitle": "模切线图转3D产品可视化"
     },
     {
       "zh": "粘土风格",
@@ -1721,7 +1881,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "粘土动画质感，柔和哑光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/playful-claymation-baby-1.jpg",
+      "previewSourceUrl": "https://x.com/azed_ai/status/1999071189877297185",
+      "previewDetailUrl": "https://aiart.pics/prompt/playful-claymation-baby",
+      "previewTitle": "claymation 嬉戏婴儿"
     },
     {
       "zh": "折纸风格",
@@ -1729,7 +1892,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "纸张折叠造型，带折痕",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/brand-flat-paper-style.png",
+      "previewSourceUrl": "https://x.com/HBCoop_/status/1925213900192043236",
+      "previewDetailUrl": "https://aiart.pics/prompt/brand-flat-paper-style",
+      "previewTitle": "品牌平面纸风格"
     },
     {
       "zh": "纸雕风格",
@@ -1737,7 +1903,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "分层纸雕，立体拼贴感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251215/whimsical-autumn-scene-paper-art-and-embroidery-style-1.jpg",
+      "previewSourceUrl": "https://x.com/art_muse/status/1999499996249407539",
+      "previewDetailUrl": "https://aiart.pics/prompt/whimsical-autumn-scene-paper-art-and-embroidery-style",
+      "previewTitle": "梦幻秋日纸艺刺绣场景"
     },
     {
       "zh": "毛绒玩具",
@@ -1745,7 +1914,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "毛绒布料质感，适合可爱主题",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/girl-in-pale-peach-loose-plush-pajamas.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1982984662747373744",
+      "previewDetailUrl": "https://aiart.pics/prompt/girl-in-pale-peach-loose-plush-pajamas",
+      "previewTitle": "淡桃粉色宽松毛绒睡衣女孩"
     },
     {
       "zh": "乐高风格",
@@ -1753,7 +1925,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "积木拼插质感，塑料高光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/lego-style-set.png",
+      "previewSourceUrl": "https://x.com/TheRelianceAI/status/1939271090678779980",
+      "previewDetailUrl": "https://aiart.pics/prompt/lego-style-set",
+      "previewTitle": "乐高风格套装"
     },
     {
       "zh": "积木风格",
@@ -1769,7 +1944,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "动画式硬边阴影分层",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/create-comic-style-illustration.png",
+      "previewSourceUrl": "https://x.com/miilesus/status/1921944436684038496",
+      "previewDetailUrl": "https://aiart.pics/prompt/create-comic-style-illustration",
+      "previewTitle": "创作漫画风格插画"
     },
     {
       "zh": "扁平化设计",
@@ -1777,7 +1955,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "无阴影纯色块，UI 常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/brand-die-cut-vinyl-sticker.jpeg",
+      "previewSourceUrl": "https://x.com/TechieBySA/status/1952747617269506187",
+      "previewDetailUrl": "https://aiart.pics/prompt/brand-die-cut-vinyl-sticker",
+      "previewTitle": "品牌模切乙烯基贴纸"
     },
     {
       "zh": "拟物化",
@@ -1785,7 +1966,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "模拟真实材质与高光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/wes-anderson-designed-x-app-interface-1.jpg",
+      "previewSourceUrl": "https://x.com/cfryant/status/1997786299252846875",
+      "previewDetailUrl": "https://aiart.pics/prompt/wes-anderson-designed-x-app-interface",
+      "previewTitle": "由Wes Anderson设计的X应用界面"
     },
     {
       "zh": "玻璃拟态",
@@ -1793,7 +1977,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "毛玻璃半透明层叠",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251223/one-click-solution-for-ecommerce-images-1.jpg",
+      "previewSourceUrl": "https://x.com/yyyole/thread/2002724036355240392",
+      "previewDetailUrl": "https://aiart.pics/prompt/one-click-solution-for-ecommerce-images",
+      "previewTitle": "电商图一键搞定方法"
     },
     {
       "zh": "新拟态",
@@ -1809,7 +1996,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "80 年代粉紫渐变与网格",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/dreamy-vaporwave-distortion.png",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/1937027922679775432",
+      "previewDetailUrl": "https://aiart.pics/prompt/dreamy-vaporwave-distortion",
+      "previewTitle": "梦幻般的蒸汽波失真"
     },
     {
       "zh": "合成波",
@@ -1825,7 +2015,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "过去人眼中的未来，复古科技感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/retro-futurism-depiction-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/2005387042591498476",
+      "previewDetailUrl": "https://aiart.pics/prompt/retro-futurism-depiction",
+      "previewTitle": "复古未来主义风格描绘"
     },
     {
       "zh": "暗黑奇幻",
@@ -1833,7 +2026,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "阴沉魔法世界调性",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/black-myth-wukong-1.jpg",
+      "previewSourceUrl": "https://x.com/Gorden_Sun/thread/1999141355659182199",
+      "previewDetailUrl": "https://aiart.pics/prompt/black-myth-wukong-eye-popping-3d-image",
+      "previewTitle": "黑神话：悟空裸眼3D图"
     },
     {
       "zh": "高奇幻",
@@ -1849,7 +2045,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "温馨童话插画调性",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/enchanted-fairytale-elegance-1.jpg",
+      "previewSourceUrl": "https://x.com/Rania_22100/status/1992013096655917171",
+      "previewDetailUrl": "https://aiart.pics/prompt/enchanted-fairytale-elegance",
+      "previewTitle": "梦幻童话优雅"
     },
     {
       "zh": "梦幻",
@@ -1857,7 +2056,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "柔光晕染，朦胧氛围",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/dreamy-mermaid-caf-1.jpg",
+      "previewSourceUrl": "https://x.com/dotey/thread/1999014634402062748",
+      "previewDetailUrl": "https://aiart.pics/prompt/dreamy-mermaid-café",
+      "previewTitle": "梦幻人鱼咖啡小屋"
     },
     {
       "zh": "超现实",
@@ -1865,7 +2067,10 @@
       "category": "风格",
       "type": "positive",
       "desc": "不合常理的梦幻组合",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/grotesque-and-dreamy-surreal-illustration.png",
+      "previewSourceUrl": "https://x.com/fy360593/status/1955265393188286632",
+      "previewDetailUrl": "https://aiart.pics/prompt/grotesque-and-dreamy-surreal-illustration",
+      "previewTitle": "怪诞又梦幻的超现实插画"
     },
     {
       "zh": "自然光",
@@ -1873,7 +2078,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "日光、天光等自然来源，柔和真实",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251214/lazy-morning-bedroom-floor-selfie-1.jpg",
+      "previewSourceUrl": "https://x.com/gaucheai/status/1999476360046092675",
+      "previewDetailUrl": "https://aiart.pics/prompt/lazy-morning-bedroom-floor-selfie",
+      "previewTitle": "卧室地板上的懒散早晨自拍"
     },
     {
       "zh": "阳光",
@@ -1881,7 +2089,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "直射阳光，带方向与硬阴影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/girl-wearing-mask-making-peace-sign.jpeg",
+      "previewSourceUrl": "https://x.com/IqraSaifiii/status/1994544453655433705",
+      "previewDetailUrl": "https://aiart.pics/prompt/girl-wearing-mask-making-peace-sign",
+      "previewTitle": "戴口罩的妹子比了个耶"
     },
     {
       "zh": "柔和光",
@@ -1889,7 +2100,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "漫射柔光，阴影过渡平缓",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/nano-banana-pro-dragon-ball-z-style-q-version-pseudo-3d-illustration-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999834906906738854",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-dragon-ball-z-style-q-version-pseudo-3d-illustration",
+      "previewTitle": "Nano Banana Pro - 龙珠Z风格Q版伪3D插画"
     },
     {
       "zh": "硬光",
@@ -1897,7 +2111,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "直射硬光，阴影锐利分明",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251220/korean-editorial-close-up-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2001990720673157590",
+      "previewDetailUrl": "https://aiart.pics/prompt/korean-editorial-close-up",
+      "previewTitle": "韩式编辑室特写"
     },
     {
       "zh": "漫射光",
@@ -1905,7 +2122,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "经过散射的光，均匀柔和",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251206/monochromatic-phantom-silhouette-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/1997021930201768007",
+      "previewDetailUrl": "https://aiart.pics/prompt/monochromatic-phantom-silhouette",
+      "previewTitle": "单色幻影剪影"
     },
     {
       "zh": "环境光",
@@ -1913,7 +2133,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "整体填充光，无明确方向",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251220/korean-editorial-close-up-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2001990720673157590",
+      "previewDetailUrl": "https://aiart.pics/prompt/korean-editorial-close-up",
+      "previewTitle": "韩式编辑室特写"
     },
     {
       "zh": "侧光",
@@ -1921,7 +2144,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "从侧面打来，强调立体与质感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251224/modern-minimalist-room-with-floating-man-1.jpg",
+      "previewSourceUrl": "https://x.com/itis_Jarvo33/status/2003358453646135728",
+      "previewDetailUrl": "https://aiart.pics/prompt/modern-minimalist-room-with-floating-man",
+      "previewTitle": "现代极简风格房间中漂浮的男子"
     },
     {
       "zh": "逆光",
@@ -1929,7 +2155,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "从主体后方打来，勾勒轮廓",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/sunny-girl-wearing-white-knit-top.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1993870488955961747",
+      "previewDetailUrl": "https://aiart.pics/prompt/sunny-girl-wearing-white-knit-top",
+      "previewTitle": "身着白色针织上衣的阳光女孩"
     },
     {
       "zh": "逆光剪影",
@@ -1945,7 +2174,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "沿边缘的细光带，分离主体与背景",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/high-contrast-monochrome-side-profile-rim-lit-portrait-use-user-face-reference-1.jpg",
+      "previewSourceUrl": "https://x.com/SimplyAnnisa/status/1991333326603579944",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-contrast-monochrome-side-profile-rim-lit-portrait-use-user-face-reference",
+      "previewTitle": "高对比度单色侧脸轮廓肖像（使用用户面部参考）"
     },
     {
       "zh": "边缘光",
@@ -1953,7 +2185,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "强调物体边缘的光线",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/modern-hilton-hotel-rainy-night-bedroom-photography-style-1.jpg",
+      "previewSourceUrl": "https://x.com/94vanAI/status/1996480741522452950",
+      "previewDetailUrl": "https://aiart.pics/prompt/modern-hilton-hotel-rainy-night-bedroom-photography-style",
+      "previewTitle": "现代希尔顿酒店雨夜客房摄影风格"
     },
     {
       "zh": "顶光",
@@ -1961,7 +2196,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "从正上方打来，戏剧性强",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/rainbow-hairstyle-girl.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1981178522988343619",
+      "previewDetailUrl": "https://aiart.pics/prompt/rainbow-hairstyle-girl",
+      "previewTitle": "彩虹色发型女生"
     },
     {
       "zh": "底光",
@@ -1969,7 +2207,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "从下方打来，营造恐怖诡异感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251210/publishing-keywords-photo-prompt-creation-guide-1.jpg",
+      "previewSourceUrl": "https://x.com/LufzzLiz/status/1998733446726951401",
+      "previewDetailUrl": "https://aiart.pics/prompt/publishing-keywords-photo-prompt-creation-guide",
+      "previewTitle": "公布提示词了😂：照片与提示词的互动创作指南"
     },
     {
       "zh": "前光",
@@ -1977,7 +2218,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "正面打来，平面均匀，阴影少",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/collage-of-four-fashion-lifestyle-scenes.jpeg",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1994168239442510308",
+      "previewDetailUrl": "https://aiart.pics/prompt/collage-of-four-fashion-lifestyle-scenes",
+      "previewTitle": "四幅时尚生活场景组成的拼贴画"
     },
     {
       "zh": "伦勃朗光",
@@ -1985,7 +2229,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "侧前光在脸颊形成三角光斑",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/comparison-of-angewomon-by-grok-imagine-vs-nano-banana-pro-1.jpg",
+      "previewSourceUrl": "https://x.com/BeautyVerse_Lab/status/2005573268284346818",
+      "previewDetailUrl": "https://aiart.pics/prompt/comparison-of-angewomon-by-grok-imagine-vs-nano-banana-pro",
+      "previewTitle": "數碼寶貝天女獸與Grok Imagine V.S. Nano Banana Pro比較"
     },
     {
       "zh": "蝴蝶光",
@@ -1993,7 +2240,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "正顶光在鼻下形成蝴蝶阴影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251220/high-end-studio-fashion-editorial-5-panel-wide-film-collage-1.jpg",
+      "previewSourceUrl": "https://x.com/BeautyVerse_Lab/status/2002263911413031260",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-end-studio-fashion-editorial-5-panel-wide-film-collage",
+      "previewTitle": "高端工作室时尚编辑 '5-面板宽电影' 贴片"
     },
     {
       "zh": "环形光",
@@ -2001,7 +2251,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "环形灯出片，眼中环形高光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251224/ready-for-christmas-present-gemini-nano-banana-3-0-1.jpg",
+      "previewSourceUrl": "https://x.com/Ankit_patel211/status/2003526593529151794",
+      "previewDetailUrl": "https://aiart.pics/prompt/ready-for-christmas-present-gemini-nano-banana-3-0",
+      "previewTitle": "圣诞礼物准备？双子座纳米香蕉3.0"
     },
     {
       "zh": "分割光",
@@ -2009,7 +2262,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "半明半暗，营造对立情绪",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/cyber-cinematic-extreme-close-up-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/Taaruk_/status/2004558806156796076",
+      "previewDetailUrl": "https://aiart.pics/prompt/cyber-cinematic-extreme-close-up-portrait",
+      "previewTitle": "Cyber-cinematic Extreme Close-up Portrait"
     },
     {
       "zh": "黄金时刻",
@@ -2017,7 +2273,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "日出日落前后，暖金低角度光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/nano-banana-pro-gemini-3-0-photography-style-1.jpg",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1997730658953683172",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-gemini-3-0-photography-style",
+      "previewTitle": "纳米香蕉Pro | 天使3.0摄影风格"
     },
     {
       "zh": "蓝色时刻",
@@ -2025,7 +2284,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "日出前日落后，冷蓝柔和光",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251224/ultra-realistic-cinematic-portrait-of-a-man-during-quiet-blue-hour-1.jpg",
+      "previewSourceUrl": "https://x.com/Taaruk_/status/2003299440761930153",
+      "previewDetailUrl": "https://aiart.pics/prompt/ultra-realistic-cinematic-portrait-of-a-man-during-quiet-blue-hour",
+      "previewTitle": "静谧蓝色时刻的男子超写实肖像"
     },
     {
       "zh": "魔幻时刻",
@@ -2041,7 +2303,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "光穿过雾气形成光柱",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251230/city-inside-a-watch-concept-1.jpg",
+      "previewSourceUrl": "https://x.com/Gdgtify/status/2005876502932476285",
+      "previewDetailUrl": "https://aiart.pics/prompt/city-inside-a-watch-concept",
+      "previewTitle": "城市中的怀表概念"
     },
     {
       "zh": "体积光",
@@ -2049,7 +2314,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "有体积感的光雾与光柱",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/hyper-realistic-cinematic-shot-young-woman-1.jpg",
+      "previewSourceUrl": "https://x.com/Strength04_X/status/1999661174099787812",
+      "previewDetailUrl": "https://aiart.pics/prompt/hyper-realistic-cinematic-shot-young-woman",
+      "previewTitle": "超现实主义电影镜头中的年轻女子"
     },
     {
       "zh": "光线穿透",
@@ -2057,7 +2325,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "光穿过缝隙形成光束",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/hyper-realistic-detailed-underwater-close-up-portrait.jpeg",
+      "previewSourceUrl": "https://x.com/saniaspeaks_/status/1985960595422867603",
+      "previewDetailUrl": "https://aiart.pics/prompt/hyper-realistic-detailed-underwater-close-up-portrait",
+      "previewTitle": "一幅超写实细节丰富的水下特写肖像"
     },
     {
       "zh": "霓虹灯光",
@@ -2065,7 +2336,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "霓虹彩色光源，赛博朋克常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/abstract-neon-light-artwork-design-1.jpg",
+      "previewSourceUrl": "https://x.com/icreatelife/status/1999460801065943506",
+      "previewDetailUrl": "https://aiart.pics/prompt/abstract-neon-light-artwork-design",
+      "previewTitle": "抽象霓虹灯光艺术设计"
     },
     {
       "zh": "烛光",
@@ -2073,7 +2347,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "暖黄闪烁小火光，温馨",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251215/intimate-moment-in-a-crowded-pub-at-night-1.jpg",
+      "previewSourceUrl": "https://x.com/kingofdairyque/status/1999400911383462223",
+      "previewDetailUrl": "https://aiart.pics/prompt/intimate-moment-in-a-crowded-pub-at-night",
+      "previewTitle": "夜晚拥挤酒吧中的亲密瞬间"
     },
     {
       "zh": "火光",
@@ -2081,7 +2358,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "篝火或火焰光，跳动暖色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/ultra-realistic-portrait-of-a-man-on-airport-runway-at-night-1.jpg",
+      "previewSourceUrl": "https://x.com/lexx_aura/status/1992619822396678367",
+      "previewDetailUrl": "https://aiart.pics/prompt/ultra-realistic-portrait-of-a-man-on-airport-runway-at-night",
+      "previewTitle": "夜幕机场跑道上的男人肖像"
     },
     {
       "zh": "月光",
@@ -2089,7 +2369,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "冷蓝柔月光，夜景常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/moonlight-rooftop-tea-party.jpeg",
+      "previewSourceUrl": "https://x.com/BeanieBlossom/status/1935608566406344905",
+      "previewDetailUrl": "https://aiart.pics/prompt/moonlight-rooftop-tea-party",
+      "previewTitle": "月光屋顶茶话会"
     },
     {
       "zh": "星光",
@@ -2097,7 +2380,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "微弱星点光，梦幻夜空",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251209/daughter-s-dreamland-adventure-with-giraffes-1.jpg",
+      "previewSourceUrl": "https://x.com/LufzzLiz/status/1998332432932847684",
+      "previewDetailUrl": "https://aiart.pics/prompt/daughter-s-dreamland-adventure-with-giraffes",
+      "previewTitle": "女儿与长颈鹿梦幻乐园"
     },
     {
       "zh": "闪电",
@@ -2105,7 +2391,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "瞬间强白光，戏剧冲击",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251226/anatomy-of-an-llm-1.jpg",
+      "previewSourceUrl": "https://x.com/LufzzLiz/status/2004208501137330537",
+      "previewDetailUrl": "https://aiart.pics/prompt/anatomy-of-an-llm",
+      "previewTitle": "LLM解剖图"
     },
     {
       "zh": "聚光灯",
@@ -2113,7 +2402,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "集中光束，舞台感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/advanced--effect-with-enhanced-subtle-expressions-1.jpg",
+      "previewSourceUrl": "https://x.com/msjiaozhu/status/1998031442803384584",
+      "previewDetailUrl": "https://aiart.pics/prompt/advanced-光影-effect-with-enhanced-subtle-expressions",
+      "previewTitle": "光影效果高级感十足，微表情韵味提升"
     },
     {
       "zh": "舞台灯",
@@ -2129,7 +2421,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "电影级布光，戏剧层次",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/minimalist-beige-studio-photo-nano-banana-pro-1.jpg",
+      "previewSourceUrl": "https://x.com/AITechGirl/status/1997752643138298206",
+      "previewDetailUrl": "https://aiart.pics/prompt/minimalist-beige-studio-photo-nano-banana-pro",
+      "previewTitle": "简约布景纳米香蕉专业摄影"
     },
     {
       "zh": "柔光箱",
@@ -2137,7 +2432,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "柔光箱出光，均匀柔和",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/high-fashion-studio-photo-collage-1.jpg",
+      "previewSourceUrl": "https://x.com/AsumanGPT/status/2005219309354647582",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-fashion-studio-photo-collage",
+      "previewTitle": "时尚摄影工作室照片拼贴"
     },
     {
       "zh": "反光板",
@@ -2145,7 +2443,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "反光板补光，减弱阴影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/3x3-photo-in-clean-soft-beige-studio.jpeg",
+      "previewSourceUrl": "https://x.com/miilesus/status/1981800648036561146",
+      "previewDetailUrl": "https://aiart.pics/prompt/3x3-photo-in-clean-soft-beige-studio",
+      "previewTitle": "干净柔和的米色工作室中的3x3照片"
     },
     {
       "zh": "发光",
@@ -2153,7 +2454,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "主体自身发光，魔幻感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/enchanted-studio-photoshoot-gemini-nano-banana-pro-1.jpg",
+      "previewSourceUrl": "https://x.com/siennalovesai/status/1998716276319965290",
+      "previewDetailUrl": "https://aiart.pics/prompt/enchanted-studio-photoshoot-gemini-nano-banana-pro",
+      "previewTitle": "Gemini Nano Banana Pro - 仙气飘飘的工作室拍摄"
     },
     {
       "zh": "生物发光",
@@ -2161,7 +2465,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "生物体发光，深海/奇幻常见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/liminal-breakroom-incident-field-manual-1.jpg",
+      "previewSourceUrl": "https://x.com/promptprincess/status/1998812800685334545",
+      "previewDetailUrl": "https://aiart.pics/prompt/liminal-breakroom-incident-field-manual",
+      "previewTitle": "LIMINAL_BREAKROOM_INCIDENT - FIELD MANUAL"
     },
     {
       "zh": "荧光",
@@ -2169,7 +2476,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "荧光灯或荧光色，偏冷绿",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/beauty-in-tokyo-subway-stairwell.jpeg",
+      "previewSourceUrl": "https://x.com/cheerselflin/status/1979203277553307820",
+      "previewDetailUrl": "https://aiart.pics/prompt/beauty-in-tokyo-subway-stairwell",
+      "previewTitle": "东京地铁楼梯间美女照"
     },
     {
       "zh": "全息光",
@@ -2177,7 +2487,10 @@
       "category": "光照",
       "type": "positive",
       "desc": "全息投影光，科技感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251231/high-fashion-magazine-cover-aesthetic-chest-level-holographic-viewfinder-large-2026-winking-smile-1.jpg",
+      "previewSourceUrl": "https://x.com/BeautyVerse_Lab/status/2006211567910805903",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-fashion-magazine-cover-aesthetic-chest-level-holographic-viewfinder-large-2026-winking-smile",
+      "previewTitle": "时尚杂志封面美学 - 胸部水平全息取景器（大2026）与眨眼微笑"
     },
     {
       "zh": "特写",
@@ -2185,7 +2498,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "近距离拍摄，突出局部细节",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/live-action-film-character-design-sheet-1.jpg",
+      "previewSourceUrl": "https://x.com/ShreyaYadav___/status/1997971442961694870",
+      "previewDetailUrl": "https://aiart.pics/prompt/live-action-film-character-design-sheet",
+      "previewTitle": "真人电影角色设计图"
     },
     {
       "zh": "极特写",
@@ -2193,7 +2509,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "极近距离，强调微小细节",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/cyber-cinematic-extreme-close-up-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/Taaruk_/status/2004558806156796076",
+      "previewDetailUrl": "https://aiart.pics/prompt/cyber-cinematic-extreme-close-up-portrait",
+      "previewTitle": "Cyber-cinematic Extreme Close-up Portrait"
     },
     {
       "zh": "面部特写",
@@ -2201,7 +2520,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "聚焦面部，适合肖像情绪",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251211/salon-effect-prediction-and-presentation-1.jpg",
+      "previewSourceUrl": "https://x.com/xiaojietongxue/thread/1999078118498136091",
+      "previewDetailUrl": "https://aiart.pics/prompt/salon-effect-prediction-and-presentation",
+      "previewTitle": "美容院效果预测与展示"
     },
     {
       "zh": "眼部特写",
@@ -2217,7 +2539,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "腰部以上，常用对话构图",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/hyper-realistic-street-scene-portrait.jpeg",
+      "previewSourceUrl": "https://x.com/lexx_aura/status/1994351098509861265",
+      "previewDetailUrl": "https://aiart.pics/prompt/hyper-realistic-street-scene-portrait",
+      "previewTitle": "超逼真街景人像"
     },
     {
       "zh": "中近景",
@@ -2225,7 +2550,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "胸部以上，兼顾表情与环境",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251218/winter-fashion-lifestyle-photo-collage-1.jpg",
+      "previewSourceUrl": "https://x.com/YaseenK7212/status/2000617917659202013",
+      "previewDetailUrl": "https://aiart.pics/prompt/winter-fashion-lifestyle-photo-collage",
+      "previewTitle": "冬季时尚生活方式照片拼贴"
     },
     {
       "zh": "中远景",
@@ -2233,7 +2561,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "膝盖以上，带部分环境",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251222/scene-variations-experiment-1.jpg",
+      "previewSourceUrl": "https://x.com/dhumann/status/1998854511092445209",
+      "previewDetailUrl": "https://aiart.pics/prompt/scene-variations-experiment",
+      "previewTitle": "场景变化实验"
     },
     {
       "zh": "全景",
@@ -2241,7 +2572,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "完整人物入镜，体现全身造型",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/futuristic-fashion-model-series-1.jpg",
+      "previewSourceUrl": "https://x.com/heydin_ai/thread/1965300686838755367",
+      "previewDetailUrl": "https://aiart.pics/prompt/futuristic-fashion-model-series",
+      "previewTitle": "未来时尚女模系列"
     },
     {
       "zh": "远景",
@@ -2249,7 +2583,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "远距离拍摄，环境为主",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251222/scene-variations-experiment-1.jpg",
+      "previewSourceUrl": "https://x.com/dhumann/status/1998854511092445209",
+      "previewDetailUrl": "https://aiart.pics/prompt/scene-variations-experiment",
+      "previewTitle": "场景变化实验"
     },
     {
       "zh": "大远景",
@@ -2257,7 +2594,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "极远距离，主体渺小",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251222/scene-variations-experiment-1.jpg",
+      "previewSourceUrl": "https://x.com/dhumann/status/1998854511092445209",
+      "previewDetailUrl": "https://aiart.pics/prompt/scene-variations-experiment",
+      "previewTitle": "场景变化实验"
     },
     {
       "zh": "鸟瞰",
@@ -2265,7 +2605,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "正上方俯视，上帝视角感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251207/generate-9-camera-shots-with-grok-1.jpg",
+      "previewSourceUrl": "https://x.com/KusoPhoto/status/1994838802087686399",
+      "previewDetailUrl": "https://aiart.pics/prompt/generate-9-camera-shots-with-grok",
+      "previewTitle": "使用Grok生成9个摄影镜头的简单模式"
     },
     {
       "zh": "俯视",
@@ -2273,7 +2616,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "从上往下拍，主体显小",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/young-asian-girl-squatting-in-concrete-courtyard-1.jpeg",
+      "previewSourceUrl": "https://x.com/IamEmily2050/status/1991027882605621629",
+      "previewDetailUrl": "https://aiart.pics/prompt/young-asian-girl-squatting-in-concrete-courtyard-1",
+      "previewTitle": "年轻的亚洲女生蹲坐在水泥地的庭院中"
     },
     {
       "zh": "仰视",
@@ -2281,7 +2627,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "从下往上拍，主体显高大",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251231/vibrant-mediterranean-escape-top-summer-travel-list-choice-1.jpg",
+      "previewSourceUrl": "https://x.com/AkatsokK/status/2005827038347751611",
+      "previewDetailUrl": "https://aiart.pics/prompt/vibrant-mediterranean-escape-top-summer-travel-list-choice",
+      "previewTitle": "地中海度假时光：夏日旅行清单的终极选择？"
     },
     {
       "zh": "荷兰角",
@@ -2289,7 +2638,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "倾斜构图，营造不安感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/nano-banana-pro-canine-jutsu-attempt-1.jpg",
+      "previewSourceUrl": "https://x.com/eggkyunio/status/1998609500534878446",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-canine-jutsu-attempt",
+      "previewTitle": "Nano Banana Pro牙突尝试"
     },
     {
       "zh": "过肩镜头",
@@ -2297,7 +2649,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "越过肩膀拍，对话感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/camera-shot-and-angle-reference-chart-1.jpg",
+      "previewSourceUrl": "https://x.com/ProperPrompter/status/1998867010244280559",
+      "previewDetailUrl": "https://aiart.pics/prompt/camera-shot-and-angle-reference-chart",
+      "previewTitle": "摄影角度参考图表"
     },
     {
       "zh": "主观视角",
@@ -2305,7 +2660,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "第一人称视角，代入感强",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/girl-inside-cafe.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1981178596581658768",
+      "previewDetailUrl": "https://aiart.pics/prompt/girl-inside-cafe",
+      "previewTitle": "咖啡厅室内女生"
     },
     {
       "zh": "第一人称视角",
@@ -2313,7 +2671,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "主观镜头，模拟角色所见",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/pov-holding-hands-photo.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1994691557338013951",
+      "previewDetailUrl": "https://aiart.pics/prompt/pov-holding-hands-photo",
+      "previewTitle": "第一人称视角牵手照片"
     },
     {
       "zh": "上帝视角",
@@ -2329,7 +2690,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "贴近地面向上拍",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251207/generate-9-camera-shots-with-grok-1.jpg",
+      "previewSourceUrl": "https://x.com/KusoPhoto/status/1994838802087686399",
+      "previewDetailUrl": "https://aiart.pics/prompt/generate-9-camera-shots-with-grok",
+      "previewTitle": "使用Grok生成9个摄影镜头的简单模式"
     },
     {
       "zh": "50mm镜头",
@@ -2337,7 +2701,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "标准镜头，接近人眼透视",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/femme-fatale-in-film-noir-1.jpg",
+      "previewSourceUrl": "https://x.com/lexx_aura/status/1991911905212936317",
+      "previewDetailUrl": "https://aiart.pics/prompt/femme-fatale-in-film-noir",
+      "previewTitle": "黑色电影中的致命女性"
     },
     {
       "zh": "85mm镜头",
@@ -2345,7 +2712,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "人像镜头，柔和虚化",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/a-hyper-realistic-high-quality-close-up-portrait.jpeg",
+      "previewSourceUrl": "https://x.com/ZaraIrahh/status/1987684052028297552",
+      "previewDetailUrl": "https://aiart.pics/prompt/a-hyper-realistic-high-quality-close-up-portrait",
+      "previewTitle": "一幅超写实的高品质特写肖像"
     },
     {
       "zh": "广角镜头",
@@ -2353,7 +2723,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "广角，收纳更多环境",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/cinematic-shot.png",
+      "previewSourceUrl": "https://x.com/CharaspowerAI/status/1944796547587125663",
+      "previewDetailUrl": "https://aiart.pics/prompt/cinematic-shot",
+      "previewTitle": "电影镜头拍摄"
     },
     {
       "zh": "鱼眼镜头",
@@ -2361,7 +2734,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "极广变形，球面感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/young-woman-sitting-in-a-shopping-cart.jpeg",
+      "previewSourceUrl": "https://x.com/_MehdiSharifi_/status/1994870610410021018",
+      "previewDetailUrl": "https://aiart.pics/prompt/young-woman-sitting-in-a-shopping-cart",
+      "previewTitle": "年轻女子坐在购物车里"
     },
     {
       "zh": "长焦镜头",
@@ -2369,7 +2745,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "长焦压缩空间，远距离突出主体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/paparazzi-collage-master-1.jpg",
+      "previewSourceUrl": "https://x.com/langzihan/status/2005307700885016886",
+      "previewDetailUrl": "https://aiart.pics/prompt/paparazzi-collage-master",
+      "previewTitle": "明星街拍与拼图排版大师"
     },
     {
       "zh": "微距镜头",
@@ -2377,7 +2756,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "极近拍摄微小物体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/the-poetic-beauty-of-jia-baoyu-1.jpg",
+      "previewSourceUrl": "https://x.com/LufzzLiz/status/2000531205842952561",
+      "previewDetailUrl": "https://aiart.pics/prompt/the-poetic-beauty-of-jia-baoyu",
+      "previewTitle": "宝玉的唯美刻画"
     },
     {
       "zh": "移轴镜头",
@@ -2385,7 +2767,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "移轴，可造微缩模型感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251217/exploring-the-miniature-world-1.jpg",
+      "previewSourceUrl": "https://x.com/Adam38363368936/thread/2000836816438710760",
+      "previewDetailUrl": "https://aiart.pics/prompt/exploring-the-miniature-world",
+      "previewTitle": "探索微缩世界"
     },
     {
       "zh": "浅景深",
@@ -2393,7 +2778,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "背景虚化，突出主体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/masterpiece-warring-states-robe-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/brad_zhang2024/thread/2005293291743617232",
+      "previewDetailUrl": "https://aiart.pics/prompt/masterpiece-warring-states-robe-portrait",
+      "previewTitle": "战国袍大师级写真"
     },
     {
       "zh": "深景深",
@@ -2401,7 +2789,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "前后都清晰",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251215/9-grid-nudity-3d-gameplay-share-1.jpg",
+      "previewSourceUrl": "https://x.com/servasyy_ai/thread/2000381429734379910",
+      "previewDetailUrl": "https://aiart.pics/prompt/9-grid-nudity-3d-gameplay-share",
+      "previewTitle": "9宫格裸感3D玩法分享"
     },
     {
       "zh": "背景虚化",
@@ -2409,7 +2800,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "焦外光斑柔美虚化",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251217/crystal-ball-handmade-toy-prompt-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/yinlin66/thread/2001164639762047250",
+      "previewDetailUrl": "https://aiart.pics/prompt/crystal-ball-handmade-toy-prompt-analysis",
+      "previewTitle": "水晶球手办Prompt分析"
     },
     {
       "zh": "散景",
@@ -2417,7 +2811,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "模糊背景",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/nano-banana-pro-1.jpg",
+      "previewSourceUrl": "https://x.com/Ankit_patel211/status/2000944806055592416/photo/1",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-f8k53u",
+      "previewTitle": "Nano Banana Pro"
     },
     {
       "zh": "运动模糊",
@@ -2425,7 +2822,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "运动产生的方向性模糊",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/prompt-1.jpg",
+      "previewSourceUrl": "https://x.com/sidona/status/2004894993857872173",
+      "previewDetailUrl": "https://aiart.pics/prompt/棚拍时装照工程级prompt控制表",
+      "previewTitle": "棚拍时装照工程级prompt控制表"
     },
     {
       "zh": "全景深",
@@ -2441,7 +2841,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "移轴摄影，微缩城市感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251208/friend-optimized-my-tilt-shift-photography-absolutely-adorable-effects-1.jpg",
+      "previewSourceUrl": "https://x.com/XianyuLi/thread/1997910012749033705",
+      "previewDetailUrl": "https://aiart.pics/prompt/friend-optimized-my-tilt-shift-photography-absolutely-adorable-effects",
+      "previewTitle": "朋友优化了我的移轴摄影，效果赞不绝口！"
     },
     {
       "zh": "哈苏相机",
@@ -2449,7 +2852,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "中画幅质感，色彩层次丰富",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251209/beauty-third-wave-golden-eyed-gaze-1.jpg",
+      "previewSourceUrl": "https://x.com/Adam38363368936/status/1998038966394818673",
+      "previewDetailUrl": "https://aiart.pics/prompt/beauty-third-wave-golden-eyed-gaze",
+      "previewTitle": "美的感觉之第三波：金色眼眸"
     },
     {
       "zh": "莱卡相机",
@@ -2457,7 +2863,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "莱卡调性，浓郁德味",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/cinestill-arcade-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/sarthakNowLive/status/1997517675472310449",
+      "previewDetailUrl": "https://aiart.pics/prompt/cinestill-arcade-portrait",
+      "previewTitle": "Cinestill_Arcade_Portrait"
     },
     {
       "zh": "宝丽来相机",
@@ -2465,7 +2874,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "即时成像，偏色颗粒",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/meaningless-1.jpg",
+      "previewSourceUrl": "https://x.com/44comb/status/1806309823325385155",
+      "previewDetailUrl": "https://aiart.pics/prompt/meaningless",
+      "previewTitle": "意味はない"
     },
     {
       "zh": "胶片相机",
@@ -2473,7 +2885,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "胶片质感，颗粒与偏色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/google-gemini-nano-banana-pro-3-0-young-woman-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/Just_sharon7/status/2004570362848367063",
+      "previewDetailUrl": "https://aiart.pics/prompt/google-gemini-nano-banana-pro-3-0-young-woman-portrait",
+      "previewTitle": "Google Gemini Nano Banana pro 3.0 - 年轻女性肖像"
     },
     {
       "zh": "无人机航拍",
@@ -2481,7 +2896,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "高空俯拍",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251204/experience-the-thrill-of-flying-a-drone-on-a-cliff-edge-with-your-dog-1.jpg",
+      "previewSourceUrl": "https://x.com/NanoBanana_labs/status/1990536869218546082",
+      "previewDetailUrl": "https://aiart.pics/prompt/experience-the-thrill-of-flying-a-drone-on-a-cliff-edge-with-your-dog",
+      "previewTitle": "悬崖边缘与爱犬共赏飞行之乐"
     },
     {
       "zh": "手持相机",
@@ -2489,7 +2907,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "手持轻微晃动，纪实感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/fake-history.jpeg",
+      "previewSourceUrl": "https://x.com/azed_ai/status/1992263633464946805",
+      "previewDetailUrl": "https://aiart.pics/prompt/fake-history",
+      "previewTitle": "伪造的历史"
     },
     {
       "zh": "纪录片风格",
@@ -2497,7 +2918,10 @@
       "category": "镜头",
       "type": "positive",
       "desc": "纪实抓拍调性",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251214/sci-fi-industrial-food-fusion-1.jpg",
+      "previewSourceUrl": "https://x.com/Adam38363368936/thread/1999851793258565828",
+      "previewDetailUrl": "https://aiart.pics/prompt/sci-fi-industrial-food-fusion",
+      "previewTitle": "太空科幻硬核工业风食品结合"
     },
     {
       "zh": "对称构图",
@@ -2505,7 +2929,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "左右或上下对称，庄重稳定",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251215/conceptual-studio-portrait-person-retro-tv-set-1.jpg",
+      "previewSourceUrl": "https://x.com/kingofdairyque/status/1999645674426814856",
+      "previewDetailUrl": "https://aiart.pics/prompt/conceptual-studio-portrait-person-retro-tv-set",
+      "previewTitle": "复古电视背景下的概念式人物肖像"
     },
     {
       "zh": "三分法",
@@ -2513,7 +2940,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "主体置于三分线交点，自然均衡",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/exaggerated-perspective-illustration-style-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999342146479096205",
+      "previewDetailUrl": "https://aiart.pics/prompt/exaggerated-perspective-illustration-style-analysis",
+      "previewTitle": "夸张视角插画风格分析"
     },
     {
       "zh": "黄金分割",
@@ -2521,7 +2951,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "黄金比例构图，古典美感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/explore-as-you-sip-and-admire-paintings-cities-and-drinks-1.jpg",
+      "previewSourceUrl": "https://x.com/AztecaAlpaca/thread/1999466768214163660",
+      "previewDetailUrl": "https://aiart.pics/prompt/explore-as-you-sip-and-admire-paintings-cities-and-drinks",
+      "previewTitle": "边走边喝边欣赏：绘画、城市与饮品"
     },
     {
       "zh": "居中构图",
@@ -2529,7 +2962,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "主体居中，突出焦点",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/cut-object-with-cartoon-explosion.jpeg",
+      "previewSourceUrl": "https://x.com/Arminn_Ai/status/1968375201739177984",
+      "previewDetailUrl": "https://aiart.pics/prompt/cut-object-with-cartoon-explosion",
+      "previewTitle": "切割带有卡通爆炸的物体"
     },
     {
       "zh": "对角线构图",
@@ -2537,7 +2973,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "沿对角线安排元素，动感",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/gym-mirror-selfie-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2000814292422287573",
+      "previewDetailUrl": "https://aiart.pics/prompt/gym-mirror-selfie",
+      "previewTitle": "健身房镜面自拍"
     },
     {
       "zh": "引导线",
@@ -2545,7 +2984,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "线条引导视线指向主体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/exaggerated-perspective-illustration-style-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999342146479096205",
+      "previewDetailUrl": "https://aiart.pics/prompt/exaggerated-perspective-illustration-style-analysis",
+      "previewTitle": "夸张视角插画风格分析"
     },
     {
       "zh": "框架构图",
@@ -2553,7 +2995,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "用前景框住主体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/nano-banana-pro-awakening-power-prompt-1.jpg",
+      "previewSourceUrl": "https://x.com/munou_ac/status/1998335678405599581",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-awakening-power-prompt",
+      "previewTitle": "Nano Banana Pro 力の解放プロンプト"
     },
     {
       "zh": "前景",
@@ -2561,7 +3006,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "强调近景层次",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/exaggerated-perspective-illustration-style-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999342146479096205",
+      "previewDetailUrl": "https://aiart.pics/prompt/exaggerated-perspective-illustration-style-analysis",
+      "previewTitle": "夸张视角插画风格分析"
     },
     {
       "zh": "中景",
@@ -2569,7 +3017,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "画面中段层次",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/exaggerated-perspective-illustration-style-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999342146479096205",
+      "previewDetailUrl": "https://aiart.pics/prompt/exaggerated-perspective-illustration-style-analysis",
+      "previewTitle": "夸张视角插画风格分析"
     },
     {
       "zh": "背景",
@@ -2577,7 +3028,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "画面后景层次",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/travel-memory-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/servasyy_ai/thread/1999656257674969454",
+      "previewDetailUrl": "https://aiart.pics/prompt/travel-memory-poster",
+      "previewTitle": "旅行回忆海报"
     },
     {
       "zh": "负空间",
@@ -2585,7 +3039,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "留出大片空白突出主体",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/floating-product-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/AllaAisling/thread/2000677740975153567",
+      "previewDetailUrl": "https://aiart.pics/prompt/floating-product-photography",
+      "previewTitle": "悬浮产品摄影"
     },
     {
       "zh": "正空间",
@@ -2601,7 +3058,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "有意保留空白",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/tokyo-metropolis-fusion-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2005199925911392603",
+      "previewDetailUrl": "https://aiart.pics/prompt/tokyo-metropolis-fusion",
+      "previewTitle": "东京都市融合"
     },
     {
       "zh": "密集构图",
@@ -2617,7 +3077,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "尽可能少的元素",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/quirky-3d-vinyl-toy.png",
+      "previewSourceUrl": "https://x.com/azed_ai/status/1931668551531929630",
+      "previewDetailUrl": "https://aiart.pics/prompt/quirky-3d-vinyl-toy",
+      "previewTitle": "奇趣风格3D乙烯基玩具"
     },
     {
       "zh": "三角形构图",
@@ -2641,7 +3104,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "S 形曲线引导视线",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/pink-camisole-girl-making-heart-sign.jpeg",
+      "previewSourceUrl": "https://x.com/IamEmily2050/status/1980462057272275105",
+      "previewDetailUrl": "https://aiart.pics/prompt/pink-camisole-girl-making-heart-sign",
+      "previewTitle": "粉色吊带背心女生比心"
     },
     {
       "zh": "L形构图",
@@ -2657,7 +3123,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "竖向线条强调高度",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/construction-site-scene-character-ar-blueprint-projection-1.jpg",
+      "previewSourceUrl": "https://x.com/HBCoop_/status/1997721544575815964",
+      "previewDetailUrl": "https://aiart.pics/prompt/construction-site-scene-character-ar-blueprint-projection",
+      "previewTitle": "建设工地场景，上传主题手持蓝图AR投影"
     },
     {
       "zh": "水平线",
@@ -2665,7 +3134,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "横向线条强调宽广",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251220/high-end-studio-fashion-editorial-5-panel-wide-film-collage-1.jpg",
+      "previewSourceUrl": "https://x.com/BeautyVerse_Lab/status/2002263911413031260",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-end-studio-fashion-editorial-5-panel-wide-film-collage",
+      "previewTitle": "高端工作室时尚编辑 '5-面板宽电影' 贴片"
     },
     {
       "zh": "放射线",
@@ -2681,7 +3153,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "元素重复排布形成节奏",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/character-deconstruction-art-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/Dyorzheng/thread/2004405477174829393",
+      "previewDetailUrl": "https://aiart.pics/prompt/character-deconstruction-art-poster",
+      "previewTitle": "角色拆解艺术海报"
     },
     {
       "zh": "节奏",
@@ -2689,7 +3164,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "元素节奏性排布",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251214/micro-worlds-museum-exhibition-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/IamEmily2050/status/1999340363564400776",
+      "previewDetailUrl": "https://aiart.pics/prompt/micro-worlds-museum-exhibition-poster",
+      "previewTitle": "微观世界展览海报"
     },
     {
       "zh": "平衡",
@@ -2697,7 +3175,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "画面视觉重量均衡",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251210/space-hierarchy-language-balancing-art-and-commerce-in-brand-storytelling-1.jpg",
+      "previewSourceUrl": "https://x.com/yanhua1010/thread/1998586614570959331",
+      "previewDetailUrl": "https://aiart.pics/prompt/space-hierarchy-language-balancing-art-and-commerce-in-brand-storytelling",
+      "previewTitle": "空间层级语言：品牌故事的艺术与商业平衡"
     },
     {
       "zh": "不平衡",
@@ -2705,7 +3186,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "故意失衡营造张力",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251229/morning-stroll-1.jpg",
+      "previewSourceUrl": "https://x.com/youngcatwoman/status/2005440675278381065",
+      "previewDetailUrl": "https://aiart.pics/prompt/morning-stroll",
+      "previewTitle": "晨间漫步"
     },
     {
       "zh": "层次感",
@@ -2713,7 +3197,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "前后层次分明",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251221/y2k-aesthetic-city-impression-collage-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/0xbisc/thread/2002664549930172496",
+      "previewDetailUrl": "https://aiart.pics/prompt/y2k-aesthetic-city-impression-collage-poster",
+      "previewTitle": "Y2K拼贴美学城市印象海报"
     },
     {
       "zh": "纵深感",
@@ -2721,7 +3208,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "画面有空间深度",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/exaggerated-perspective-illustration-style-analysis-1.jpg",
+      "previewSourceUrl": "https://x.com/Cydiar404/thread/1999342146479096205",
+      "previewDetailUrl": "https://aiart.pics/prompt/exaggerated-perspective-illustration-style-analysis",
+      "previewTitle": "夸张视角插画风格分析"
     },
     {
       "zh": "全景图",
@@ -2729,7 +3219,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "超宽全景",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251223/oceanic-cliffside-panorama-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/2002997572412064090",
+      "previewDetailUrl": "https://aiart.pics/prompt/oceanic-cliffside-panorama",
+      "previewTitle": "海洋悬崖全景"
     },
     {
       "zh": "拼贴",
@@ -2737,7 +3230,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "多元素拼贴组合",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251221/y2k-aesthetic-city-impression-collage-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/0xbisc/thread/2002664549930172496",
+      "previewDetailUrl": "https://aiart.pics/prompt/y2k-aesthetic-city-impression-collage-poster",
+      "previewTitle": "Y2K拼贴美学城市印象海报"
     },
     {
       "zh": "蒙太奇",
@@ -2745,7 +3241,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "多画面叠化组合",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/grok-and-nano-banana-pro-poster-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2004908116450968041",
+      "previewDetailUrl": "https://aiart.pics/prompt/grok-and-nano-banana-pro-poster",
+      "previewTitle": "Grok与nano banana pro海报"
     },
     {
       "zh": "双重曝光",
@@ -2753,7 +3252,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "两次曝光叠合",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251206/double-exposure-animal-silhouette-with-integrated-natural-elements-1.jpg",
+      "previewSourceUrl": "https://x.com/CharaspowerAI/status/1996982927427596680",
+      "previewDetailUrl": "https://aiart.pics/prompt/double-exposure-animal-silhouette-with-integrated-natural-elements",
+      "previewTitle": "双重曝光：融合自然元素的动物剪影"
     },
     {
       "zh": "多重曝光",
@@ -2769,7 +3271,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "镜面反射对称",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251217/raw-candid-flash-style-mirror-photograph-young-woman-1.jpg",
+      "previewSourceUrl": "https://x.com/Arminn_Ai/status/1999784969363681297/photo/1",
+      "previewDetailUrl": "https://aiart.pics/prompt/raw-candid-flash-style-mirror-photograph-young-woman",
+      "previewTitle": "青年女性浴室镜像照片"
     },
     {
       "zh": "倒影",
@@ -2777,7 +3282,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "水面或镜面反射",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251220/physical-floor-mirror-selfie-1.jpg",
+      "previewSourceUrl": "https://x.com/Arminn_Ai/status/2002069165830517207",
+      "previewDetailUrl": "https://aiart.pics/prompt/physical-floor-mirror-selfie",
+      "previewTitle": "物理地板镜自拍"
     },
     {
       "zh": "剪影",
@@ -2785,7 +3293,10 @@
       "category": "构图",
       "type": "positive",
       "desc": "主体成黑色剪影",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/fireworks-over-waterfront-city-at-night-1.jpg",
+      "previewSourceUrl": "https://x.com/AllaAisling/status/2005299702015918358",
+      "previewDetailUrl": "https://aiart.pics/prompt/fireworks-over-waterfront-city-at-night",
+      "previewTitle": "夜空中的水上城市烟花"
     },
     {
       "zh": "暖色调",
@@ -2793,7 +3304,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "红橙黄为主，温暖热烈",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/create-a-high-aesthetic-2026-vision-board-collage-1.jpg",
+      "previewSourceUrl": "https://x.com/AsumanGPT/status/2004583231824232734",
+      "previewDetailUrl": "https://aiart.pics/prompt/create-a-high-aesthetic-2026-vision-board-collage",
+      "previewTitle": "2026年愿景板提示：创建高美学感的愿景板拼贴"
     },
     {
       "zh": "冷色调",
@@ -2801,7 +3315,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "蓝青紫为主，清冷宁静",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251230/glamorous-supermodel-photograph-1.jpg",
+      "previewSourceUrl": "https://x.com/aytacaltintepe/status/2005630799219953710",
+      "previewDetailUrl": "https://aiart.pics/prompt/glamorous-supermodel-photograph",
+      "previewTitle": "魅力超模摄影"
     },
     {
       "zh": "柔和色调",
@@ -2809,7 +3326,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "低饱和粉彩，温柔淡雅",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251231/universal-new-year-prompt-words-1.jpg",
+      "previewSourceUrl": "https://x.com/94vanAI/status/2006224499419562303",
+      "previewDetailUrl": "https://aiart.pics/prompt/universal-new-year-prompt-words",
+      "previewTitle": "通用类别新年提示词"
     },
     {
       "zh": "鲜艳色彩",
@@ -2817,7 +3337,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "高饱和鲜亮色彩",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251210/city-top-four-delicacies-generator-1.jpg",
+      "previewSourceUrl": "https://x.com/rionaifantasy/status/1998604652817039633",
+      "previewDetailUrl": "https://aiart.pics/prompt/city-top-four-delicacies-generator",
+      "previewTitle": "城市四大美食一键生成神器"
     },
     {
       "zh": "高饱和",
@@ -2825,7 +3348,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "色彩浓郁饱满",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/girl-holding-retro-silver-microphone.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1981178292276527584",
+      "previewDetailUrl": "https://aiart.pics/prompt/girl-holding-retro-silver-microphone",
+      "previewTitle": "握着复古银色麦克风女生"
     },
     {
       "zh": "低饱和",
@@ -2833,7 +3359,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "色彩淡雅低饱和",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251228/beauty-of-light-and-saturation-1.jpg",
+      "previewSourceUrl": "https://x.com/BubbleBrain/status/2005004870890160158",
+      "previewDetailUrl": "https://aiart.pics/prompt/beauty-of-light-and-saturation",
+      "previewTitle": "光影与饱和度之美"
     },
     {
       "zh": "去饱和",
@@ -2841,7 +3370,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "降低饱和度，偏灰",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/butterfly-transformation-portrait-1.jpg",
+      "previewSourceUrl": "https://x.com/ShreyaYadav___/status/1999388393697153300",
+      "previewDetailUrl": "https://aiart.pics/prompt/butterfly-transformation-portrait",
+      "previewTitle": "蝴蝶蜕变肖像"
     },
     {
       "zh": "单色调",
@@ -2849,7 +3381,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "单一色相不同明度",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251206/monochromatic-phantom-silhouette-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/1997021930201768007",
+      "previewDetailUrl": "https://aiart.pics/prompt/monochromatic-phantom-silhouette",
+      "previewTitle": "单色幻影剪影"
     },
     {
       "zh": "双色调",
@@ -2857,7 +3392,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "两色构成的色调",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251212/futuristic-holographic-projection-1.jpg",
+      "previewSourceUrl": "https://x.com/LudovicCreator/status/1999196250281767079",
+      "previewDetailUrl": "https://aiart.pics/prompt/futuristic-holographic-projection",
+      "previewTitle": "未来主义全息投影"
     },
     {
       "zh": "三色调",
@@ -2913,7 +3451,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "高饱和荧光色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/retro-editorial-poster-design-1.jpg",
+      "previewSourceUrl": "https://x.com/underwoodxie96/status/2000782356974854439",
+      "previewDetailUrl": "https://aiart.pics/prompt/retro-editorial-poster-design",
+      "previewTitle": "Concise Chinese Title"
     },
     {
       "zh": "赛博朋克色",
@@ -2929,7 +3470,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "棕褐土黄自然色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/embroidery-style.png",
+      "previewSourceUrl": "https://x.com/firatbilal/status/1931762571876446256",
+      "previewDetailUrl": "https://aiart.pics/prompt/embroidery-style",
+      "previewTitle": "刺绣风格"
     },
     {
       "zh": "金属色",
@@ -2945,7 +3489,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "七彩渐变",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/see-through-everything.jpeg",
+      "previewSourceUrl": "https://x.com/aziz4ai/status/1934528170264572227",
+      "previewDetailUrl": "https://aiart.pics/prompt/see-through-everything",
+      "previewTitle": "透视一切"
     },
     {
       "zh": "渐变色",
@@ -2953,7 +3500,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "色彩渐变过渡",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251218/ultra-photorealistic-coca-cola-christmas-bottle-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/FollowAurelius/status/1998084924302401973",
+      "previewDetailUrl": "https://aiart.pics/prompt/ultra-photorealistic-coca-cola-christmas-bottle-photography",
+      "previewTitle": "可口可乐圣诞节日瓶高清摄影"
     },
     {
       "zh": "粉彩色",
@@ -2961,7 +3511,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "低饱和粉嫩色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251201/rainbow-hairstyle-girl.jpeg",
+      "previewSourceUrl": "https://x.com/songguoxiansen/status/1981178522988343619",
+      "previewDetailUrl": "https://aiart.pics/prompt/rainbow-hairstyle-girl",
+      "previewTitle": "彩虹色发型女生"
     },
     {
       "zh": "红色",
@@ -2969,7 +3522,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "红色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/futuristic-fashion-model-series-1.jpg",
+      "previewSourceUrl": "https://x.com/heydin_ai/thread/1965300686838755367",
+      "previewDetailUrl": "https://aiart.pics/prompt/futuristic-fashion-model-series",
+      "previewTitle": "未来时尚女模系列"
     },
     {
       "zh": "橙色",
@@ -2977,7 +3533,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "橙色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251207/humorous-anthropomorphic-orange-character-in-a-kitchen-cover-1.jpg",
+      "previewSourceUrl": "https://x.com/imxiaohu/thread/1996561615957983542",
+      "previewDetailUrl": "https://aiart.pics/prompt/humorous-anthropomorphic-orange-character-in-a-kitchen",
+      "previewTitle": "厨房里的幽默橙子角色"
     },
     {
       "zh": "黄色",
@@ -2985,7 +3544,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "黄色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/stylized-black-and-white-urban-street-portrait-with-selective-yellow-accents-1.jpg",
+      "previewSourceUrl": "https://x.com/jojogh_007/status/1998289182028935497",
+      "previewDetailUrl": "https://aiart.pics/prompt/stylized-black-and-white-urban-street-portrait-with-selective-yellow-accents",
+      "previewTitle": "都市街头黑白肖像，选择性黄色点缀"
     },
     {
       "zh": "绿色",
@@ -2993,7 +3555,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "绿色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/join-the-new-ai-luvers-community-worlds-first-largest-ai-prompt-share-platform-1.jpg",
+      "previewSourceUrl": "https://x.com/gaucheai/status/1996920351280726228",
+      "previewDetailUrl": "https://aiart.pics/prompt/join-the-new-ai-luvers-community-worlds-first-largest-ai-prompt-share-platform",
+      "previewTitle": "新AI恋爱爱好者社区：打造全球首个最大AI提示分享平台"
     },
     {
       "zh": "青色",
@@ -3001,7 +3566,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "青色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/new-york-deli-movie-poster-at-night-1.jpg",
+      "previewSourceUrl": "https://x.com/jamesyeung18/status/1686364682519732224",
+      "previewDetailUrl": "https://aiart.pics/prompt/new-york-deli-movie-poster-at-night",
+      "previewTitle": "纽约深夜的熟食店电影海报"
     },
     {
       "zh": "蓝色",
@@ -3009,7 +3577,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "蓝色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/global-landmark-3d-travel-suitcase-illustrations-1.jpg",
+      "previewSourceUrl": "https://x.com/Strength04_X/status/2004954251517460719",
+      "previewDetailUrl": "https://aiart.pics/prompt/global-landmark-3d-travel-suitcase-illustrations",
+      "previewTitle": "全球地标3D旅行箱插画"
     },
     {
       "zh": "紫色",
@@ -3017,7 +3588,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "紫色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/landmine-fashion-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/hawl_beta/thread/2000842029383999499",
+      "previewDetailUrl": "https://aiart.pics/prompt/landmine-fashion-photography",
+      "previewTitle": "地雷系时尚摄影"
     },
     {
       "zh": "粉色",
@@ -3025,7 +3599,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "粉色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251218/brand-photo-with-pink-nike-sneaker-silver-bow-high-end-commercial-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/YaseenK7212/status/2001302056456339569",
+      "previewDetailUrl": "https://aiart.pics/prompt/brand-photo-with-pink-nike-sneaker-silver-bow-high-end-commercial-photography",
+      "previewTitle": "品牌照片与Pink Nike运动鞋及银色蝴蝶结高端商业摄影"
     },
     {
       "zh": "棕色",
@@ -3033,7 +3610,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "棕色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251223/one-click-solution-for-ecommerce-images-1.jpg",
+      "previewSourceUrl": "https://x.com/yyyole/thread/2002724036355240392",
+      "previewDetailUrl": "https://aiart.pics/prompt/one-click-solution-for-ecommerce-images",
+      "previewTitle": "电商图一键搞定方法"
     },
     {
       "zh": "黑色",
@@ -3041,7 +3621,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "黑色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251226/nano-banana-pro-couple-theme-1.jpg",
+      "previewSourceUrl": "https://x.com/kaanakz/status/2003569125071745027",
+      "previewDetailUrl": "https://aiart.pics/prompt/nano-banana-pro-couple-theme",
+      "previewTitle": "Nano Banana Pro - 夫妻主题"
     },
     {
       "zh": "白色",
@@ -3049,7 +3632,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "白色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251205/futuristic-fashion-model-series-1.jpg",
+      "previewSourceUrl": "https://x.com/heydin_ai/thread/1965300686838755367",
+      "previewDetailUrl": "https://aiart.pics/prompt/futuristic-fashion-model-series",
+      "previewTitle": "未来时尚女模系列"
     },
     {
       "zh": "灰色",
@@ -3057,7 +3643,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "灰色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251216/landmine-fashion-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/hawl_beta/thread/2000842029383999499",
+      "previewDetailUrl": "https://aiart.pics/prompt/landmine-fashion-photography",
+      "previewTitle": "地雷系时尚摄影"
     },
     {
       "zh": "金色",
@@ -3065,7 +3654,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "金色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251227/high-fashion-studio-editorial-portrait-southeast-asian-ceremonial-regalia-1.jpg",
+      "previewSourceUrl": "https://x.com/astronomerozge1/status/2004640182117531769",
+      "previewDetailUrl": "https://aiart.pics/prompt/high-fashion-studio-editorial-portrait-southeast-asian-ceremonial-regalia",
+      "previewTitle": "东南亚宫廷服饰高级时尚摄影"
     },
     {
       "zh": "银色",
@@ -3073,7 +3665,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "银色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251218/brand-photo-with-pink-nike-sneaker-silver-bow-high-end-commercial-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/YaseenK7212/status/2001302056456339569",
+      "previewDetailUrl": "https://aiart.pics/prompt/brand-photo-with-pink-nike-sneaker-silver-bow-high-end-commercial-photography",
+      "previewTitle": "品牌照片与Pink Nike运动鞋及银色蝴蝶结高端商业摄影"
     },
     {
       "zh": "铜色",
@@ -3081,7 +3676,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "铜色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/intimate-portrait-photography-1.jpg",
+      "previewSourceUrl": "https://x.com/logicpromt/status/1998473108957573133",
+      "previewDetailUrl": "https://aiart.pics/prompt/intimate-portrait-photography",
+      "previewTitle": "细腻的亲密人像摄影"
     },
     {
       "zh": "玫瑰金",
@@ -3089,7 +3687,10 @@
       "category": "色彩",
       "type": "positive",
       "desc": "玫瑰金色",
-      "previewImage": ""
+      "previewImage": "https://img1.aiart.pics/images/prompts/20251213/viral-nano-banana-pro-slideshow-prompt-1.jpg",
+      "previewSourceUrl": "https://x.com/aisauce_x/status/1998027968841728345",
+      "previewDetailUrl": "https://aiart.pics/prompt/viral-nano-banana-pro-slideshow-prompt",
+      "previewTitle": "Viral Nano Banana Pro Slideshow Prompt"
     },
     {
       "zh": "杰作",

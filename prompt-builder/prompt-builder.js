@@ -213,7 +213,8 @@
       if (isSelected) classes += ' selected';
       if (t.type === 'negative') classes += ' tag-negative';
       // 不再用原生 title，避免与预览卡重叠；预览卡由 hover 触发
-      html += '<button class="' + classes + '" data-en="' + escapeAttr(t.en) + '" data-zh="' + escapeAttr(t.zh) + '" data-cat="' + escapeAttr(t.category) + '" data-type="' + escapeAttr(t.type) + '" data-desc="' + escapeAttr(t.desc || '') + '" data-img="' + escapeAttr(t.previewImage || '') + '" type="button">';
+      // data-img: 示例图 URL；data-src: 来源页；data-detail: 详情页；data-pvtitle: 示例标题
+      html += '<button class="' + classes + '" data-en="' + escapeAttr(t.en) + '" data-zh="' + escapeAttr(t.zh) + '" data-cat="' + escapeAttr(t.category) + '" data-type="' + escapeAttr(t.type) + '" data-desc="' + escapeAttr(t.desc || '') + '" data-img="' + escapeAttr(t.previewImage || '') + '" data-src="' + escapeAttr(t.previewSourceUrl || '') + '" data-detail="' + escapeAttr(t.previewDetailUrl || '') + '" data-pvtitle="' + escapeAttr(t.previewTitle || '') + '" type="button">';
       html += '<span class="pb-tag-zh">' + escapeHtml(t.zh) + '</span>';
       if (t.en && t.en !== t.zh) {
         html += '<span class="pb-tag-en">' + escapeHtml(t.en) + '</span>';
@@ -336,6 +337,9 @@
     var cat = target.getAttribute('data-cat') || '';
     var desc = target.getAttribute('data-desc') || '';
     var img = target.getAttribute('data-img') || '';
+    var srcUrl = target.getAttribute('data-src') || '';
+    var detailUrl = target.getAttribute('data-detail') || '';
+    var pvTitle = target.getAttribute('data-pvtitle') || '';
 
     // compact 模式：无 desc 且无 previewImage 时只显示中文/英文/分类，预览卡更小
     var compact = !desc && !img;
@@ -353,9 +357,28 @@
     if (desc) {
       html += '<div class="pb-pv-desc">' + escapeHtml(desc) + '</div>';
     }
-    // 图片：懒加载，仅当有 url 时才插入 img 节点（第一版 previewImage 全空，不会渲染）
+    // 图片 + 来源 + 链接：懒加载，仅当有 url 时才插入 img 节点
     if (img) {
-      html += '<div class="pb-pv-img-wrap"><img class="pb-pv-img" alt="" loading="lazy" /></div>';
+      html += '<div class="pb-pv-img-wrap">';
+      html += '<img class="pb-pv-img" alt="' + (pvTitle ? escapeAttr(pvTitle) : '') + '" loading="lazy" />';
+      html += '</div>';
+      // 示例标题（截断）
+      if (pvTitle) {
+        html += '<div class="pb-pv-pvtitle">' + escapeHtml(pvTitle) + '</div>';
+      }
+      // 来源 + 查看链接
+      var hasLink = srcUrl || detailUrl;
+      if (hasLink) {
+        html += '<div class="pb-pv-links">';
+        if (srcUrl) {
+          html += '<a class="pb-pv-link" href="' + escapeAttr(srcUrl) + '" target="_blank" rel="noopener noreferrer">查看原图</a>';
+        }
+        if (detailUrl) {
+          if (srcUrl) html += '<span class="pb-pv-link-sep">·</span>';
+          html += '<a class="pb-pv-link" href="' + escapeAttr(detailUrl) + '" target="_blank" rel="noopener noreferrer">查看详情</a>';
+        }
+        html += '</div>';
+      }
     }
     $preview.innerHTML = html;
 
@@ -364,8 +387,21 @@
       var $img = $preview.querySelector('.pb-pv-img');
       if ($img) {
         $img.addEventListener('error', function () {
+          // 加载失败：隐藏整个图片区域及关联的标题/链接
           var w = $preview.querySelector('.pb-pv-img-wrap');
           if (w) w.style.display = 'none';
+          var t = $preview.querySelector('.pb-pv-pvtitle');
+          if (t) t.style.display = 'none';
+          var l = $preview.querySelector('.pb-pv-links');
+          if (l) l.style.display = 'none';
+          // 失败后若已无 desc，切到 compact
+          if (!desc) $preview.classList.add('compact');
+          // 重新定位（卡片变矮）
+          positionPreview(clientX, clientY);
+        });
+        $img.addEventListener('load', function () {
+          // 加载完成后重新定位（图片高度变化）
+          positionPreview(clientX, clientY);
         });
         $img.src = img;
       }
@@ -520,6 +556,9 @@
           allTags = data.tags;
           categories = data.meta.categories || [];
           if ($totalCount) $totalCount.textContent = data.meta.total || allTags.length;
+          // 同步底部版本号
+          var $ver = document.getElementById('pbDataVersion');
+          if ($ver && data.meta.version) $ver.textContent = 'v' + data.meta.version;
         } else if (Array.isArray(data)) {
           // 兼容纯数组格式
           allTags = data;
