@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var DATA_URL = 'prompts/data/aiart-prompts.json';
+  var DATA_URL = '/prompts/data/aiart-prompts.json';
   var allItems = [];
   var currentCat = '全部';
   var currentQuery = '';
