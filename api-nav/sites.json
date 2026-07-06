@@ -80,6 +80,18 @@
       "tags": [
         "稳定"
       ]
+    },
+    {
+      "id": "1783329135731",
+      "date": "2026-07-06",
+      "name": "Agnes",
+      "domain": "https://platform.agnes-ai.com/subscribe/codingPlan",
+      "url": "https://platform.agnes-ai.com/subscribe/codingPlan",
+      "description": "Agnes AI 已面向全球开发者和创作者无限期免费开放其核心的多模态模型 API，旨在降低大模型的使用门槛。\n文本/视觉模型：agnes-2.0-flash（支持高达 1M 字符/Token 的超长上下文）。\n图像生成/编辑模型：agnes-image-2.1-flash（支持最高 4K 超高清图像生成）。\n视频生成模型：agnes-video-v2.0（支持原生音画同出、1080P 输出及多帧生成）。",
+      "tags": [
+        "生图",
+        "稳定"
+      ]
     }
   ]
 }
