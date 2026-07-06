@@ -603,9 +603,21 @@
         <span>教程精选</span>
       </div>
       <div id="tutorialsRec">
+        <a href="tutorials/free-ai-api-sites.html" class="rec-item">
+          <div class="rec-title"><span>免费公益 AI/API 站点怎么找？</span></div>
+          <div class="rec-desc">用 XCbot 导航快速筛选免费大模型、AI 绘图和 API 中转资源。</div>
+        </a>
+        <a href="tutorials/ai-prompt-guide.html" class="rec-item">
+          <div class="rec-title"><span>AI 绘图提示词怎么写？</span></div>
+          <div class="rec-desc">从主体、场景、风格、光线和构图拆解提示词写法。</div>
+        </a>
+        <a href="tutorials/free-game-resources.html" class="rec-item">
+          <div class="rec-title"><span>免费游戏资源怎么使用？</span></div>
+          <div class="rec-desc">了解百度网盘、夸克网盘资源入口的搜索和安全注意事项。</div>
+        </a>
         <a href="tutorials/" class="rec-item">
           <div class="rec-title"><span>查看全部教程</span></div>
-          <div class="rec-desc">教程内容整理中，点击进入教程板块。</div>
+          <div class="rec-desc">进入教程板块，查看更多使用指南。</div>
         </a>
       </div>
     </div>
@@ -632,7 +644,8 @@
         if (!Array.isArray(list) || !list.length) return;
         var top = list.slice().sort(function(a,b){ return Number(!!b.pinned) - Number(!!a.pinned); }).slice(0, 4);
         tutorialsRec.innerHTML = top.map(function(t){
-          return '<a href="tutorials/#' + encodeURIComponent(t.id) + '" class="rec-item">' +
+          var href = t.url || ('tutorials/#' + encodeURIComponent(t.id));
+          return '<a href="' + esc(href) + '" class="rec-item">' +
             '<div class="rec-title"><span>' + esc(t.title) + '</span></div>' +
             '<div class="rec-desc">' + esc(t.summary || t.date || '点击查看教程内容') + '</div>' +
           '</a>';
