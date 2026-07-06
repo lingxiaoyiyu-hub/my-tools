@@ -48,6 +48,7 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .site-domain{font-size:.76rem;color:var(--muted)}
 .card-tags{display:flex;gap:4px;flex-wrap:wrap}
 .card-tag{font-size:.65rem;padding:2px 6px;border-radius:4px;background:rgba(59,130,246,.1);color:var(--primary);border:1.5px solid rgba(59,130,246,.2);font-weight:600}
+.pinned-tag{background:rgba(245,158,11,.16);color:var(--warn);border-color:rgba(245,158,11,.38)}
 .site-desc{font-size:.8rem;color:#94a3b8;line-height:1.5;flex:1}
 .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
 .latency-indicator{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:4px}
@@ -256,7 +257,7 @@ function renderSites() {
     const matchTag = activeTag === '全部' || (s.tags || []).includes(activeTag);
     const matchQ = s.name.toLowerCase().includes(q) || s.domain.toLowerCase().includes(q);
     return matchTag && matchQ;
-  });
+  }).sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned));
  
   if (!filtered.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">没有符合条件的站点。</div>';
@@ -270,6 +271,7 @@ function renderSites() {
           <span class="site-title">${esc(s.name)}</span>
         </div>
         <div class="card-tags">
+          ${s.pinned ? '<span class="card-tag pinned-tag">置顶</span>' : ''}
           ${(s.tags||[]).map(t => '<span class="card-tag">' + esc(t) + '</span>').join('')}
         </div>
       </div>
