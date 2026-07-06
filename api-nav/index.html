@@ -19,7 +19,7 @@ header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:ce
 .feedback-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
  
 /* Announcement */
-#announceBanner{display:none;width:100%;max-width:1180px;margin:0 auto;background:linear-gradient(90deg,rgba(245,158,11,.12),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.25);border-top:none;border-radius:0 0 9px 9px;padding:10px 24px;font-size:.88rem;color:var(--warn);align-items:center;gap:10px;position:sticky;top:56px;z-index:9}
+#announceBanner{display:none;width:100%;max-width:1180px;background:linear-gradient(90deg,rgba(245,158,11,.12),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.25);border-top:none;border-radius:0 0 9px 9px;padding:10px 24px;font-size:.88rem;color:var(--warn);align-items:center;gap:10px;position:fixed;top:56px;left:0;right:0;margin:0 auto;z-index:9}
 #announceBanner span{flex:1}
 #announceBanner button{background:none;border:none;color:var(--warn);cursor:pointer;font-size:1.1rem;opacity:.7;padding:0 4px}
 #announceBanner button:hover{opacity:1}
@@ -142,7 +142,7 @@ footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.
     <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
   </svg>
   <span id="announceText"></span>
-  <button onclick="document.getElementById('announceBanner').style.display='none'" title="关闭公告">&times;</button>
+  <button onclick="document.getElementById('announceBanner').style.display='none';document.querySelector('.container').style.marginTop=''" title="关闭公告">&times;</button>
 </div>
  
 <div class="container">
@@ -235,6 +235,7 @@ async function loadSites() {
       if (ann && ann.enabled && ann.text) {
         document.getElementById('announceText').textContent = ann.text;
         document.getElementById('announceBanner').style.display = 'flex';
+        document.querySelector('.container').style.marginTop = '46px';
       }
     }
     renderSites();
