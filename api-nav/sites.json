@@ -46,6 +46,18 @@
       "tags": [
         "稳定"
       ]
+    },
+    {
+      "id": "1783324613049",
+      "date": "2026-07-06",
+      "name": "斑马API",
+      "domain": "https://bmapi.020212.xyz/register?aff=NVM5ZQ7AND54",
+      "url": "https://bmapi.020212.xyz/register?aff=NVM5ZQ7AND54",
+      "description": "注册送100积分，每日签到送100积分，邀请1人+100积分，模型很全，codex，claude，速度也很快。\n按照它官方的介绍，5000积分≈约3000次常规任务调用(GPT5.5普通对话)。",
+      "tags": [
+        "签到",
+        "稳定"
+      ]
     }
   ]
 }
