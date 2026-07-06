@@ -367,7 +367,6 @@ function saveConfig() {
 // ─── Data Load ────────────────────────────────────
 async function loadData() {
   try {
-   const res = await fetch('sites.json?t=' + Date.now());
     const res = await (async () => {
       try {
         const r = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/sites?t=' + Date.now(), { cache: 'no-store' });
