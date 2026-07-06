@@ -327,26 +327,33 @@ function closeFeedback() {
   document.getElementById('feedbackModal').classList.remove('show');
 }
  
-function submitFeedback() {
+async function submitFeedback() {
   const msg = document.getElementById('fbMessage').value.trim();
   if (!msg) { alert('请填写反馈内容！'); return; }
- 
-  const fb = {
-    id: String(Date.now()),
+
+  const payload = {
     name: document.getElementById('fbName').value.trim() || '匿名',
     url: document.getElementById('fbUrl').value.trim(),
-    message: msg,
-    time: new Date().toLocaleString('zh-CN'),
-    read: false
+    message: msg
   };
- 
-  const list = JSON.parse(localStorage.getItem('nav_feedbacks') || '[]');
-  list.push(fb);
-  localStorage.setItem('nav_feedbacks', JSON.stringify(list));
- 
-  document.getElementById('fbForm').style.display = 'none';
-  document.getElementById('fbSuccess').style.display = 'block';
-  setTimeout(closeFeedback, 2000);
+
+  try {
+    const res = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert('提交失败：' + (err.error || res.status));
+      return;
+    }
+    document.getElementById('fbForm').style.display = 'none';
+    document.getElementById('fbSuccess').style.display = 'block';
+    setTimeout(closeFeedback, 2000);
+  } catch (e) {
+    alert('提交失败，请稍后再试。');
+  }
 }
  
 // Close modal on backdrop click

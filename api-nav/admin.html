@@ -474,19 +474,39 @@ async function saveAnnounceAndPublish() {
 }
 
 // ─── Feedback ─────────────────────────────────────
-function loadFeedback() {
-  var raw = localStorage.getItem('nav_feedbacks');
-  var list = raw ? JSON.parse(raw) : [];
+async function loadFeedback() {
+  var adminKey = localStorage.getItem('nav_admin_key') || '';
   var badge = document.getElementById('fbBadge');
+  var el = document.getElementById('feedbackList');
+
+  if (!adminKey) {
+    badge.style.display = 'none';
+    el.innerHTML = '<div style="color:var(--muted);font-size:.84rem;padding:8px">请先在「系统配置」中保存 Worker 管理密钥后查看反馈。</div>';
+    return;
+  }
+
+  var list = [];
+  try {
+    var res = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/feedback', {
+      headers: { 'X-Admin-Key': adminKey }
+    });
+    if (!res.ok) throw new Error(String(res.status));
+    list = await res.json();
+  } catch (e) {
+    badge.style.display = 'none';
+    el.innerHTML = '<div style="color:var(--danger);font-size:.84rem;padding:8px">反馈数据读取失败，请检查 Worker 管理密钥。</div>';
+    return;
+  }
+
   var unread = list.filter(function(f){ return !f.read; }).length;
   badge.style.display = unread > 0 ? 'inline' : 'none';
   badge.textContent = unread;
 
-  var el = document.getElementById('feedbackList');
   if (!list.length) {
     el.innerHTML = '<div style="color:var(--muted);font-size:.84rem;padding:8px">暂无投稿反馈。</div>';
     return;
   }
+
   el.innerHTML = list.slice().reverse().map(function(f) {
     return '<div class="fb-item">' +
       '<div class="fb-item-header">' +
@@ -502,30 +522,47 @@ function loadFeedback() {
       '</div>' +
     '</div>';
   }).join('');
-
-  list.forEach(function(f){ f.read = true; });
-  localStorage.setItem('nav_feedbacks', JSON.stringify(list));
-  badge.style.display = 'none';
 }
 
-function markRead(id) {
-  var list = JSON.parse(localStorage.getItem('nav_feedbacks') || '[]');
+async function fetchFeedbackList() {
+  var adminKey = localStorage.getItem('nav_admin_key') || '';
+  if (!adminKey) return [];
+  var res = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/feedback', {
+    headers: { 'X-Admin-Key': adminKey }
+  });
+  return res.ok ? await res.json() : [];
+}
+
+async function saveFeedback(list) {
+  var adminKey = localStorage.getItem('nav_admin_key') || '';
+  if (!adminKey) return false;
+  var res = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/feedback', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey },
+    body: JSON.stringify(list)
+  });
+  return res.ok;
+}
+
+async function markRead(id) {
+  var list = await fetchFeedbackList();
   var f = list.find(function(x){ return x.id === id; });
   if (f) f.read = true;
-  localStorage.setItem('nav_feedbacks', JSON.stringify(list));
+  await saveFeedback(list);
   loadFeedback();
 }
 
-function deleteFeedback(id) {
+async function deleteFeedback(id) {
   if (!confirm('确定删除这条反馈吗？')) return;
-  var list = JSON.parse(localStorage.getItem('nav_feedbacks') || '[]').filter(function(x){ return x.id !== id; });
-  localStorage.setItem('nav_feedbacks', JSON.stringify(list));
+  var list = await fetchFeedbackList();
+  list = list.filter(function(x){ return x.id !== id; });
+  await saveFeedback(list);
   loadFeedback();
 }
 
-function clearAllFeedback() {
+async function clearAllFeedback() {
   if (!confirm('确定清空所有投稿反馈记录吗？')) return;
-  localStorage.removeItem('nav_feedbacks');
+  await saveFeedback([]);
   loadFeedback();
 }
 

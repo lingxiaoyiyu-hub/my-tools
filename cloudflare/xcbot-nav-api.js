@@ -1,6 +1,8 @@
+const ALLOWED_ORIGIN = 'https://xcbot.cyou';
+
 const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Key',
   'Access-Control-Max-Age': '86400',
 };
@@ -40,6 +42,13 @@ function normalizePayload(payload) {
   };
 }
 
+async function getFeedbacks(env) {
+  const raw = await env.NAV_KV.get('feedbacks');
+  if (!raw) return [];
+  const parsed = JSON.parse(raw);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -57,9 +66,7 @@ export default {
       try {
         const data = await getSites(env);
         return json(data, {
-          headers: {
-            'Cache-Control': 'public, max-age=30',
-          },
+          headers: { 'Cache-Control': 'public, max-age=30' },
         });
       } catch (error) {
         return json({ error: 'Failed to read navigation data.' }, { status: 500 });
@@ -70,13 +77,78 @@ export default {
       if (!requireAdmin(request, env)) {
         return json({ error: 'Unauthorized.' }, { status: 401 });
       }
-
       try {
         const payload = normalizePayload(await request.json());
         await env.NAV_KV.put('sites', JSON.stringify(payload, null, 2));
         return json({ ok: true, updatedAt: new Date().toISOString(), count: payload.sites.length });
       } catch (error) {
         return json({ error: 'Invalid navigation data.' }, { status: 400 });
+      }
+    }
+
+    if (pathname === '/feedback' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const message = (body.message || '').toString().trim();
+        if (!message) {
+          return json({ error: '请填写反馈内容。' }, { status: 400 });
+        }
+        if (message.length > 1000) {
+          return json({ error: '反馈内容过长，请控制在 1000 字以内。' }, { status: 400 });
+        }
+
+        const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+        const rlKey = 'rl:feedback:' + ip;
+        const rlRaw = await env.NAV_KV.get(rlKey);
+        const count = rlRaw ? parseInt(rlRaw, 10) : 0;
+        if (count >= 5) {
+          return json({ error: '提交太频繁，请稍后再试。' }, { status: 429 });
+        }
+        await env.NAV_KV.put(rlKey, String(count + 1), { expirationTtl: 60 });
+
+        const now = new Date();
+        const entry = {
+          id: String(now.getTime()),
+          time: now.toISOString(),
+          name: (body.name || '匿名').toString().trim().slice(0, 50) || '匿名',
+          url: (body.url || '').toString().trim().slice(0, 500),
+          message,
+          read: false,
+        };
+
+        const list = await getFeedbacks(env);
+        list.push(entry);
+        await env.NAV_KV.put('feedbacks', JSON.stringify(list, null, 2));
+        return json({ ok: true, id: entry.id }, { status: 201 });
+      } catch (error) {
+        return json({ error: 'Invalid request.' }, { status: 400 });
+      }
+    }
+
+    if (pathname === '/feedback' && request.method === 'GET') {
+      if (!requireAdmin(request, env)) {
+        return json({ error: 'Unauthorized.' }, { status: 401 });
+      }
+      try {
+        return json(await getFeedbacks(env));
+      } catch (error) {
+        return json({ error: 'Failed to read feedback data.' }, { status: 500 });
+      }
+    }
+
+    if (pathname === '/feedback' && request.method === 'PUT') {
+      if (!requireAdmin(request, env)) {
+        return json({ error: 'Unauthorized.' }, { status: 401 });
+      }
+      try {
+        const list = await request.json();
+        if (!Array.isArray(list)) {
+          return json({ error: 'Expected an array.' }, { status: 400 });
+        }
+        await env.NAV_KV.put('feedbacks', JSON.stringify(list, null, 2));
+        return json({ ok: true, count: list.length });
+      } catch (error) {
+        return json({ error: 'Invalid feedback data.' }, { status: 400 });
       }
     }
 
