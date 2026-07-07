@@ -133,6 +133,17 @@
       max-width:1180px; margin:0 auto; padding:0 24px;
       display:grid; grid-template-columns:1fr 300px; gap:28px; align-items:start;
     }
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
 
     /* Promo banner (featured membership card) */
     .promo-banner{
@@ -451,6 +462,7 @@
 
 <div class="main">
   <div class="main-inner">
+    <h1 class="sr-only">XCbot 工具箱 - 免费 AI 公益站导航、游戏资源与提示词</h1>
 
     <!-- AI 会员小铺（正式入口 → 小铺） -->
     <div class="promo-banner" id="promoBanner">
