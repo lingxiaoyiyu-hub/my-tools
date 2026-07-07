@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://xcbot.cyou/sitemap.xml
+Sitemap: https://xcbot.cyou/sitemap.txt
