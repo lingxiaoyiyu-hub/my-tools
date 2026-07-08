@@ -46,12 +46,13 @@ function publicCommonPayload(data) {
     announcement: payload.announcement,
     sites: payload.sites.map(site => ({
       id: (site.id || '').toString(),
+      name: (site.name || '').toString(),
       category: (site.category || '').toString(),
       description: (site.description || '').toString(),
       tags: Array.isArray(site.tags) ? site.tags.map(tag => tag.toString()) : [],
       pinned: Boolean(site.pinned),
       date: (site.date || '').toString(),
-    })).filter(site => site.id),
+    })).filter(site => site.id && site.name),
   };
 }
 
