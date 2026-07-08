@@ -40,6 +40,22 @@ async function getCommonSites(env) {
   return JSON.parse(raw);
 }
 
+function publicCommonPayload(data) {
+  const payload = normalizePayload(data);
+  return {
+    announcement: payload.announcement,
+    sites: payload.sites.map(site => ({
+      id: (site.id || '').toString(),
+      name: (site.name || '').toString(),
+      category: (site.category || '').toString(),
+      description: (site.description || '').toString(),
+      tags: Array.isArray(site.tags) ? site.tags.map(tag => tag.toString()) : [],
+      pinned: Boolean(site.pinned),
+      date: (site.date || '').toString(),
+    })).filter(site => site.id && site.name),
+  };
+}
+
 function normalizePayload(payload) {
   if (Array.isArray(payload)) {
     return { announcement: { enabled: false, text: '' }, sites: payload };
@@ -117,11 +133,30 @@ export default {
       }
     }
 
+    if (pathname === '/common-sites/open' && request.method === 'GET') {
+      try {
+        const id = (url.searchParams.get('id') || '').toString();
+        const data = normalizePayload(await getCommonSites(env));
+        const site = data.sites.find(item => (item.id || '').toString() === id);
+        if (!site || !site.url) {
+          return json({ error: 'Link not found.' }, { status: 404 });
+        }
+        const target = new URL(site.url);
+        if (target.protocol !== 'http:' && target.protocol !== 'https:') {
+          return json({ error: 'Invalid link.' }, { status: 400 });
+        }
+        return Response.redirect(target.toString(), 302);
+      } catch (error) {
+        return json({ error: 'Invalid link.' }, { status: 400 });
+      }
+    }
+
     if (pathname === '/common-sites' && request.method === 'GET') {
       try {
-        const data = await getCommonSites(env);
-        return json(data, {
-          headers: { 'Cache-Control': 'public, max-age=30' },
+        const data = normalizePayload(await getCommonSites(env));
+        const isAdmin = requireAdmin(request, env);
+        return json(isAdmin ? data : publicCommonPayload(data), {
+          headers: { 'Cache-Control': isAdmin ? 'no-store' : 'public, max-age=30' },
         });
       } catch (error) {
         return json({ error: 'Failed to read common navigation data.' }, { status: 500 });
