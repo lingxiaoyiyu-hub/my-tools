@@ -1,5 +1,6 @@
 https://xcbot.cyou/
 https://xcbot.cyou/api-nav/
+https://xcbot.cyou/common-nav/
 https://xcbot.cyou/games/
 https://xcbot.cyou/prompts/
 https://xcbot.cyou/tutorials/

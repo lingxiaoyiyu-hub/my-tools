@@ -835,8 +835,9 @@ body.tool-page #editor{
   box-sizing:border-box !important;
 }
 
-/* api-nav 筛选栏不是内容卡片，去掉统一容器补全带来的外框。 */
-body.tool-page.api-nav-page .controls-row{
+/* 导航页筛选栏不是内容卡片，去掉统一容器补全带来的外框。 */
+body.tool-page.api-nav-page .controls-row,
+body.tool-page.common-nav-page .controls-row{
   background:transparent !important;
   border:none !important;
   border-radius:0 !important;

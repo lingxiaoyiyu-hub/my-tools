@@ -32,6 +32,14 @@ async function getSites(env) {
   return JSON.parse(raw);
 }
 
+async function getCommonSites(env) {
+  const raw = await env.NAV_KV.get('commonSites');
+  if (!raw) {
+    return { announcement: { enabled: false, text: '' }, sites: [] };
+  }
+  return JSON.parse(raw);
+}
+
 function normalizePayload(payload) {
   if (Array.isArray(payload)) {
     return { announcement: { enabled: false, text: '' }, sites: payload };
@@ -106,6 +114,30 @@ export default {
         return json({ ok: true, updatedAt: new Date().toISOString(), count: payload.sites.length });
       } catch (error) {
         return json({ error: 'Invalid navigation data.' }, { status: 400 });
+      }
+    }
+
+    if (pathname === '/common-sites' && request.method === 'GET') {
+      try {
+        const data = await getCommonSites(env);
+        return json(data, {
+          headers: { 'Cache-Control': 'public, max-age=30' },
+        });
+      } catch (error) {
+        return json({ error: 'Failed to read common navigation data.' }, { status: 500 });
+      }
+    }
+
+    if (pathname === '/common-sites' && request.method === 'PUT') {
+      if (!requireAdmin(request, env)) {
+        return json({ error: 'Unauthorized.' }, { status: 401 });
+      }
+      try {
+        const payload = normalizePayload(await request.json());
+        await env.NAV_KV.put('commonSites', JSON.stringify(payload, null, 2));
+        return json({ ok: true, updatedAt: new Date().toISOString(), count: payload.sites.length });
+      } catch (error) {
+        return json({ error: 'Invalid common navigation data.' }, { status: 400 });
       }
     }
 

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常用网站导航 - 接码、机场、工具站等常用网站收藏 | XCbot 工具箱</title>
+<meta name="description" content="XCbot 常用网站导航收录接码、机场、梯子、工具站和常用资源站，支持搜索与自定义分类筛选，方便快速找到好用网站入口。">
+<link rel="canonical" href="https://xcbot.cyou/common-nav/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="XCbot 工具箱">
+<meta property="og:url" content="https://xcbot.cyou/common-nav/">
+<meta property="og:title" content="常用网站导航 - 接码、机场、工具站等常用网站收藏">
+<meta property="og:description" content="收录接码、机场、梯子、工具站和常用资源站，支持搜索与自定义分类筛选。">
+<meta property="og:image" content="https://xcbot.cyou/docs/screenshots/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="常用网站导航 - 接码、机场、工具站等常用网站收藏">
+<meta name="twitter:description" content="接码、机场、梯子、工具站和常用资源站入口整理。">
+<meta name="twitter:image" content="https://xcbot.cyou/docs/screenshots/og-image.png">
+<style>
+:root{--bg:#090d16;--card:#131b2e;--cb:#1e293b;--primary:#3b82f6;--phover:#2563eb;--text:#f8fafc;--muted:#64748b;--success:#10b981;--danger:#ef4444;--warn:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+ 
+/* Header */
+header{height:56px;border-bottom:1px solid var(--cb);display:flex;align-items:center;padding:0 24px;background:rgba(9,13,22,.8);backdrop-filter:blur(12px);z-index:10;position:sticky;top:0}
+.logo{font-size:1.05rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:8px;text-decoration:none}
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav-link{color:var(--muted);font-size:.88rem;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-link:hover{color:var(--primary)}
+ 
+/* Main */
+.container{max-width:1000px;width:100%;margin:0 auto;padding:32px 24px;flex:1;display:flex;flex-direction:column;gap:24px}
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.page-title{font-size:1.5rem;font-weight:700}
+.page-sub{font-size:.85rem;margin-top:4px;line-height:1.5}
+ 
+/* Controls */
+.controls-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--cb);padding-bottom:16px}
+.tags-filter{display:flex;gap:8px;flex-wrap:wrap}
+.tag-btn{background:rgba(255,255,255,.03);border:1px solid var(--cb);color:var(--muted);padding:6px 14px;border-radius:99px;font-size:.8rem;cursor:pointer;transition:all .2s}
+.tag-btn:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.tag-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.search-actions{display:flex;align-items:center;gap:8px;max-width:430px;width:100%}
+.search-box{position:relative;flex:1;min-width:220px}
+.search-input{width:100%;background:var(--card);border:1px solid var(--cb);color:var(--text);border-radius:99px;padding:8px 16px 8px 36px;font-size:.88rem;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--primary)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.announce-btn{display:none;align-items:center;gap:5px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.32);color:var(--warn);border-radius:99px;padding:8px 13px;font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.announce-btn:hover{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.48)}
+ 
+/* Grid */
+.sites-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.site-card{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative}
+.site-card:hover{transform:translateY(-2px);border-color:rgba(59,130,246,.4);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between}
+.site-name-area{display:flex;flex-direction:column;gap:2px}
+.site-title{font-size:1.1rem;font-weight:700}
+.site-domain{font-size:.76rem;color:var(--muted)}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap}
+.card-tag{font-size:.65rem;padding:2px 6px;border-radius:4px;background:rgba(59,130,246,.1);color:var(--primary);border:1.5px solid rgba(59,130,246,.2);font-weight:600}
+.pinned-tag{background:rgba(245,158,11,.16);color:var(--warn);border-color:rgba(245,158,11,.38)}
+.site-desc{font-size:.8rem;color:#94a3b8;line-height:1.5;flex:1}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.latency-indicator{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+.latency-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);display:inline-block}
+.latency-dot.online{background:var(--success)}
+.latency-dot.offline{background:var(--danger)}
+.visit-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text);border-radius:8px;padding:6px 12px;font-size:.78rem;text-decoration:none;cursor:pointer;transition:all .2s;font-weight:600}
+.visit-btn:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+.test-btn{background:none;border:none;color:var(--muted);font-size:.72rem;cursor:pointer;text-decoration:underline}
+.test-btn:hover{color:var(--primary)}
+ 
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:var(--card);border:1px solid var(--cb);border-radius:20px;padding:32px;width:480px;max-width:95vw;display:flex;flex-direction:column;gap:20px;box-shadow:0 24px 64px rgba(0,0,0,.5);position:relative}
+.announce-modal{border-color:rgba(245,158,11,.45);background:#111827}
+.announce-modal .modal-title{color:#fff;font-size:1.16rem}
+.announce-content{font-size:.95rem;font-weight:600;color:#fff;line-height:1.85;white-space:pre-wrap;background:#0f172a;border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:16px 18px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+.modal-title{font-size:1.1rem;font-weight:800;color:var(--text)}
+.modal-sub{font-size:.84rem;color:var(--muted);line-height:1.6;margin-top:-12px}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;padding:4px}
+.modal-close:hover{color:var(--text)}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.form-input,.form-textarea{background:rgba(255,255,255,.04);border:1px solid var(--cb);border-radius:8px;color:var(--text);padding:10px 12px;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s;width:100%}
+.form-input:focus,.form-textarea:focus{border-color:var(--primary)}
+.form-textarea{resize:vertical}
+.btn-row{display:flex;gap:10px}
+.btn{padding:10px 20px;border-radius:8px;font-size:.88rem;font-weight:600;border:none;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--phover)}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--cb)}.btn-ghost:hover{background:rgba(255,255,255,.1)}
+ 
+/* Footer */
+footer{padding:24px;text-align:center;border-top:1px solid var(--cb);font-size:.78rem;color:var(--muted)}
+</style>
+<link rel="stylesheet" href="../shared-white.css">
+  <link rel="stylesheet" href="../tool-theme.css?v=header-right-20260705">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+</head>
+<body class="tool-page common-nav-page">
+ 
+<header>
+  <div class="header-inner">
+    <a href="../" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 28 28" fill="none">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2b2b30"></stop>
+              <stop offset="1" stop-color="#0a0a0a"></stop>
+            </linearGradient>
+            <linearGradient id="logoGloss" x1="0" y1="0" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#ffffff" stop-opacity="0.35"></stop>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+          <rect width="28" height="28" rx="8" fill="url(#logoGrad)"></rect>
+          <rect width="28" height="14" rx="8" fill="url(#logoGloss)"></rect>
+          <path d="M9 9.5l10 9M19 9.5L9 18.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round"></path>
+          <circle cx="14" cy="6.4" r="1.4" fill="#ff8a4c"></circle>
+        </svg>
+      </span>
+      <span>XCbot 工具箱</span>
+    </a>
+    <div class="header-right">
+      <a href="https://github.com/lingxiaoyiyu-hub/xcbot-tools" target="_blank" rel="noopener noreferrer" class="shop-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11 11 0 0 1 12 6.05c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.35.78 1.05.78 2.12v3.18c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path></svg>
+        <span>GitHub</span>
+      </a>
+      <a href="https://t.me/xcaiplus" target="_blank" rel="noopener noreferrer" class="shop-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="currentColor"><path d="M21.9 4.2 18.7 19c-.2 1-.8 1.2-1.6.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.6 12.7 1.8 11.2c-1-.3-1-1 .2-1.5L20.7 2.5c.9-.3 1.6.2 1.2 1.7z"></path></svg>
+        <span>Telegram</span>
+      </a>
+      <a href="https://pay.ldxp.cn/shop/xcplus" target="_blank" class="shop-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="11" rx="2"></rect><path d="M14 4l6 6-7.5 7.5"></path><circle cx="17" cy="6" r="1" fill="currentColor" stroke="none"></circle></svg>
+        <span>会员小铺</span>
+      </a>
+      <a href="admin.html" class="shop-btn admin-btn" title="后台管理">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>后台管理</span>
+      </a>
+    </div>
+  </div>
+</header>
+ 
+<div class="container">
+  <div class="page-head">
+    <div class="page-head-text">
+      <h1 class="page-title">常用网站导航</h1>
+      <p class="page-sub">收录接码、机场、梯子、工具站等常用网站，按自定义分类整理，方便快速找到入口。</p>
+    </div>
+  </div>
+ 
+  <div class="controls-row">
+    <div class="tags-filter" id="tagsFilter">
+      <button class="tag-btn active" data-tag="全部">全部</button>
+    </div>
+    <div class="search-actions">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="搜索网站、分类或说明...">
+      </div>
+      <button id="announceBtn" class="announce-btn" onclick="openAnnouncement()" title="查看公告">公告</button>
+    </div>
+  </div>
+ 
+  <div class="sites-grid" id="sitesGrid"></div>
+</div>
+ 
+<footer>
+  <p>&copy; 2026 常用网站导航. 所有收录信息仅作入口整理，请自行判断网站可用性与使用风险。</p>
+</footer>
+ 
+<!-- Announcement Modal -->
+<div class="modal-overlay" id="announcementModal">
+  <div class="modal announce-modal">
+    <button class="modal-close" onclick="closeAnnouncement()">&times;</button>
+    <div class="modal-title">站点公告</div>
+    <div class="announce-content" id="announcementText"></div>
+  </div>
+</div>
+
+<script>
+let allSites = [];
+let activeTag = '全部';
+ 
+// ─── Load ─────────────────────────────────────────
+async function loadSites() {
+  try {
+    const res = await (async () => {
+      try {
+        const r = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/common-sites?t=' + Date.now(), { cache: 'no-store' });
+        if (r.ok) return r;
+        throw new Error('Worker unavailable');
+      } catch {
+        return await fetch('sites.json?t=' + Date.now());
+      }
+    })();
+    const data = await res.json();
+ 
+    // New format: { announcement, sites }
+    if (Array.isArray(data)) {
+      allSites = data;
+    } else {
+      allSites = data.sites || [];
+      // Show announcement button if enabled
+      const ann = data.announcement;
+      if (ann && ann.enabled && ann.text) {
+        document.getElementById('announcementText').textContent = ann.text;
+        document.getElementById('announceBtn').style.display = 'inline-flex';
+        setTimeout(openAnnouncement, 350);
+      }
+    }
+    renderCategoryFilters();
+    renderSites();
+  } catch (err) {
+    document.getElementById('sitesGrid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:40px">数据文件加载失败，请稍后再试。</div>';
+  }
+}
+ 
+// ─── Render ───────────────────────────────────────
+function renderSites() {
+  const grid = document.getElementById('sitesGrid');
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = allSites.filter(s => {
+    const category = s.category || '未分类';
+    const tags = s.tags || [];
+    const matchTag = activeTag === '全部' || category === activeTag;
+    const text = [s.name, s.domain, s.url, s.description, category].concat(tags).join(' ').toLowerCase();
+    const matchQ = !q || text.includes(q);
+    return matchTag && matchQ;
+  }).sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned) || String(a.name || '').localeCompare(String(b.name || ''), 'zh-CN'));
+ 
+  if (!filtered.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">没有符合条件的站点。</div>';
+    return;
+  }
+ 
+  grid.innerHTML = filtered.map(s => `
+    <div class="site-card">
+      <div class="card-header">
+        <div class="site-name-area">
+          <span class="site-title">${esc(s.name)}</span>
+          <span class="site-domain">${esc(s.domain)}</span>
+        </div>
+        <div class="card-tags">
+          ${s.pinned ? '<span class="card-tag pinned-tag">置顶</span>' : ''}
+          <span class="card-tag">${esc(s.category || '未分类')}</span>
+          ${(s.tags||[]).map(t => '<span class="card-tag">' + esc(t) + '</span>').join('')}
+        </div>
+      </div>
+      <div class="site-desc">${esc(s.description)}</div>
+      <div class="card-footer">
+        <div class="latency-indicator" id="lat-${s.id}">
+          <span class="latency-dot"></span>
+          <button class="test-btn" onclick="testPing('${s.id}','${esc(s.url)}')">联通性测试</button>
+        </div>
+        <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" class="visit-btn">打开链接</a>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+// ─── Ping ─────────────────────────────────────────
+async function testPing(id, url) {
+  const el = document.getElementById('lat-' + id);
+  if (!el) return;
+  el.innerHTML = '<span class="latency-dot"></span><span style="color:var(--muted)">测试中...</span>';
+  const t0 = Date.now();
+  try {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 6000);
+    await fetch(url, { mode: 'no-cors', cache: 'no-cache', signal: ctrl.signal });
+    clearTimeout(tid);
+    const ms = Date.now() - t0;
+    el.innerHTML = '<span class="latency-dot online"></span><span style="color:var(--success)">在线 (' + ms + 'ms)</span>';
+  } catch {
+    el.innerHTML = '<span class="latency-dot offline"></span><span style="color:var(--danger)">超时 / 离线</span>';
+  }
+}
+ 
+// ─── Announcement Modal ───────────────────────────
+function openAnnouncement() {
+  document.getElementById('announcementModal').classList.add('show');
+}
+
+function closeAnnouncement() {
+  document.getElementById('announcementModal').classList.remove('show');
+}
+
+// Close modal on backdrop click
+document.getElementById('announcementModal').addEventListener('click', function(e) {
+  if (e.target === this) closeAnnouncement();
+});
+ 
+// ─── Helpers ──────────────────────────────────────
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCategoryFilters() {
+  const wrap = document.getElementById('tagsFilter');
+  const categories = Array.from(new Set(allSites.map(s => (s.category || '未分类').trim()).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'zh-CN'));
+  wrap.innerHTML = '<button class="tag-btn active" data-tag="全部">全部</button>' + categories.map(c => '<button class="tag-btn" data-tag="' + esc(c) + '">' + esc(c) + '</button>').join('');
+  bindCategoryButtons();
+}
+ 
+// ─── Event Listeners ──────────────────────────────
+document.getElementById('searchInput').addEventListener('input', renderSites);
+function bindCategoryButtons() {
+  document.querySelectorAll('#tagsFilter .tag-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      document.querySelectorAll('#tagsFilter .tag-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      activeTag = e.target.dataset.tag;
+      renderSites();
+    });
+  });
+}
+
+bindCategoryButtons();
+ 
+window.onload = loadSites;
+</script>
+</body>
+</html>
