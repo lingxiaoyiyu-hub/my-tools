@@ -229,21 +229,23 @@ function renderSites() {
     const category = s.category || '未分类';
     const tags = s.tags || [];
     const matchTag = activeTag === '全部' || category === activeTag;
-    const text = [s.name, s.description, category].concat(tags).join(' ').toLowerCase();
+    const text = [s.description, category].concat(tags).join(' ').toLowerCase();
     const matchQ = !q || text.includes(q);
     return matchTag && matchQ;
-  }).sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned) || String(a.name || '').localeCompare(String(b.name || ''), 'zh-CN'));
+  }).sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned) ||
+    String(a.category || '').localeCompare(String(b.category || ''), 'zh-CN') ||
+    String(a.date || a.id || '').localeCompare(String(b.date || b.id || ''), 'zh-CN'));
  
   if (!filtered.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">没有符合条件的站点。</div>';
     return;
   }
  
-  grid.innerHTML = filtered.map(s => `
+  grid.innerHTML = filtered.map((s, index) => `
     <div class="site-card">
       <div class="card-header">
         <div class="site-name-area">
-          <span class="site-title">${esc(s.name)}</span>
+          <span class="site-title">${esc(getEntryTitle(s, index))}</span>
         </div>
         <div class="card-tags">
           ${s.pinned ? '<span class="card-tag pinned-tag">置顶</span>' : ''}
@@ -283,6 +285,11 @@ function getOpenUrl(site) {
   if (site.openUrl) return site.openUrl;
   if (site.id) return API_BASE + '/common-sites/open?id=' + encodeURIComponent(site.id);
   return site.url || '#';
+}
+
+function getEntryTitle(site, index) {
+  const category = site.category || '资源';
+  return category + '入口 ' + String(index + 1).padStart(2, '0');
 }
 
 function renderCategoryFilters() {
