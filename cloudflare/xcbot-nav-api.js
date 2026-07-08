@@ -40,6 +40,86 @@ async function getCommonSites(env) {
   return JSON.parse(raw);
 }
 
+function emptyCommonStats() {
+  return {
+    views: { total: 0, byDay: {} },
+    opens: { total: 0, byDay: {}, bySite: {} },
+    updatedAt: null,
+  };
+}
+
+function normalizeCommonStats(value) {
+  const base = emptyCommonStats();
+  if (!value || typeof value !== 'object') return base;
+  const views = value.views || {};
+  const opens = value.opens || {};
+  return {
+    views: {
+      total: Number(views.total || 0),
+      byDay: views.byDay && typeof views.byDay === 'object' ? views.byDay : {},
+    },
+    opens: {
+      total: Number(opens.total || 0),
+      byDay: opens.byDay && typeof opens.byDay === 'object' ? opens.byDay : {},
+      bySite: opens.bySite && typeof opens.bySite === 'object' ? opens.bySite : {},
+    },
+    updatedAt: value.updatedAt || null,
+  };
+}
+
+async function getCommonStats(env) {
+  const raw = await env.NAV_KV.get('commonStats');
+  if (!raw) return emptyCommonStats();
+  return normalizeCommonStats(JSON.parse(raw));
+}
+
+function todayKey() {
+  return new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().split('T')[0];
+}
+
+function bumpDay(bucket, day) {
+  bucket.byDay = bucket.byDay && typeof bucket.byDay === 'object' ? bucket.byDay : {};
+  bucket.byDay[day] = Number(bucket.byDay[day] || 0) + 1;
+}
+
+function trimDailyMap(map, keepDays = 90) {
+  const keys = Object.keys(map || {}).sort().slice(-keepDays);
+  return keys.reduce((out, key) => {
+    out[key] = Number(map[key] || 0);
+    return out;
+  }, {});
+}
+
+async function saveCommonStats(env, stats) {
+  stats.views.byDay = trimDailyMap(stats.views.byDay);
+  stats.opens.byDay = trimDailyMap(stats.opens.byDay);
+  Object.keys(stats.opens.bySite || {}).forEach(id => {
+    const site = stats.opens.bySite[id];
+    site.byDay = trimDailyMap(site.byDay || {});
+  });
+  stats.updatedAt = new Date().toISOString();
+  await env.NAV_KV.put('commonStats', JSON.stringify(stats, null, 2));
+}
+
+async function recordCommonStat(env, type, siteId = '') {
+  const stats = await getCommonStats(env);
+  const day = todayKey();
+  if (type === 'view') {
+    stats.views.total += 1;
+    bumpDay(stats.views, day);
+  }
+  if (type === 'open') {
+    const id = siteId.toString();
+    stats.opens.total += 1;
+    bumpDay(stats.opens, day);
+    stats.opens.bySite[id] = stats.opens.bySite[id] || { count: 0, byDay: {}, lastAt: null };
+    stats.opens.bySite[id].count = Number(stats.opens.bySite[id].count || 0) + 1;
+    bumpDay(stats.opens.bySite[id], day);
+    stats.opens.bySite[id].lastAt = new Date().toISOString();
+  }
+  await saveCommonStats(env, stats);
+}
+
 function publicCommonPayload(data) {
   const payload = normalizePayload(data);
   return {
@@ -145,9 +225,44 @@ export default {
         if (target.protocol !== 'http:' && target.protocol !== 'https:') {
           return json({ error: 'Invalid link.' }, { status: 400 });
         }
+        try {
+          await recordCommonStat(env, 'open', id);
+        } catch (error) {
+          // Statistics should never block a valid redirect.
+        }
         return Response.redirect(target.toString(), 302);
       } catch (error) {
         return json({ error: 'Invalid link.' }, { status: 400 });
+      }
+    }
+
+    if (pathname === '/common-sites/track' && request.method === 'POST') {
+      try {
+        const origin = request.headers.get('Origin') || '';
+        if (origin && origin !== ALLOWED_ORIGIN) {
+          return json({ error: 'Origin not allowed.' }, { status: 403 });
+        }
+        const body = await request.json().catch(() => ({}));
+        if ((body.type || body.event) !== 'view') {
+          return json({ error: 'Unsupported stats event.' }, { status: 400 });
+        }
+        await recordCommonStat(env, 'view');
+        return json({ ok: true });
+      } catch (error) {
+        return json({ error: 'Invalid stats event.' }, { status: 400 });
+      }
+    }
+
+    if (pathname === '/common-sites/stats' && request.method === 'GET') {
+      if (!requireAdmin(request, env)) {
+        return json({ error: 'Unauthorized.' }, { status: 401 });
+      }
+      try {
+        return json(await getCommonStats(env), {
+          headers: { 'Cache-Control': 'no-store' },
+        });
+      } catch (error) {
+        return json({ error: 'Failed to read stats.' }, { status: 500 });
       }
     }
 

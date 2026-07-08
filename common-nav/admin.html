@@ -63,6 +63,21 @@ header{height:56px;border-bottom:1px solid var(--border);display:flex;align-item
 .btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#059669}
 .btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#dc2626}
 .status-box{padding:12px;border-radius:8px;font-size:.82rem;line-height:1.6;background:rgba(255,255,255,.03);border:1px solid var(--border);display:none;white-space:pre-wrap}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat-card{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:14px}
+.stat-label{font-size:.74rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.stat-value{font-size:1.55rem;font-weight:800;margin-top:6px;color:var(--text);line-height:1.1}
+.stat-note{font-size:.76rem;color:var(--muted);line-height:1.6}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+.stats-table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:680px}
+.stats-table th,.stats-table td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.stats-table th{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:rgba(255,255,255,.03)}
+.stats-table tr:last-child td{border-bottom:none}
+.site-cell strong{display:block;font-size:.88rem;color:var(--text)}
+.site-cell span{display:block;font-size:.74rem;color:var(--muted);margin-top:3px}
+.num-cell{font-variant-numeric:tabular-nums;font-weight:700}
+@media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr}}
 hr.divider{border:none;border-top:1px solid var(--border);margin:4px 0}
 footer{text-align:center;padding:14px;font-size:.76rem;color:var(--muted);border-top:1px solid var(--border)}
 </style>
@@ -107,6 +122,7 @@ footer{text-align:center;padding:14px;font-size:.76rem;color:var(--muted);border
 
 <div class="tabs">
   <div class="tab active" onclick="switchTab('sites')">站点管理</div>
+  <div class="tab" onclick="switchTab('stats')">访问统计</div>
   <div class="tab" onclick="switchTab('announce')">公告管理</div>
   <div class="tab" onclick="switchTab('settings')">系统配置</div>
 </div>
@@ -167,6 +183,36 @@ footer{text-align:center;padding:14px;font-size:.76rem;color:var(--muted);border
   </div>
 </div>
 
+<div class="tab-panel" id="tab-stats">
+  <div class="grid1">
+    <div class="panel">
+      <div class="panel-title">
+        <span>访问统计</span>
+        <button class="btn btn-ghost btn-sm" onclick="refreshStats()">刷新</button>
+      </div>
+      <div style="font-size:.84rem;color:var(--muted);line-height:1.6">
+        这里统计常用网站导航前台访问量，以及每个站点「打开链接」的点击次数。统计不记录用户身份、IP 或设备指纹。
+      </div>
+      <div class="stats-grid" id="statsSummary"></div>
+      <div class="stat-note" id="statsUpdated"></div>
+      <div class="table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>站点</th>
+              <th>累计打开</th>
+              <th>今日打开</th>
+              <th>最后打开</th>
+            </tr>
+          </thead>
+          <tbody id="statsTableBody"></tbody>
+        </table>
+      </div>
+      <div class="status-box" id="statusBoxStats"></div>
+    </div>
+  </div>
+</div>
+
 <div class="tab-panel" id="tab-announce">
   <div class="grid1">
     <div class="panel dashed-warn">
@@ -223,6 +269,7 @@ footer{text-align:center;padding:14px;font-size:.76rem;color:var(--muted);border
 <script>
 var API_BASE = 'https://xcbot-nav-api.lingxiaoyiyu.workers.dev';
 var db = { announcement: { enabled: false, text: '' }, sites: [] };
+var stats = defaultStats();
 var currentId = null;
 var announceEnabled = false;
 var ADMIN_HASH = 'a0d848a9b27fd6ff66e2a91a5ccbec2a3e25512c7ada69eceb52ce8b756ab59d';
@@ -255,6 +302,7 @@ async function checkLogin() {
       document.getElementById('adminContent').style.display = 'flex';
       loadConfig();
       loadData();
+      loadStats();
     } else {
       errEl.textContent = '密码错误，请重试。';
       document.getElementById('loginInput').value = '';
@@ -269,13 +317,14 @@ async function checkLogin() {
 window.onload = function(){ document.getElementById('loginInput').focus(); };
 
 function switchTab(name) {
-  var panels = ['sites', 'announce', 'settings'];
+  var panels = ['sites', 'stats', 'announce', 'settings'];
   document.querySelectorAll('.tab').forEach(function(t, i) {
     t.classList.toggle('active', panels[i] === name);
   });
   document.querySelectorAll('.tab-panel').forEach(function(p) {
     p.classList.toggle('active', p.id === 'tab-' + name);
   });
+  if (name === 'stats') loadStats();
 }
 
 function loadConfig() {
@@ -286,6 +335,7 @@ function saveConfig() {
   localStorage.setItem('nav_admin_key', document.getElementById('workerAdminKey').value.trim());
   showLog('statusBoxSettings', '配置已保存到本地浏览器。', 'success');
   loadData();
+  loadStats();
 }
 
 async function loadData() {
@@ -295,6 +345,7 @@ async function loadData() {
       db = { announcement: { enabled: false, text: '' }, sites: [] };
       renderList();
       renderAnnounce();
+      renderStats();
       showLog('statusBox', '请先在「系统配置」填写并保存 Worker 管理密钥，后台需要密钥才能读取完整跳转地址。', 'info');
       return;
     }
@@ -313,6 +364,7 @@ async function loadData() {
     db.sites = Array.isArray(db.sites) ? db.sites : [];
     renderList();
     renderAnnounce();
+    renderStats();
   } catch (e) {
     showLog('statusBox', '无法读取数据，请稍后再试。', 'error');
   }
@@ -410,6 +462,108 @@ function renderAnnounce() {
   btn.classList.toggle('on', announceEnabled);
   document.getElementById('announceToggleLabel').textContent = announceEnabled ? '已开启（显示在前台）' : '已关闭';
   document.getElementById('announceText').value = (db.announcement && db.announcement.text) || '';
+}
+
+function defaultStats() {
+  return { views: { total: 0, byDay: {} }, opens: { total: 0, byDay: {}, bySite: {} }, updatedAt: null };
+}
+
+function normalizeStats(raw) {
+  raw = raw && typeof raw === 'object' ? raw : {};
+  var views = raw.views || {};
+  var opens = raw.opens || {};
+  return {
+    views: { total: Number(views.total || 0), byDay: views.byDay || {} },
+    opens: { total: Number(opens.total || 0), byDay: opens.byDay || {}, bySite: opens.bySite || {} },
+    updatedAt: raw.updatedAt || null
+  };
+}
+
+async function loadStats() {
+  var adminKey = localStorage.getItem('nav_admin_key') || '';
+  if (!adminKey) {
+    stats = defaultStats();
+    renderStats();
+    showLog('statusBoxStats', '请先在「系统配置」填写并保存 Worker 管理密钥，才能读取统计数据。', 'info');
+    return;
+  }
+  try {
+    var res = await fetch(API_BASE + '/common-sites/stats?t=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'X-Admin-Key': adminKey }
+    });
+    if (!res.ok) {
+      var err = await res.json().catch(function(){ return {}; });
+      throw new Error(err.error || String(res.status));
+    }
+    stats = normalizeStats(await res.json());
+    renderStats();
+    document.getElementById('statusBoxStats').style.display = 'none';
+  } catch (e) {
+    showLog('statusBoxStats', '统计数据读取失败：' + e.message, 'error');
+  }
+}
+
+function refreshStats() {
+  loadData();
+  loadStats();
+}
+
+function todayLocalKey() {
+  return new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().split('T')[0];
+}
+
+function dayCount(bucket, day) {
+  return Number(((bucket && bucket.byDay) || {})[day] || 0);
+}
+
+function statCard(label, value) {
+  return '<div class="stat-card"><div class="stat-label">' + esc(label) + '</div><div class="stat-value">' + Number(value || 0).toLocaleString('zh-CN') + '</div></div>';
+}
+
+function formatDateTime(value) {
+  if (!value) return '暂无';
+  var d = new Date(value);
+  if (isNaN(d.getTime())) return value;
+  return d.toLocaleString('zh-CN', { hour12: false });
+}
+
+function renderStats() {
+  var summary = document.getElementById('statsSummary');
+  var updated = document.getElementById('statsUpdated');
+  var body = document.getElementById('statsTableBody');
+  if (!summary || !updated || !body) return;
+  var day = todayLocalKey();
+  var views = stats.views || { total: 0, byDay: {} };
+  var opens = stats.opens || { total: 0, byDay: {}, bySite: {} };
+  summary.innerHTML =
+    statCard('累计访问', views.total) +
+    statCard('今日访问', dayCount(views, day)) +
+    statCard('累计打开链接', opens.total) +
+    statCard('今日打开链接', dayCount(opens, day));
+  updated.textContent = stats.updatedAt ? '最后更新：' + formatDateTime(stats.updatedAt) : '暂无统计数据。';
+
+  var bySite = opens.bySite || {};
+  var rows = db.sites.map(function(site) {
+    var item = bySite[site.id] || {};
+    return {
+      site: site,
+      count: Number(item.count || 0),
+      today: Number(((item.byDay || {})[day]) || 0),
+      lastAt: item.lastAt || ''
+    };
+  }).sort(function(a, b) {
+    return b.count - a.count || String(a.site.name || '').localeCompare(String(b.site.name || ''), 'zh-CN');
+  });
+
+  body.innerHTML = rows.map(function(row) {
+    return '<tr>' +
+      '<td class="site-cell"><strong>' + esc(row.site.name || '未命名站点') + '</strong><span>' + esc(row.site.category || '未分类') + ' · ' + esc(row.site.domain || '') + '</span></td>' +
+      '<td class="num-cell">' + row.count.toLocaleString('zh-CN') + '</td>' +
+      '<td class="num-cell">' + row.today.toLocaleString('zh-CN') + '</td>' +
+      '<td>' + esc(formatDateTime(row.lastAt)) + '</td>' +
+    '</tr>';
+  }).join('') || '<tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">暂无站点数据。</td></tr>';
 }
 
 function toggleAnnounce() {
