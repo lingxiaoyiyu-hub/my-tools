@@ -19,7 +19,9 @@
   'use strict';
 
   var DATA_URL = './data/aiart-prompts.json';
+  var INITIAL_DATA_URL = './data/aiart-prompts-first.json';
   var allItems = [];
+  var initialItems = [];
   var filteredItems = [];   // 当前搜索+筛选后的完整结果集
   var currentCat = '全部';
   var currentQuery = '';
@@ -167,6 +169,41 @@
     shownCount = end;
     updateResultCount();
     updateLoadMoreBtn();
+  }
+
+  function shuffle(items) {
+    var result = items.slice();
+    for (var i = result.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = result[i];
+      result[i] = result[j];
+      result[j] = temp;
+    }
+    return result;
+  }
+
+  function mergeFullData(data) {
+    var fullItems = Array.isArray(data) ? data : [];
+    var initialIds = {};
+    initialItems.forEach(function (item) { initialIds[item.id] = true; });
+    var rest = fullItems.filter(function (item) { return !initialIds[item.id]; });
+    allItems = initialItems.concat(rest);
+    if (currentQuery === '' && currentCat === '全部') {
+      filteredItems = allItems.slice();
+      updateResultCount();
+      updateLoadMoreBtn();
+    } else {
+      applyFilter();
+    }
+  }
+
+  function loadFullData() {
+    fetch(DATA_URL)
+      .then(function (r) { return r.json(); })
+      .then(mergeFullData)
+      .catch(function (err) {
+        console.warn('完整提示词数据将在需要时重试:', err);
+      });
   }
 
   /** 应用搜索 + 分类筛选（基于完整 allItems），并重置分页。 */
@@ -346,19 +383,31 @@
     if (e.key === 'Escape' && modalOverlay.style.display === 'flex') closeModal();
   });
 
-  // ── 初始化 ──
-  fetch(DATA_URL)
-    .then(function (r) { return r.json(); })
+  // ── 初始化：先显示轻量首屏，再后台加载完整数据 ──
+  fetch(INITIAL_DATA_URL)
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('Initial data unavailable')); })
     .then(function (data) {
-      allItems = Array.isArray(data) ? data : [];
+      initialItems = shuffle(Array.isArray(data) ? data : []);
+      allItems = initialItems.slice();
       applyFilter();
+      loadFullData();
     })
-    .catch(function (err) {
-      console.error('加载提示词数据失败:', err);
-      grid.innerHTML = '';
-      emptyState.textContent = '数据加载失败，请稍后重试。';
-      emptyState.style.display = 'block';
-      resultCount.textContent = '';
-      if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+    .catch(function () {
+      fetch(DATA_URL)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          initialItems = shuffle(Array.isArray(data) ? data.slice(0, PAGE_SIZE) : []);
+          allItems = initialItems.slice();
+          applyFilter();
+          loadFullData();
+        })
+        .catch(function (err) {
+          console.error('加载提示词数据失败:', err);
+          grid.innerHTML = '';
+          emptyState.textContent = '数据加载失败，请稍后重试。';
+          emptyState.style.display = 'block';
+          resultCount.textContent = '';
+          if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+        });
     });
 })();
