@@ -190,8 +190,16 @@ let activeTag = '全部';
 // ─── Load ─────────────────────────────────────────
 async function loadSites() {
   try {
-    const res = await fetch(API_BASE + '/common-sites?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error('Worker unavailable');
+    const res = await (async () => {
+      try {
+        const local = await fetch('sites.json?t=' + Date.now(), { cache: 'no-store' });
+        if (local.ok) return local;
+        throw new Error('Static data unavailable');
+      } catch {
+        return await fetch(API_BASE + '/common-sites?t=' + Date.now(), { cache: 'no-store' });
+      }
+    })();
+    if (!res.ok) throw new Error('Navigation data unavailable');
     const data = await res.json();
  
     // New format: { announcement, sites }

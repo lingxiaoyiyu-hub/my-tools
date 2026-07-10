@@ -1,0 +1,40 @@
+name: Sync public navigation data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download public data
+        env:
+          API_BASE: https://xcbot-nav-api.lingxiaoyiyu.workers.dev
+        run: |
+          set -e
+          curl --fail --silent --show-error --location "$API_BASE/sites" -o api-nav/sites.json
+          curl --fail --silent --show-error --location "$API_BASE/tutorials" -o tutorials/tutorials.json
+          curl --fail --silent --show-error --location "$API_BASE/common-sites" -o common-nav/sites.json
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api-nav/sites.json tutorials/tutorials.json common-nav/sites.json
+
+          if git diff --cached --quiet; then
+            echo "No public data changes"
+            exit 0
+          fi
+
+          git commit -m "chore: sync public navigation data"
+          git push

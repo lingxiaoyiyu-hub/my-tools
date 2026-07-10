@@ -240,11 +240,11 @@ async function loadSites() {
   try {
     const res = await (async () => {
       try {
-        const r = await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/sites?t=' + Date.now(), { cache: 'no-store' });
+        const r = await fetch('sites.json?t=' + Date.now(), { cache: 'no-store' });
         if (r.ok) return r;
-        throw new Error('Worker unavailable');
+        throw new Error('Static data unavailable');
       } catch {
-        return await fetch('sites.json?t=' + Date.now());
+        return await fetch('https://xcbot-nav-api.lingxiaoyiyu.workers.dev/sites?t=' + Date.now(), { cache: 'no-store' });
       }
     })();
     const data = await res.json();
