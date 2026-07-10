@@ -37,7 +37,9 @@
   var filters = document.getElementById('filters');
   var resultCount = document.getElementById('resultCount');
   var emptyState = document.getElementById('emptyState');
+  var loadMoreWrap = document.getElementById('loadMoreWrap');
   var loadMoreBtn = document.getElementById('loadMoreBtn');
+  var isLoadingMore = false;
   var modalOverlay = document.getElementById('modalOverlay');
   var modalClose = document.getElementById('modalClose');
   var modalImg = document.getElementById('modalImg');
@@ -126,12 +128,9 @@
 
   /** 更新"加载更多"按钮的可见性。 */
   function updateLoadMoreBtn() {
-    if (!loadMoreBtn) return;
-    if (shownCount >= filteredItems.length) {
-      loadMoreBtn.style.display = 'none';
-    } else {
-      loadMoreBtn.style.display = '';
-    }
+    var hasMore = shownCount < filteredItems.length;
+    if (loadMoreWrap) loadMoreWrap.style.display = hasMore ? 'flex' : 'none';
+    if (loadMoreBtn) loadMoreBtn.style.display = hasMore ? '' : 'none';
   }
 
   /** 渲染指定范围的卡片并追加到 DOM。 */
@@ -162,13 +161,20 @@
 
   /** 加载下一页。 */
   function loadNextPage() {
-    if (shownCount >= filteredItems.length) return;
-    var start = shownCount;
-    var end = Math.min(start + PAGE_SIZE, filteredItems.length);
-    appendCards(start, end);
-    shownCount = end;
-    updateResultCount();
-    updateLoadMoreBtn();
+    if (isLoadingMore || shownCount >= filteredItems.length) return;
+    isLoadingMore = true;
+    if (loadMoreBtn) loadMoreBtn.disabled = true;
+    try {
+      var start = shownCount;
+      var end = Math.min(start + PAGE_SIZE, filteredItems.length);
+      appendCards(start, end);
+      shownCount = end;
+      updateResultCount();
+      updateLoadMoreBtn();
+    } finally {
+      isLoadingMore = false;
+      if (loadMoreBtn) loadMoreBtn.disabled = false;
+    }
   }
 
   function shuffle(items) {
@@ -343,6 +349,15 @@
   // "加载更多"按钮
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadNextPage);
+  }
+
+  if (loadMoreWrap && 'IntersectionObserver' in window) {
+    var loadMoreObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) loadNextPage();
+      });
+    }, { rootMargin: '600px 0px' });
+    loadMoreObserver.observe(loadMoreWrap);
   }
 
   // 卡片内事件委托（复制 / 详情 / 图片错误）
