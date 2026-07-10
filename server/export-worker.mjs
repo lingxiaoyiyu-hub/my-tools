@@ -24,11 +24,12 @@ async function get(path, adminKey) {
 const adminKey = await readAdminKey();
 if (!adminKey) throw new Error("An admin key is required.");
 
-const [sites, commonSites, tutorials, feedbacks, combinedStats] = await Promise.all([
+const [sites, commonSites, tutorials, feedbacks, seoArticles, combinedStats] = await Promise.all([
   get("/sites", adminKey),
   get("/common-sites", adminKey),
   get("/tutorials", adminKey),
   get("/feedback", adminKey),
+  get("/seo", adminKey),
   get("/stats", adminKey),
 ]);
 
@@ -36,6 +37,7 @@ const values = {
   sites: JSON.stringify(sites, null, 2),
   commonSites: JSON.stringify(commonSites, null, 2),
   tutorials: JSON.stringify(tutorials, null, 2),
+  seoArticles: JSON.stringify(seoArticles, null, 2),
   feedbacks: JSON.stringify(feedbacks, null, 2),
   // /stats is the public admin view and already includes legacy common-nav stats.
   siteStats: JSON.stringify(combinedStats, null, 2),
